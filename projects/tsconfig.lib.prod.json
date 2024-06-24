@@ -4,6 +4,7 @@
   "compilerOptions": {
     "declarationMap": false
   },
+  "files": ["../node_modules/@rolster/types/index.d.ts"],
   "angularCompilerOptions": {
     "compilationMode": "partial"
   }

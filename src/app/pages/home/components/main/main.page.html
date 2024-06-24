@@ -1,23 +1,4 @@
 <div class="app-root">
-  <rls-avatar
-    [skeleton]="false"
-    [rounded]="false"
-    style="font-size: var(--label-size)"
-  >
-    <span>10%</span>
-  </rls-avatar>
-
-  <rls-avatar [skeleton]="true" [rounded]="true" (click)="checked = !checked">
-    <img src="../assets/cr7.jpg" />
-  </rls-avatar>
-
-  <xft-icon value="attach-inclined" style="color: var(--color-mode-100)">
-  </xft-icon>
-
-  <xft-skeleton-text class="overline-medium" [active]="checked"
-    >Daniel Castillo</xft-skeleton-text
-  >
-
   <button
     xft-button="raised"
     [disabled]="checked"
@@ -97,18 +78,10 @@
         ></div>
         <div
           class="content xl-flex-col-6 lg-flex-col-4 md-flex-col-3 sm-flex-col-2"
-        >
-          <xft-date-field placeholder="Fecha de nacimiento*" xftTheme="success">
-            Fecha de nacimiento<span>*</span>
-          </xft-date-field>
-        </div>
+        ></div>
         <div
           class="content xl-flex-col-4 lg-flex-col-2 md-flex-col-2 sm-flex-col-3"
-        >
-          <xft-checkbox-label xft-theme="success">
-            Persona mayor de edad
-          </xft-checkbox-label>
-        </div>
+        ></div>
         <div
           class="content xl-flex-col-4 lg-flex-col-2 md-flex-col-2 sm-flex-col-1"
         >
@@ -116,47 +89,19 @@
         </div>
         <div
           class="content xl-flex-col-4 lg-flex-col-2 md-flex-col-2 sm-flex-col-1"
-        >
-          <xft-switch-label xft-theme="danger">
-            Ingeniero de sistemas
-          </xft-switch-label>
-        </div>
+        ></div>
         <div
           class="content xl-flex-col-3 lg-flex-col-2 md-flex-col-4 sm-flex-col-3"
-        >
-          <xft-select-field [suggestions]="persons" [sheetMode]="false">
-            Encargado del proceso<span>*</span>
-          </xft-select-field>
-        </div>
+        ></div>
         <div
           class="content xl-flex-col-3 lg-flex-col-6 md-flex-col-1 sm-flex-col-2"
-        >
-          <xft-radiobutton-label
-            [formControl]="role"
-            value="DEV"
-            xft-theme="warning"
-          >
-            Developer FullStack
-          </xft-radiobutton-label>
-        </div>
+        ></div>
         <div
           class="content xl-flex-col-3 lg-flex-col-2 md-flex-col-1 sm-flex-col-1"
-        >
-          <xft-radiobutton-label
-            [formControl]="role"
-            value="QA"
-            xft-theme="warning"
-          >
-            Lider de QA
-          </xft-radiobutton-label>
-        </div>
+        ></div>
         <div
           class="content xl-flex-col-3 lg-flex-col-1 md-flex-col-2 sm-flex-col-1"
-        >
-          <xft-autocomplete-field [suggestions]="persons" [sheetMode]="false">
-            Lider de ingenieria<span>*</span>
-          </xft-autocomplete-field>
-        </div>
+        ></div>
         <div
           class="content xl-flex-col-2 lg-flex-col-1 md-flex-col-4 sm-flex-col-1"
         >

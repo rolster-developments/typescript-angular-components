@@ -1,0 +1,22 @@
+<div
+  class="rls-input"
+  [class.rls-input--focused]="formControl?.focused || focused"
+  [class.rls-input--disabled]="disabledInput"
+>
+  <input
+    class="rls-input__component"
+    [value]="input()"
+    [type]="type"
+    autocomplete="off"
+    [placeholder]="placeholder"
+    [disabled]="disabledInput"
+    [readonly]="readonly"
+    (focus)="onFocus()"
+    (blur)="onBlur()"
+    (input)="onInput($event)"
+  />
+
+  <span class="rls-input__value">
+    <ng-content></ng-content>
+  </span>
+</div>

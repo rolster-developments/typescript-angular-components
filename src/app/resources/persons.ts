@@ -1,6 +1,3 @@
-import { getInitials, hasPattern } from '@rolster/typescript-utils';
-import { ListFieldElement } from 'projects/components/organisms';
-
 class Person {
   constructor(
     public readonly documento: string,
@@ -8,11 +5,11 @@ class Person {
   ) {}
 }
 
-class PersonElement implements ListFieldElement {
+class PersonElement {
   public initials: string;
 
   constructor(private person: Person) {
-    this.initials = getInitials(person.nombre);
+    this.initials = person.nombre;
   }
 
   public get title(): string {
@@ -36,7 +33,7 @@ class PersonElement implements ListFieldElement {
   }
 
   hasCoincidence(pattern: string): boolean {
-    return hasPattern(this.person.nombre, pattern);
+    return this.person.nombre === pattern;
   }
 }
 

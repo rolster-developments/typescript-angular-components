@@ -1,5 +1,5 @@
-# Xofttion Angular UI Components
+# Rolster Angular Components
 
-Repository for UI Kit Components in Angular 14.
+Repository for Kit Components in Angular 17.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.4.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.0.

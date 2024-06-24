@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { PopupComponentService } from 'projects/components/organisms';
 import { personsElement } from 'src/app/resources/persons';
 
 @Component({
@@ -18,7 +17,7 @@ export class MainComponent {
 
   public checked = false;
 
-  constructor(private popupService: PopupComponentService) {
+  constructor() {
     this.control = new FormControl<string>('', [
       Validators.required,
       Validators.minLength(5)
@@ -29,17 +28,5 @@ export class MainComponent {
   }
 
   public onConfirmation(): void {
-    this.popupService.launch({
-      message: '¿Desea realizar el registro de la factura de venta?',
-      subtitle: 'Xigeness v0.9.2',
-      title: 'Factura de venta',
-      theme: 'success',
-      approved: {
-        label: 'Registrar'
-      },
-      reject: {
-        label: 'Cancelar registro'
-      }
-    });
   }
 }

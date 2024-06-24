@@ -1,12 +1,11 @@
 <div class="rls-app__body">
   <section class="rls-app__page">
     <section class="rls-app__page__content">
-      <xft-toolbar [breadcrumbs]="['Inicio', 'Home', 'Main']">
-        Xigeness Application v1.0.0 [2022.08.29]
-      </xft-toolbar>
-      <div>
-        <router-outlet></router-outlet>
-      </div>
+      <rls-field-text [formControl]="formControl" rls-theme="success">
+        Nombre completo
+      </rls-field-text>
+      <button (click)="onClick()">Saber valor</button>
+      <label class="caption-bold">{{ name() }}</label>
     </section>
   </section>
 </div>

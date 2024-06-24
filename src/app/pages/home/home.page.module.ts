@@ -1,19 +1,10 @@
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 import { HomePageRouting } from './home.page.routing';
-import {
-  SidenavComponentModule,
-  ToolbarComponentModule
-} from 'projects/components';
+import { RlsFieldTextComponent } from '../../../../projects/src/components';
 
 @NgModule({
   declarations: [HomePage],
-  imports: [
-    ReactiveFormsModule,
-    HomePageRouting,
-    ToolbarComponentModule,
-    SidenavComponentModule
-  ]
+  imports: [HomePageRouting, RlsFieldTextComponent]
 })
 export class HomePageModule {}
