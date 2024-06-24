@@ -1,0 +1,239 @@
+<div class="app-root">
+  <rls-avatar
+    [skeleton]="false"
+    [rounded]="false"
+    style="font-size: var(--label-size)"
+  >
+    <span>10%</span>
+  </rls-avatar>
+
+  <rls-avatar [skeleton]="true" [rounded]="true" (click)="checked = !checked">
+    <img src="../assets/cr7.jpg" />
+  </rls-avatar>
+
+  <xft-icon value="attach-inclined" style="color: var(--color-mode-100)">
+  </xft-icon>
+
+  <xft-skeleton-text class="overline-medium" [active]="checked"
+    >Daniel Castillo</xft-skeleton-text
+  >
+
+  <button
+    xft-button="raised"
+    [disabled]="checked"
+    xft-theme="info"
+    (click)="onConfirmation()"
+  >
+    <span>Registrar usuario</span>
+  </button>
+
+  <button xft-button="flat" [disabled]="checked" xft-theme="happy">
+    <span>Descargar comprobante</span>
+  </button>
+
+  <button xft-button="outline" [disabled]="checked">
+    <span>Realizar pago</span>
+  </button>
+
+  <div class="card">
+    <div class="container">
+      <h4 class="font-mode-500">Daniel Andres Castillo Pedroza</h4>
+      <h5 class="font-mode-300">Ingeniero de Sistemas</h5>
+      <h6 class="font-mode-100">Universidad Popular del Cesar</h6>
+    </div>
+
+    <div class="container">
+      <div
+        class="grid xs-grid-8 md-grid-12 lg-grid-16 xs-grid-col-2 sm-grid-col-4 md-grid-col-6 lg-grid-col-8 xl-grid-col-12"
+      >
+        <div class="cell">01</div>
+        <div class="cell">02</div>
+        <div class="cell">03</div>
+        <div class="cell">04</div>
+        <div class="cell">05</div>
+        <div class="cell">1g</div>
+        <div class="cell" xft-theme="success">06</div>
+        <div class="cell" xft-theme="success">07</div>
+        <div class="cell" xft-theme="success">08</div>
+        <div class="cell" xft-theme="success">09</div>
+        <div class="cell" xft-theme="success">10</div>
+        <div class="cell" xft-theme="success">2g</div>
+        <div class="cell" xft-theme="info">11</div>
+        <div class="cell" xft-theme="info">12</div>
+        <div class="cell" xft-theme="info">13</div>
+        <div class="cell" xft-theme="info">14</div>
+        <div class="cell" xft-theme="info">15</div>
+        <div class="cell" xft-theme="info">3g</div>
+        <div class="cell" xft-theme="happy">16</div>
+        <div class="cell" xft-theme="happy">17</div>
+        <div class="cell" xft-theme="happy">18</div>
+        <div class="cell" xft-theme="happy">19</div>
+        <div class="cell" xft-theme="happy">20</div>
+        <div class="cell" xft-theme="happy">4g</div>
+        <div class="cell" xft-theme="warning">21</div>
+        <div class="cell" xft-theme="warning">22</div>
+        <div class="cell" xft-theme="warning">23</div>
+        <div class="cell" xft-theme="warning">24</div>
+        <div class="cell" xft-theme="warning">25</div>
+        <div class="cell" xft-theme="warning">5g</div>
+        <div class="cell" xft-theme="danger">26</div>
+        <div class="cell" xft-theme="danger">27</div>
+        <div class="cell" xft-theme="danger">28</div>
+        <div class="cell" xft-theme="danger">29</div>
+        <div class="cell" xft-theme="danger">30</div>
+        <div class="cell" xft-theme="danger">6g</div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div
+        class="flex xs-flex-grid-8 md-flex-grid-16 sm-flex-grid-col-4 md-flex-grid-col-6 lg-flex-grid-col-8 xl-flex-grid-col-12"
+      >
+        <div
+          class="content xl-flex-col-12 lg-flex-col-8 md-flex-col-6 sm-flex-col-4"
+        ></div>
+        <div
+          class="content xl-flex-col-6 lg-flex-col-4 md-flex-col-3 sm-flex-col-2"
+        ></div>
+        <div
+          class="content xl-flex-col-6 lg-flex-col-4 md-flex-col-3 sm-flex-col-2"
+        >
+          <xft-date-field placeholder="Fecha de nacimiento*" xftTheme="success">
+            Fecha de nacimiento<span>*</span>
+          </xft-date-field>
+        </div>
+        <div
+          class="content xl-flex-col-4 lg-flex-col-2 md-flex-col-2 sm-flex-col-3"
+        >
+          <xft-checkbox-label xft-theme="success">
+            Persona mayor de edad
+          </xft-checkbox-label>
+        </div>
+        <div
+          class="content xl-flex-col-4 lg-flex-col-2 md-flex-col-2 sm-flex-col-1"
+        >
+          <div class="cell">05</div>
+        </div>
+        <div
+          class="content xl-flex-col-4 lg-flex-col-2 md-flex-col-2 sm-flex-col-1"
+        >
+          <xft-switch-label xft-theme="danger">
+            Ingeniero de sistemas
+          </xft-switch-label>
+        </div>
+        <div
+          class="content xl-flex-col-3 lg-flex-col-2 md-flex-col-4 sm-flex-col-3"
+        >
+          <xft-select-field [suggestions]="persons" [sheetMode]="false">
+            Encargado del proceso<span>*</span>
+          </xft-select-field>
+        </div>
+        <div
+          class="content xl-flex-col-3 lg-flex-col-6 md-flex-col-1 sm-flex-col-2"
+        >
+          <xft-radiobutton-label
+            [formControl]="role"
+            value="DEV"
+            xft-theme="warning"
+          >
+            Developer FullStack
+          </xft-radiobutton-label>
+        </div>
+        <div
+          class="content xl-flex-col-3 lg-flex-col-2 md-flex-col-1 sm-flex-col-1"
+        >
+          <xft-radiobutton-label
+            [formControl]="role"
+            value="QA"
+            xft-theme="warning"
+          >
+            Lider de QA
+          </xft-radiobutton-label>
+        </div>
+        <div
+          class="content xl-flex-col-3 lg-flex-col-1 md-flex-col-2 sm-flex-col-1"
+        >
+          <xft-autocomplete-field [suggestions]="persons" [sheetMode]="false">
+            Lider de ingenieria<span>*</span>
+          </xft-autocomplete-field>
+        </div>
+        <div
+          class="content xl-flex-col-2 lg-flex-col-1 md-flex-col-4 sm-flex-col-1"
+        >
+          <div class="cell">11</div>
+        </div>
+        <div
+          class="content xl-flex-col-2 lg-flex-col-6 md-flex-col-3 sm-flex-col-1"
+        >
+          <div class="cell">12</div>
+        </div>
+        <div
+          class="content xl-flex-col-2 lg-flex-col-4 md-flex-col-2 sm-flex-col-2"
+        >
+          <div class="cell">13</div>
+        </div>
+        <div
+          class="content xl-flex-col-2 lg-flex-col-3 md-flex-col-1 sm-flex-col-1"
+        >
+          <div class="cell">14</div>
+        </div>
+        <div
+          class="content xl-flex-col-2 lg-flex-col-1 md-flex-col-1 sm-flex-col-2"
+        >
+          <div class="cell">15</div>
+        </div>
+        <div
+          class="content xl-flex-col-2 lg-flex-col-2 md-flex-col-1 sm-flex-col-1"
+        >
+          <div class="cell">16</div>
+        </div>
+        <div
+          class="content xl-flex-col-6 lg-flex-col-2 md-flex-col-3 sm-flex-col-4"
+        >
+          <div class="cell">17</div>
+        </div>
+        <div
+          class="content xl-flex-col-3 lg-flex-col-4 md-flex-col-1 sm-flex-col-4"
+        >
+          <div class="cell">18</div>
+        </div>
+        <div class="content xl-flex-col-3 lg-flex-col-3 md-flex-col-2">
+          <div class="cell">19</div>
+        </div>
+        <div class="content xl-flex-col-2 lg-flex-col-2 md-flex-col-1">
+          <div class="cell">20</div>
+        </div>
+        <div class="content xl-flex-col-2 lg-flex-col-3 md-flex-col-2">
+          <div class="cell">21</div>
+        </div>
+        <div class="content xl-flex-col-2 lg-flex-col-3 md-flex-col-1">
+          <div class="cell">22</div>
+        </div>
+        <div class="content xl-flex-col-6 lg-flex-col-1 md-flex-col-1">
+          <div class="cell">23</div>
+        </div>
+        <div class="content xl-flex-col-1 lg-flex-col-2 md-flex-col-1">
+          <div class="cell">24</div>
+        </div>
+        <div class="content xl-flex-col-1 lg-flex-col-2 md-flex-col-2">
+          <div class="cell">25</div>
+        </div>
+        <div class="content xl-flex-col-1 lg-flex-col-1 md-flex-col-1">
+          <div class="cell">26</div>
+        </div>
+        <div class="content xl-flex-col-6 lg-flex-col-3 md-flex-col-1">
+          <div class="cell">27</div>
+        </div>
+        <div class="content xl-flex-col-1 lg-flex-col-1 md-flex-col-1">
+          <div class="cell">28</div>
+        </div>
+        <div class="content xl-flex-col-1 lg-flex-col-2 md-flex-col-3">
+          <div class="cell">29</div>
+        </div>
+        <div class="content xl-flex-col-1 lg-flex-col-1 md-flex-col-2">
+          <div class="cell">30</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

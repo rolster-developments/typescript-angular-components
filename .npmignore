@@ -1,0 +1,13 @@
+# Folders
+.angular
+.github
+.vscode
+node_modules
+test
+
+# Files
+.eslintignore
+.eslintrc.json
+.gitignore
+.prettierignore
+.prettierrc

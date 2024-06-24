@@ -1,0 +1,124 @@
+.app-root {
+  width: 100%;
+  padding: var(--sizing-24) var(--sizing-16);
+  box-sizing: border-box;
+}
+
+.card {
+  background: var(--background-theme-500);
+  width: 100%;
+  box-shadow: var(--shadow-bottom-light-4);
+  overflow: hidden;
+  border-radius: var(--sizing-8);
+}
+
+.container {
+  position: relative;
+  float: left;
+  width: 100%;
+  padding: var(--sizing-16);
+  box-sizing: border-box;
+}
+
+.grid {
+  border-radius: var(--sizing-8);
+
+  .cell {
+    background: var(--background-theme-100);
+    color: var(--color-theme-300);
+    border-radius: var(--sizing-8);
+    text-align: center;
+    padding: var(--sizing-8);
+    box-sizing: border-box;
+
+    &:nth-child(6n + 1) {
+      background: var(--color-xofttion-100);
+      color: var(--color-dark-500);
+    }
+
+    &:nth-child(6n + 2) {
+      background: var(--color-xofttion-300);
+      color: var(--color-dark-500);
+    }
+
+    &:nth-child(6n + 3) {
+      background: var(--color-xofttion-500);
+      color: var(--color-light-500);
+    }
+
+    &:nth-child(6n + 4) {
+      background: var(--color-xofttion-700);
+      color: var(--color-light-500);
+    }
+
+    &:nth-child(6n + 5) {
+      background: var(--color-xofttion-900);
+      color: var(--color-light-500);
+    }
+
+    &:nth-child(6n + 6) {
+      background: var(--gradient-xofttion-500);
+      color: var(--color-light-500);
+    }
+
+    span {
+      padding: 0rem var(--sizing-8);
+      border-radius: var(--sizing-8);
+    }
+  }
+}
+
+.flex {
+  .content {
+    .cell {
+      width: 100%;
+      color: var(--color-theme-500);
+      border-radius: var(--sizing-8);
+      text-align: center;
+      padding: var(--sizing-8);
+      box-sizing: border-box;
+    }
+
+    &:nth-child(6n + 1) {
+      .cell {
+        background: var(--color-base-300);
+        color: var(--font-mode-500);
+      }
+    }
+
+    &:nth-child(6n + 2) {
+      .cell {
+        background: var(--color-warning-300);
+        color: var(--font-mode-500);
+      }
+    }
+
+    &:nth-child(6n + 3) {
+      .cell {
+        background: var(--color-danger-300);
+        color: var(--font-mode-500);
+      }
+    }
+
+    &:nth-child(6n + 4) {
+      .cell {
+        background: var(--color-info-300);
+        color: var(--font-mode-500);
+      }
+    }
+
+    &:nth-child(6n + 5) {
+      .cell {
+        background: var(--color-happy-300);
+        color: var(--font-mode-500);
+      }
+    }
+
+    &:nth-child(6n + 6) {
+      .cell {
+        background: var(--color-success-300);
+        color: var(--font-mode-500);
+      }
+    }
+  }
+}
