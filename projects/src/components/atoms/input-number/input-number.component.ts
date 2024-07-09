@@ -9,22 +9,17 @@ import {
 import { FormControl } from '@rolster/angular-forms';
 import { RlsInputComponent } from '../input/input.component';
 
-type TextType = 'text' | 'email';
-
 @Component({
-  selector: 'rls-input-text',
+  selector: 'rls-input-number',
   standalone: true,
-  templateUrl: './input-text.component.html',
-  styleUrls: ['./input-text.component.scss'],
+  templateUrl: 'input-number.component.html',
+  styleUrls: ['input-number.component.scss'],
   encapsulation: ViewEncapsulation.None,
   imports: [RlsInputComponent]
 })
-export class RlsInputTextComponent {
+export class RlsInputNumberComponent {
   @Input()
-  public formControl?: FormControl<string>;
-
-  @Input()
-  public type: TextType = 'text';
+  public formControl?: FormControl<number>;
 
   @Input()
   public placeholder = '';

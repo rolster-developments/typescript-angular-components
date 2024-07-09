@@ -6,25 +6,20 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import { FormControl } from '@rolster/angular-forms';
-import { RlsInputTextComponent } from '../../atoms';
+import { RlsInputNumberComponent } from '../../atoms';
 import { RlsMessageFormErrorComponent } from '../message-form-error/message-form-error.component';
 
-type TextType = 'text' | 'email';
-
 @Component({
-  selector: 'rls-field-text',
+  selector: 'rls-field-number',
   standalone: true,
-  templateUrl: './field-text.component.html',
-  styleUrls: ['./field-text.component.scss'],
+  templateUrl: 'field-number.component.html',
+  styleUrls: ['field-number.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  imports: [RlsInputTextComponent, RlsMessageFormErrorComponent]
+  imports: [RlsInputNumberComponent, RlsMessageFormErrorComponent]
 })
-export class RlsFieldTextComponent {
+export class RlsFieldNumberComponent {
   @Input()
-  public formControl?: FormControl<string>;
-
-  @Input()
-  public type: TextType = 'text';
+  public formControl?: FormControl<number>;
 
   @Input()
   public label = true;

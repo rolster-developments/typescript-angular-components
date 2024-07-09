@@ -4,6 +4,9 @@
       <rls-field-text [formControl]="formControl" rls-theme="success">
         Nombre completo
       </rls-field-text>
+      <rls-field-number [formControl]="formNumber" rls-theme="warning">
+        Edad
+      </rls-field-number>
       <button (click)="onClick()">Saber valor</button>
       <label class="caption-bold">{{ name() }}</label>
     </section>

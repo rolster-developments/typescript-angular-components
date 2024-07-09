@@ -13,6 +13,8 @@ export class HomePage {
     required
   ]);
 
+  protected formNumber = new FormControl<number>(30, [required]);
+
   protected name = signal('Daniel');
 
   public onClick(): void {
