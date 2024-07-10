@@ -6,18 +6,18 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import { FormControl } from '@rolster/angular-forms';
-import { RlsInputNumberComponent } from '../../atoms';
+import { RlsInputMoneyComponent } from '../../atoms';
 import { RlsMessageFormErrorComponent } from '../message-form-error/message-form-error.component';
 
 @Component({
-  selector: 'rls-field-number',
+  selector: 'rls-field-money',
   standalone: true,
-  templateUrl: 'field-number.component.html',
-  styleUrls: ['field-number.component.scss'],
+  templateUrl: 'field-money.component.html',
+  styleUrls: ['field-money.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  imports: [RlsInputNumberComponent, RlsMessageFormErrorComponent]
+  imports: [RlsInputMoneyComponent, RlsMessageFormErrorComponent]
 })
-export class RlsFieldNumberComponent {
+export class RlsFieldMoneyComponent {
   @Input()
   public formControl?: FormControl<number>;
 
@@ -32,6 +32,12 @@ export class RlsFieldNumberComponent {
 
   @Input()
   public disabled = false;
+
+  @Input()
+  public decimals = false;
+
+  @Input()
+  public symbol = '';
 
   @Output()
   public value: EventEmitter<number>;

@@ -5,7 +5,7 @@ import { RlsMessageIconComponent } from '../../atoms/message-icon/message-icon.c
 @Component({
   selector: 'rls-message-form-error',
   standalone: true,
-  templateUrl: './message-form-error.component.html',
+  templateUrl: 'message-form-error.component.html',
   encapsulation: ViewEncapsulation.None,
   imports: [RlsMessageIconComponent]
 })

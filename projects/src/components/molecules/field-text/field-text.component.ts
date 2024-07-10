@@ -14,8 +14,8 @@ type TextType = 'text' | 'email';
 @Component({
   selector: 'rls-field-text',
   standalone: true,
-  templateUrl: './field-text.component.html',
-  styleUrls: ['./field-text.component.scss'],
+  templateUrl: 'field-text.component.html',
+  styleUrls: ['field-text.component.scss'],
   encapsulation: ViewEncapsulation.None,
   imports: [RlsInputTextComponent, RlsMessageFormErrorComponent]
 })

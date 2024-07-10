@@ -8,16 +8,17 @@ import {
 } from '@angular/core';
 import { FormControl } from '@rolster/angular-forms';
 import { RlsInputComponent } from '../input/input.component';
+import { RlsAmountComponent } from '../amount/amount.component';
 
 @Component({
-  selector: 'rls-input-number',
+  selector: 'rls-input-money',
   standalone: true,
-  templateUrl: 'input-number.component.html',
-  styleUrls: ['input-number.component.scss'],
+  templateUrl: 'input-money.component.html',
+  styleUrls: ['input-money.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  imports: [RlsInputComponent]
+  imports: [RlsAmountComponent, RlsInputComponent]
 })
-export class RlsInputNumberComponent {
+export class RlsInputMoneyComponent {
   @Input()
   public formControl?: FormControl<number>;
 
@@ -29,6 +30,12 @@ export class RlsInputNumberComponent {
 
   @Input()
   public disabled = false;
+
+  @Input()
+  public decimals = false;
+
+  @Input()
+  public symbol = '';
 
   @Output()
   public value: EventEmitter<number>;

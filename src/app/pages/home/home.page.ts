@@ -4,8 +4,8 @@ import { required } from '@rolster/validators/helpers';
 
 @Component({
   selector: 'app-home',
-  templateUrl: './home.page.html',
-  styleUrls: ['./home.page.scss'],
+  templateUrl: 'home.page.html',
+  styleUrls: ['home.page.scss'],
   encapsulation: ViewEncapsulation.None
 })
 export class HomePage {

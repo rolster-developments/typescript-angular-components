@@ -4,8 +4,8 @@ import { personsElement } from 'src/app/resources/persons';
 
 @Component({
   selector: 'app-main',
-  templateUrl: './main.page.html',
-  styleUrls: ['./main.page.scss'],
+  templateUrl: 'main.page.html',
+  styleUrls: ['main.page.scss'],
   encapsulation: ViewEncapsulation.None
 })
 export class MainComponent {

@@ -4,9 +4,14 @@
       <rls-field-text [formControl]="formControl" rls-theme="success">
         Nombre completo
       </rls-field-text>
-      <rls-field-number [formControl]="formNumber" rls-theme="warning">
-        Edad
-      </rls-field-number>
+      <rls-field-money
+        [formControl]="formNumber"
+        [decimals]="true"
+        rls-theme="warning"
+      >
+        Salario
+      </rls-field-money>
+      <rls-amount [value]="106564"></rls-amount>
       <button (click)="onClick()">Saber valor</button>
       <label class="caption-bold">{{ name() }}</label>
     </section>

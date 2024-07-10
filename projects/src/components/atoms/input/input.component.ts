@@ -15,8 +15,8 @@ type InputType = 'text' | 'number' | 'password' | 'email';
 @Component({
   selector: 'rls-input',
   standalone: true,
-  templateUrl: './input.component.html',
-  styleUrls: ['./input.component.scss'],
+  templateUrl: 'input.component.html',
+  styleUrls: ['input.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
 export class RlsInputComponent implements OnInit, OnDestroy {

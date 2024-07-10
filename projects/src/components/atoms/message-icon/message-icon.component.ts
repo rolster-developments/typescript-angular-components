@@ -4,8 +4,8 @@ import { RlsIconComponent } from '../icon/icon.component';
 @Component({
   selector: 'rls-message-icon',
   standalone: true,
-  templateUrl: './message-icon.component.html',
-  styleUrls: ['./message-icon.component.scss'],
+  templateUrl: 'message-icon.component.html',
+  styleUrls: ['message-icon.component.scss'],
   encapsulation: ViewEncapsulation.None,
   imports: [RlsIconComponent]
 })
