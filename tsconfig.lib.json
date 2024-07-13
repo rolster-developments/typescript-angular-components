@@ -1,0 +1,9 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig */
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./dist"
+  },
+  "files": ["node_modules/@rolster/types/index.d.ts"],
+  "exclude": ["src/**/*.spec.ts"]
+}

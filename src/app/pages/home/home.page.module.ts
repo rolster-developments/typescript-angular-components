@@ -3,11 +3,13 @@ import { HomePage } from './home.page';
 import { HomePageRouting } from './home.page.routing';
 import {
   RlsAmountComponent,
+  RlsButtonActionComponent,
   RlsFieldMoneyComponent,
   RlsFieldNumberComponent,
+  RlsFieldPasswordComponent,
   RlsFieldTextComponent,
   RlsTabularTextComponent
-} from '../../../../projects/src/components';
+} from '../../../../projects/src';
 
 @NgModule({
   declarations: [HomePage],
@@ -17,7 +19,9 @@ import {
     RlsFieldNumberComponent,
     RlsTabularTextComponent,
     RlsAmountComponent,
-    RlsFieldMoneyComponent
+    RlsFieldMoneyComponent,
+    RlsButtonActionComponent,
+    RlsFieldPasswordComponent
   ]
 })
 export class HomePageModule {}

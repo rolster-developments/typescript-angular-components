@@ -10,21 +10,21 @@ import {
 } from '@angular/core';
 import { FormControl } from '@rolster/angular-forms';
 
-type InputType = 'text' | 'number' | 'email';
+type PasswordType = 'password' | 'text';
 
 @Component({
-  selector: 'rls-input',
+  selector: 'rls-input-password',
   standalone: true,
-  templateUrl: 'input.component.html',
-  styleUrls: ['input.component.scss'],
+  templateUrl: 'input-password.component.html',
+  styleUrls: ['input-password.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class RlsInputComponent implements OnInit, OnDestroy {
+export class RlsInputPasswordComponent implements OnInit, OnDestroy {
   @Input()
-  public formControl?: FormControl<any>;
+  public formControl?: FormControl<string>;
 
   @Input()
-  public type: InputType = 'text';
+  public type: PasswordType = 'password';
 
   @Input()
   public placeholder = '';
@@ -36,11 +36,11 @@ export class RlsInputComponent implements OnInit, OnDestroy {
   public disabled = false;
 
   @Output()
-  public value: EventEmitter<any>;
+  public value: EventEmitter<string>;
 
   protected unsubscription?: Unsubscription;
 
-  protected input = signal<any>('');
+  protected input = signal<string>('');
 
   protected focused = false;
 
@@ -81,14 +81,13 @@ export class RlsInputComponent implements OnInit, OnDestroy {
 
   public onInput(event: Event): void {
     const { value } = event.target as HTMLInputElement;
-    const data = this.type === 'number' ? +value : value;
 
     if (this.formControl) {
-      this.formControl.setState(data);
+      this.formControl.setState(value);
     } else {
-      this.input.set(data);
+      this.input.set(value);
     }
 
-    this.value.emit(data);
+    this.value.emit(value);
   }
 }

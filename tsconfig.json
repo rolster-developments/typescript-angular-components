@@ -1,36 +1,35 @@
 /* To learn more about this file see: https://angular.io/config/tsconfig */
 {
-  "compileOnSave": false,
-  "compilerOptions": {
-    "baseUrl": "./",
-    "outDir": "./dist",
-    "sourceMap": true,
-    "declaration": false,
-    "module": "es2020",
-    "target": "es2015",
-    "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "importHelpers": true,
-    "lib": ["dom", "es2020"],
-    "paths": {
-      "rolster-components/*": ["projects/src/components/*"]
-    },
-    "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "noImplicitOverride": true,
-    "noPropertyAccessFromIndexSignature": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "downlevelIteration": true,
-    "typeRoots": ["node_modules/@types/**/*.d.ts", "src/**/*.d.ts"]
-  },
-  "files": ["node_modules/@rolster/types/index.d.ts"],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
-  }
+  },
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./",
+    "declaration": false,
+    "downlevelIteration": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
+    "importHelpers": true,
+    "lib": ["DOM", "ES2020"],
+    "module": "ES2020",
+    "moduleResolution": "node",
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "outDir": "./dist",
+    "paths": {
+      "rolster-components/*": ["projects/src/components/*"]
+    },
+    "sourceMap": true,
+    "strict": true,
+    "target": "ES2015",
+    "typeRoots": ["node_modules/@types/**/*.d.ts", "src/**/*.d.ts"]
+  },
+  "files": ["node_modules/@rolster/types/index.d.ts"]
 }
