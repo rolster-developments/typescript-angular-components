@@ -3,14 +3,13 @@
   "version": "1.0.0",
   "private": false,
   "scripts": {
-    "server:dev": "ng serve",
-    "build:app": "ng build",
-    "test:app": "ng test",
+    "server": "ng serve",
     "test": "ng test @rolster/angular-components",
-    "build": "tsc -p tsconfig.app.json",
-    "publish": "npm run build && cd dist && npm publish",
+    "clean": "rimraf ./dist",
+    "build": "npm run clean && tsc -p tsconfig.lib.json && rollup -c rollup.config.js",
+    "prettier": "npx prettier --write .",
     "lint:ts": "eslint . --ext .ts",
-    "prettier": "npx prettier --write ."
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "@angular/animations": "^17.3.0",
@@ -21,8 +20,8 @@
     "@angular/forms": "^17.3.0",
     "@angular/platform-browser": "^17.3.0",
     "@angular/platform-browser-dynamic": "^17.3.0",
-    "@rolster/helpers-advanced": "^1.3.0",
     "@rolster/angular-forms": "^17.0.0",
+    "@rolster/helpers-advanced": "^1.3.0",
     "@rolster/helpers-components": "^0.1.27",
     "@rolster/validators": "^1.0.5",
     "async": "^3.2.3",
@@ -56,7 +55,6 @@
     "karma-jasmine": "^4.0.2",
     "karma-jasmine-html-reporter": "^1.7.0",
     "karma-nyan-reporter": "^0.2.5",
-    "ng-packagr": "^17.3.0",
     "prettier": "^3.1.0",
     "rimraf": "^3.0.2",
     "rollup": "^2.32.0",

@@ -3,6 +3,7 @@ import { HomePage } from './home.page';
 import { HomePageRouting } from './home.page.routing';
 import {
   RlsAmountComponent,
+  RlsButtonComponent,
   RlsButtonActionComponent,
   RlsFieldMoneyComponent,
   RlsFieldNumberComponent,
@@ -19,6 +20,7 @@ import {
     RlsFieldNumberComponent,
     RlsTabularTextComponent,
     RlsAmountComponent,
+    RlsButtonComponent,
     RlsFieldMoneyComponent,
     RlsButtonActionComponent,
     RlsFieldPasswordComponent

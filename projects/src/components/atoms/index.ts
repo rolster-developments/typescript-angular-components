@@ -1,4 +1,5 @@
 export * from './amount/amount.component';
+export * from './button/button.component';
 export * from './button-action/button-action.component';
 export * from './icon/icon.component';
 export * from './input-money/input-money.component';

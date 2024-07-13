@@ -1,21 +1,27 @@
 <div class="rls-app__body">
   <section class="rls-app__page">
     <section class="rls-app__page__content">
-      <rls-field-password [formControl]="formControl" rls-theme="success">
-        Nombre completo
-      </rls-field-password>
-      <rls-field-money
-        [formControl]="formNumber"
-        [decimals]="true"
-        rls-theme="warning"
-      >
-        Salario
-      </rls-field-money>
-      <rls-amount [value]="106564"></rls-amount>
-      <button (click)="onClick()">Saber valor</button>
-      <div>
-        <label class="rls-caption-bold">{{ name() }}</label>
-        <button rls-button-action="alert-circle" tooltip="Katherin"></button>
+      <div class="home-app">
+        <rls-field-password [formControl]="formControl" rls-theme="success">
+          Nombre completo
+        </rls-field-password>
+
+        <rls-field-money
+          [formControl]="formNumber"
+          [decimals]="true"
+          rls-theme="warning"
+        >
+          Salario
+        </rls-field-money>
+
+        <rls-amount [value]="106564"></rls-amount>
+
+        <button rls-button="ghost" (click)="onClick()">Saber valor</button>
+
+        <div>
+          <label class="rls-caption-bold">{{ name() }}</label>
+          <button rls-button-action="alert-circle" tooltip="Katherin"></button>
+        </div>
       </div>
     </section>
   </section>

@@ -6,6 +6,7 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import { RlsIconComponent } from '../icon/icon.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'button[rls-button-action]',
@@ -13,7 +14,7 @@ import { RlsIconComponent } from '../icon/icon.component';
   templateUrl: 'button-action.component.html',
   styleUrls: ['button-action.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  imports: [RlsIconComponent]
+  imports: [CommonModule, RlsIconComponent]
 })
 export class RlsButtonActionComponent implements OnInit {
   @Input('rls-button-action')

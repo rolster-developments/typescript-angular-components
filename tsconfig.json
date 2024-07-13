@@ -22,13 +22,13 @@
     "noImplicitOverride": true,
     "noImplicitReturns": true,
     "noPropertyAccessFromIndexSignature": true,
-    "outDir": "./dist",
+    "outDir": "dist",
     "paths": {
       "rolster-components/*": ["projects/src/components/*"]
     },
     "sourceMap": true,
     "strict": true,
-    "target": "ES2015",
+    "target": "ES2020",
     "typeRoots": ["node_modules/@types/**/*.d.ts", "src/**/*.d.ts"]
   },
   "files": ["node_modules/@rolster/types/index.d.ts"]

@@ -2,8 +2,10 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "outDir": "./dist"
+    "declaration": true,
+    "outDir": "dist/esm"
   },
   "files": ["node_modules/@rolster/types/index.d.ts"],
-  "exclude": ["src/**/*.spec.ts"]
+  "include": ["projects/**/*.ts"],
+  "exclude": ["projects/**/*.spec.ts"]
 }
