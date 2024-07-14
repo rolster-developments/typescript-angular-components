@@ -1,0 +1,50 @@
+// Rolster Technology Checkbox Component
+// v1.0.2
+// @license MIT
+// Author: Rolster Developers
+// Created: 20/Mar/2018
+// Updated: 27/Ene/2024
+
+rls-radiobutton {
+  --pvt-component-transform: scale(0);
+
+  position: relative;
+  display: block;
+
+  .rls-radiobutton {
+    position: relative;
+    display: flex;
+    outline: none;
+    width: var(--rls-sizing-x12);
+    height: var(--rls-sizing-x12);
+    border-radius: 50%;
+    box-sizing: border-box;
+    border: var(--rls-app-border-1-300);
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &--checked {
+      --pvt-component-transform: scale(1);
+
+      border: var(--rls-theme-border-1-500);
+    }
+
+    &--disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    &__component {
+      border-radius: 50%;
+      width: 7rem;
+      height: 7rem;
+      margin: auto;
+      background: var(--rls-theme-gradient-500);
+      transform: var(--pvt-component-transform);
+      transform-origin: 50% 50%;
+      transition: all 160ms 0ms var(--rls-standard-curve);
+    }
+  }
+}

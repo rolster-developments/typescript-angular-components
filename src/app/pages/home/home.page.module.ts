@@ -9,13 +9,28 @@ import {
   RlsFieldNumberComponent,
   RlsFieldPasswordComponent,
   RlsFieldTextComponent,
-  RlsTabularTextComponent
+  RlsTabularTextComponent,
+  RlsAvatarComponent,
+  RlsBadgeComponent,
+  RlsCheckboxComponent,
+  RlsLabelComponent,
+  RlsPosterComponent,
+  RlsProgressBarComponent,
+  RlsProgressCircularComponent,
+  RlsRadiobuttonComponent,
+  RlsSkeletonComponent,
+  RlsSkeletonTextComponent,
+  RlsSwitchComponent
 } from '../../../../projects/src';
 
 @NgModule({
   declarations: [HomePage],
   imports: [
     HomePageRouting,
+    RlsBadgeComponent,
+    RlsLabelComponent,
+    RlsAvatarComponent,
+    RlsCheckboxComponent,
     RlsFieldTextComponent,
     RlsFieldNumberComponent,
     RlsTabularTextComponent,
@@ -23,7 +38,14 @@ import {
     RlsButtonComponent,
     RlsFieldMoneyComponent,
     RlsButtonActionComponent,
-    RlsFieldPasswordComponent
+    RlsFieldPasswordComponent,
+    RlsPosterComponent,
+    RlsProgressBarComponent,
+    RlsProgressCircularComponent,
+    RlsRadiobuttonComponent,
+    RlsSkeletonComponent,
+    RlsSkeletonTextComponent,
+    RlsSwitchComponent
   ]
 })
 export class HomePageModule {}

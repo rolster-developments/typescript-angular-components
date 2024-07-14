@@ -17,7 +17,10 @@ export class HomePage {
 
   protected name = signal('Daniel');
 
+  protected active = false;
+
   public onClick(): void {
+    this.active = !this.active;
     this.formControl.setState('Adrian Castillo');
     this.name.set('Adrian');
   }

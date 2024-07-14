@@ -6,10 +6,10 @@
     "server": "ng serve",
     "test": "ng test @rolster/angular-components",
     "clean": "rimraf ./dist",
-    "build": "npm run clean && tsc -p tsconfig.lib.json && rollup -c rollup.config.js",
+    "build": "cd projects && npm run clean && tsc -p tsconfig.lib.json && rollup -c rollup.config.js",
+    "publish:lib": "npm run build && npm publish",
     "prettier": "npx prettier --write .",
-    "lint:ts": "eslint . --ext .ts",
-    "prepublishOnly": "npm run build"
+    "lint:ts": "eslint . --ext .ts"
   },
   "dependencies": {
     "@angular/animations": "^17.3.0",

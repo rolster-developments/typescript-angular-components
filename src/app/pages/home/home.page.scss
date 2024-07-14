@@ -4,4 +4,10 @@
   row-gap: var(--rls-sizing-x8);
   padding: var(--rls-sizing-x8);
   box-sizing: border-box;
+
+  &__row {
+    display: flex;
+    align-items: center;
+    column-gap: var(--rls-sizing-x4);
+  }
 }

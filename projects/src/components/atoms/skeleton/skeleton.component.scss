@@ -1,0 +1,40 @@
+// Rolster Technology Skeleton Component
+// v1.0.0
+// @license MIT
+// Author: Rolster Developers
+// Created: 14/May/2022
+// Updated: 14/May/2023
+
+rls-skeleton {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-height: var(--rlc-skeleton-height);
+  min-height: var(--rlc-skeleton-height);
+  height: var(--rlc-skeleton-height);
+  overflow: hidden;
+  background: var(--rls-theme-color-100);
+  border-radius: var(--rls-sizing-x2);
+
+  &::after {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    transform: translateX(-100%);
+    background-image: linear-gradient(
+      90deg,
+      var(--rls-theme-skeleton-100) 0%,
+      var(--rls-theme-skeleton-100) 20%,
+      var(--rls-theme-skeleton-300) 60%,
+      var(--rls-theme-skeleton-100)
+    );
+    animation: skeleton-animation 1600ms infinite;
+  }
+}
+
+@keyframes skeleton-animation {
+  100% {
+    transform: translateX(100%);
+  }
+}

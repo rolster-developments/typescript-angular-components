@@ -2,7 +2,7 @@
   <section class="rls-app__page">
     <section class="rls-app__page__content">
       <div class="home-app">
-        <rls-field-password [formControl]="formControl" rls-theme="success">
+        <rls-field-password [formControl]="formControl" rls-theme="amaizing">
           Nombre completo
         </rls-field-password>
 
@@ -16,12 +16,43 @@
 
         <rls-amount [value]="106564"></rls-amount>
 
-        <button rls-button="ghost" (click)="onClick()">Saber valor</button>
+        <button rls-button="outline" (click)="onClick()">
+          Registrar Producto
+        </button>
 
-        <div>
+        <b>
+          <rls-label rls-theme="warning">
+            Daniel Andres Castillo Pedroza
+          </rls-label>
+        </b>
+
+        <rls-poster rls-theme="warning">
+          Adrian Rafael Castillo Pedroza
+        </rls-poster>
+
+        <div class="home-app__row">
+          <rls-avatar [rounded]="true"><span>DC</span></rls-avatar>
           <label class="rls-caption-bold">{{ name() }}</label>
           <button rls-button-action="alert-circle" tooltip="Katherin"></button>
+          <rls-badge rls-theme="standard"><span>88</span></rls-badge>
+          <rls-progress-circular rls-theme="amaizing"></rls-progress-circular>
         </div>
+
+        <div class="home-app__row">
+          <rls-checkbox [checked]="true" [disabled]="active"></rls-checkbox>
+          <rls-radiobutton
+            [checked]="true"
+            [disabled]="active"
+          ></rls-radiobutton>
+          <rls-switch [checked]="true" [disabled]="active"></rls-switch>
+        </div>
+
+        <rls-skeleton-text [active]="active">
+          Daniel Andres Castillo Pedroza
+        </rls-skeleton-text>
+
+        <rls-progress-bar [indeterminate]="true" rls-theme="standard">
+        </rls-progress-bar>
       </div>
     </section>
   </section>
