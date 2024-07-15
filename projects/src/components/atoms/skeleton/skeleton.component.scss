@@ -13,7 +13,7 @@ rls-skeleton {
   min-height: var(--rlc-skeleton-height);
   height: var(--rlc-skeleton-height);
   overflow: hidden;
-  background: var(--rls-theme-color-100);
+  background: var(--rls-theme-color-200);
   border-radius: var(--rls-sizing-x2);
 
   &::after {
@@ -24,10 +24,10 @@ rls-skeleton {
     transform: translateX(-100%);
     background-image: linear-gradient(
       90deg,
-      var(--rls-theme-skeleton-100) 0%,
-      var(--rls-theme-skeleton-100) 20%,
+      var(--rls-theme-skeleton-200) 0%,
+      var(--rls-theme-skeleton-200) 20%,
       var(--rls-theme-skeleton-300) 60%,
-      var(--rls-theme-skeleton-100)
+      var(--rls-theme-skeleton-200)
     );
     animation: skeleton-animation 1600ms infinite;
   }

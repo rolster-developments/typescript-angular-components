@@ -2,57 +2,102 @@
   <section class="rls-app__page">
     <section class="rls-app__page__content">
       <div class="home-app">
-        <rls-field-password [formControl]="formControl" rls-theme="amaizing">
-          Nombre completo
-        </rls-field-password>
+        <div class="home-app__content">
+          <rls-field-password [formControl]="formControl" rls-theme="amaizing">
+            Nombre completo
+          </rls-field-password>
 
-        <rls-field-money
-          [formControl]="formNumber"
-          [decimals]="true"
-          rls-theme="warning"
-        >
-          Salario
-        </rls-field-money>
+          <rls-field-money
+            [formControl]="formNumber"
+            [decimals]="true"
+            rls-theme="warning"
+          >
+            Salario
+          </rls-field-money>
 
-        <rls-amount [value]="106564"></rls-amount>
+          <rls-amount [value]="106564"></rls-amount>
 
-        <button rls-button="outline" (click)="onClick()">
-          Registrar Producto
-        </button>
+          <button rls-button="outline" (click)="onClick()">
+            Registrar Producto
+          </button>
 
-        <b>
-          <rls-label rls-theme="warning">
+          <b>
+            <rls-label rls-theme="warning">
+              Daniel Andres Castillo Pedroza
+            </rls-label>
+          </b>
+
+          <rls-poster rls-theme="warning">
+            Adrian Rafael Castillo Pedroza
+          </rls-poster>
+
+          <div class="home-app__row">
+            <rls-avatar [rounded]="true"><span>DC</span></rls-avatar>
+            <label class="rls-caption-bold">{{ name() }}</label>
+            <button
+              rls-button-action="alert-circle"
+              tooltip="Katherin"
+            ></button>
+            <rls-badge rls-theme="standard"><span>88</span></rls-badge>
+            <rls-progress-circular rls-theme="amaizing"></rls-progress-circular>
+          </div>
+
+          <div class="home-app__row">
+            <rls-checkbox [checked]="true" [disabled]="active"></rls-checkbox>
+            <rls-radiobutton
+              [checked]="true"
+              [disabled]="active"
+            ></rls-radiobutton>
+            <rls-switch [checked]="true" [disabled]="active"></rls-switch>
+          </div>
+
+          <rls-skeleton-text [active]="active">
             Daniel Andres Castillo Pedroza
-          </rls-label>
-        </b>
+          </rls-skeleton-text>
 
-        <rls-poster rls-theme="warning">
-          Adrian Rafael Castillo Pedroza
-        </rls-poster>
+          <rls-progress-bar [indeterminate]="true" rls-theme="standard">
+          </rls-progress-bar>
 
-        <div class="home-app__row">
-          <rls-avatar [rounded]="true"><span>DC</span></rls-avatar>
-          <label class="rls-caption-bold">{{ name() }}</label>
-          <button rls-button-action="alert-circle" tooltip="Katherin"></button>
-          <rls-badge rls-theme="standard"><span>88</span></rls-badge>
-          <rls-progress-circular rls-theme="amaizing"></rls-progress-circular>
+          <rls-ballot
+            subtitle="Ingeniero de sistemas"
+            [bordered]="true"
+            img="assets/cr7.png"
+            [skeleton]="active"
+          >
+            Daniel Andres Castillo Pedroza
+          </rls-ballot>
+
+          <rls-label-checkbox>
+            Acepta los terminos y condiciones
+          </rls-label-checkbox>
+
+          <rls-label-switch [extended]="false">
+            Acepta la política de tratamiento de datos
+          </rls-label-switch>
+
+          <div class="home-app__column">
+            <rls-label-radiobutton
+              value="Cristiano"
+              [formControl]="formRadiobutton"
+            >
+              Cristiano Ronaldo Aviero
+            </rls-label-radiobutton>
+            
+            <rls-label-radiobutton
+              value="Messi"
+              [formControl]="formRadiobutton"
+            >
+              Lionel Andrés Messi
+            </rls-label-radiobutton>
+            
+            <rls-label-radiobutton
+              value="Daniel"
+              [formControl]="formRadiobutton"
+            >
+              Daniel Andrés Castillo Pedroza
+            </rls-label-radiobutton>
+          </div>
         </div>
-
-        <div class="home-app__row">
-          <rls-checkbox [checked]="true" [disabled]="active"></rls-checkbox>
-          <rls-radiobutton
-            [checked]="true"
-            [disabled]="active"
-          ></rls-radiobutton>
-          <rls-switch [checked]="true" [disabled]="active"></rls-switch>
-        </div>
-
-        <rls-skeleton-text [active]="active">
-          Daniel Andres Castillo Pedroza
-        </rls-skeleton-text>
-
-        <rls-progress-bar [indeterminate]="true" rls-theme="standard">
-        </rls-progress-bar>
       </div>
     </section>
   </section>

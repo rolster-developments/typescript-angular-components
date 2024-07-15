@@ -1,13 +1,25 @@
 .home-app {
-  display: flex;
-  flex-direction: column;
-  row-gap: var(--rls-sizing-x8);
-  padding: var(--rls-sizing-x8);
+  padding: 0rem var(--rls-sizing-x8);
   box-sizing: border-box;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    row-gap: var(--rls-sizing-x8);
+    padding: var(--rls-sizing-x12) 0rem;
+  }
 
   &__row {
     display: flex;
     align-items: center;
     column-gap: var(--rls-sizing-x4);
+  }
+
+  &__column {
+    display: flex;
+    flex-direction: column;
+    row-gap: var(--rls-sizing-x4);
   }
 }

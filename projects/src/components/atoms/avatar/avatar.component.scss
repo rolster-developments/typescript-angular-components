@@ -22,7 +22,7 @@ rls-avatar {
     border-radius: var(--rlc-avatar-border-radius);
 
     &--skeleton {
-      background: var(--rls-theme-color-100);
+      background: var(--rls-theme-color-200);
 
       & > * {
         display: none;

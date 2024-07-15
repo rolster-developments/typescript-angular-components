@@ -1,0 +1,69 @@
+// Rolster Technology Ballot Component
+// v1.0.2
+// @license MIT
+// Author: Rolster Developers
+// Created: 20/Mar/2018
+// Updated: 14/Jul/2024
+
+rls-ballot {
+  --rlc-avatar-width: var(--rls-sizing-x20);
+  --rlc-avatar-height: var(--rls-sizing-x20);
+
+  position: relative;
+  display: block;
+
+  .rls-ballot {
+    position: relative;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    column-gap: var(--rls-sizing-x4);
+    padding: var(--rls-sizing-x4);
+    box-sizing: border-box;
+    overflow: hidden;
+
+    &--bordered {
+      border-radius: var(--rls-sizing-x4);
+      border: var(--rls-app-border-1-100);
+    }
+
+    &--skeleton {
+      --rlc-ballot-subtitle-width: 60%;
+    }
+
+    &__component {
+      display: flex;
+      overflow: hidden;
+      flex-direction: column;
+      row-gap: var(--rls-sizing-x2);
+    }
+
+    &__title {
+      position: relative;
+      width: 100%;
+      color: var(--rls-app-color-500);
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      font-weight: var(--rls-font-weight-medium);
+      font-size: var(--rls-label-font-size);
+      letter-spacing: var(--rls-label-letter-spacing);
+      min-height: var(--rls-label-line-height);
+      line-height: var(--rls-label-line-height);
+    }
+
+    &__subtitle {
+      position: relative;
+      width: var(--rlc-ballot-subtitle-width);
+      color: var(--rls-app-color-300);
+      font-weight: var(--rls-font-weight-semibold);
+      font-size: var(--rls-smalltext-font-size);
+      letter-spacing: var(--rls-smalltext-letter-spacing);
+      min-height: var(--rlc-ballot-subtitle-height);
+      line-height: var(--rlc-ballot-subtitle-height);
+      overflow: var(--rlc-ballot-subtitle-overflow);
+      text-overflow: var(--rlc-ballot-subtitle-text-overflow);
+      white-space: var(--rlc-ballot-subtitle-white-space);
+    }
+  }
+}

@@ -15,6 +15,8 @@ export class HomePage {
 
   protected formNumber = new FormControl<number>(30, [required]);
 
+  protected formRadiobutton = new FormControl<string>();
+
   protected name = signal('Daniel');
 
   protected active = false;

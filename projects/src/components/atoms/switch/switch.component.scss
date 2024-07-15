@@ -12,8 +12,7 @@ rls-switch {
 
   position: relative;
   display: block;
-  width: 100%;
-  max-width: var(--rls-sizing-x20);
+  width: var(--rls-sizing-x20);
 
   .rls-switch {
     width: 100%;
