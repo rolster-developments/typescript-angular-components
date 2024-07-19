@@ -1,0 +1,81 @@
+// Rolster Technology BottomSheet Component
+// v1.1.0
+// @license MIT
+// Author: Rolster Developers
+// Created: 21/May/2021
+// Updated: 30/May/2024
+
+rls-bottom-sheet {
+  .rls-bottom-sheet {
+    position: fixed;
+    top: initial;
+    right: 0rem;
+    bottom: 0rem;
+    left: 0rem;
+    z-index: var(--rls-z-index-32);
+    transition: top 240ms 0ms var(--rls-deceleration-curve);
+
+    &--visible {
+      top: 0rem;
+
+      .rls-bottom-sheet__body {
+        transform: translateY(0%);
+      }
+
+      .rls-bottom-sheet__backdrop {
+        bottom: 0rem;
+        opacity: 1;
+        backdrop-filter: blur(2px);
+      }
+    }
+
+    &__body {
+      position: absolute;
+      bottom: 0rem;
+      width: 100%;
+      border-radius: var(--rls-sizing-x4) var(--rls-sizing-x4) 0rem 0rem;
+      overflow: hidden;
+      max-height: calc(
+        100vh - var(--rls-sizing-x32) - var(--rls-sizing-safe-top)
+      );
+      z-index: var(--rls-z-index-4);
+      background: var(--rls-app-background-500);
+      transform: translateY(100%);
+      transition: transform 240ms 0ms var(--rls-deceleration-curve);
+
+      &::before {
+        position: relative;
+        display: block;
+        content: '';
+        width: var(--rls-sizing-x16);
+        height: var(--rls-sizing-x2);
+        border-radius: var(--rls-sizing-x1);
+        margin: var(--rls-sizing-x4) calc(50% - var(--rls-sizing-x8));
+        background: var(--rls-app-color-100);
+      }
+    }
+
+    &__component {
+      position: relative;
+      width: 100%;
+      max-height: calc(100vh - 42rem);
+      overflow: auto;
+    }
+
+    &__backdrop {
+      position: absolute;
+      display: block;
+      top: 0rem;
+      left: 0rem;
+      right: 0rem;
+      bottom: initial;
+      opacity: 0;
+      z-index: var(--rls-z-index-2);
+      will-change: opacity;
+      background: var(--rls-theme-backdrop-900);
+      transition:
+        opacity 240ms 0ms var(--rls-deceleration-curve),
+        bottom 240ms 0ms var(--rls-deceleration-curve);
+    }
+  }
+}

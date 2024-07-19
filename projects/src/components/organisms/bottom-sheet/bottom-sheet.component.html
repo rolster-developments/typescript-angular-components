@@ -1,0 +1,9 @@
+<div class="rls-bottom-sheet" [class.rls-bottom-sheet--visible]="visible">
+  <div class="rls-bottom-sheet__body">
+    <div class="rls-bottom-sheet__component">
+      <ng-content />
+    </div>
+  </div>
+
+  <div class="rls-bottom-sheet__backdrop" (click)="onBackdrop()"></div>
+</div>

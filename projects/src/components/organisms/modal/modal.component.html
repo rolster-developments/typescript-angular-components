@@ -1,0 +1,7 @@
+<div class="rls-modal" [class.rls-modal--visible]="visible">
+  <div class="rls-modal__component">
+    <ng-content></ng-content>
+  </div>
+
+  <div class="rls-modal__backdrop" (click)="onBackdrop()"></div>
+</div>

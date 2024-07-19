@@ -1,6 +1,24 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormControl } from '@rolster/angular-forms';
 import { required } from '@rolster/validators/helpers';
+import {
+  RlsBottomSheetService,
+  RlsConfirmationService,
+  RlsModalService
+} from '../../../../projects/src';
+import { OnPortal, RlsPortalPrivate } from '../../../../projects/src/types';
+
+@Component({
+  selector: 'rls-portal',
+  template: `<div>
+    <div class="rls-title-regular">Daniel Castillo Pedroza</div>
+    <div class="rls-title-regular">Adrian Castillo Pedroza</div>
+    <div class="rls-title-regular">Fabian Castillo Pedroza</div>
+  </div>`
+})
+class RlsComponentPortal implements OnPortal {
+  ngPortal(portal: RlsPortalPrivate): void {}
+}
 
 @Component({
   selector: 'app-home',
@@ -21,9 +39,28 @@ export class HomePage {
 
   protected active = false;
 
+  constructor(
+    private bottomSheetService: RlsBottomSheetService,
+    private confirmationService: RlsConfirmationService,
+    private modalService: RlsModalService
+  ) {}
+
   public onClick(): void {
     this.active = !this.active;
     this.formControl.setState('Adrian Castillo');
     this.name.set('Adrian');
+
+    this.confirmationService.execute({
+      message: '¿Deseas realizar el registro del usuario en la Aplicación?',
+      title: 'Rolster Developers',
+      subtitle: 'Daniel Andres Castillo Pedroza',
+      approve: {
+        label: 'Aceptar'
+      },
+      reject: {
+        label: 'Cancelar',
+        theme: 'danger'
+      }
+    });
   }
 }

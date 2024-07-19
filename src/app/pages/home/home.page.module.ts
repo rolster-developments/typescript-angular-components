@@ -24,7 +24,8 @@ import {
   RlsBallotComponent,
   RlsLabelCheckboxComponent,
   RlsLabelRadiobuttonComponent,
-  RlsLabelSwitchComponent
+  RlsLabelSwitchComponent,
+  RlsBottomSheetComponent
 } from '../../../../projects/src';
 
 @NgModule({
@@ -53,7 +54,8 @@ import {
     RlsBallotComponent,
     RlsLabelCheckboxComponent,
     RlsLabelRadiobuttonComponent,
-    RlsLabelSwitchComponent
+    RlsLabelSwitchComponent,
+    RlsBottomSheetComponent
   ]
 })
 export class HomePageModule {}

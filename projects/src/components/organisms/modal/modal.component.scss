@@ -1,0 +1,75 @@
+// Rolster Technology Modal Component
+// v1.0.2
+// @license MIT
+// Author: Rolster Developers
+// Created: 20/Mar/2018
+// Updated: 27/Ene/2024
+
+rls-modal {
+  .rls-modal {
+    --pvt-component-transform: translateY(80rem) scale(0.6);
+    --pvt-component-height: 0rem;
+    --pvt-component-opacity: 0;
+    --pvt-component-visibility: hidden;
+    --pvt-backdrop-opacity: 0;
+    --pvt-backdrop-bottom: initial;
+
+    position: fixed;
+    display: flex;
+    top: 0rem;
+    left: 0rem;
+    width: 100%;
+    height: 100%;
+    z-index: var(--rls-z-index-24);
+    visibility: hidden;
+    align-items: center;
+    justify-content: center;
+
+    &--visible {
+      --pvt-component-visibility: visible;
+      --pvt-component-height: auto;
+      --pvt-component-opacity: 1;
+      --pvt-component-transform: translateY(0) scale(1);
+      --pvt-backdrop-bottom: 0rem;
+      --pvt-backdrop-opacity: 1;
+
+      visibility: visible;
+    }
+
+    &__component {
+      position: absolute;
+      width: auto;
+      max-width: calc(100% - var(--rls-sizing-x8));
+      height: var(--pvt-component-height);
+      opacity: var(--pvt-component-opacity);
+      visibility: var(--pvt-component-visibility);
+      z-index: var(--rls-z-index-2);
+      overflow: hidden;
+      border-radius: var(--rls-sizing-x4);
+      background: var(--rls-app-background-500);
+      will-change: transform;
+      transform: var(--pvt-component-transform);
+      transition:
+        opacity 125ms 0ms var(--rls-deceleration-curve),
+        transform 125ms 0ms var(--rls-deceleration-curve),
+        visibility 125ms 0ms var(--rls-deceleration-curve);
+    }
+
+    &__backdrop {
+      position: absolute;
+      display: block;
+      top: 0rem;
+      left: 0rem;
+      right: 0rem;
+      bottom: var(--pvt-backdrop-bottom);
+      opacity: var(--pvt-backdrop-opacity);
+      z-index: 1;
+      will-change: opacity;
+      background: var(--rls-theme-backdrop-900);
+      backdrop-filter: blur(2px);
+      transition:
+        opacity 120ms 0ms var(--rls-deceleration-curve),
+        bottom 120ms 0ms var(--rls-deceleration-curve);
+    }
+  }
+}

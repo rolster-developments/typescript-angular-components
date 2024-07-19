@@ -1,0 +1,45 @@
+<div class="rls-confirmation__component">
+  <div class="rls-confirmation__header">
+    @if (settings?.title) {
+      <div class="rls-confirmation__title">{{ settings?.title }}</div>
+    }
+
+    @if (settings?.subtitle) {
+      <div class="rls-confirmation__subtitle">
+        {{ settings?.subtitle }}
+      </div>
+    }
+  </div>
+
+  <div class="rls-confirmation__body">
+    <p class="rls-confirmation__message" [innerHtml]="settings?.message"></p>
+  </div>
+
+  <div class="rls-confirmation__footer">
+    <div class="rls-confirmation__actions">
+      @if (settings?.approve) {
+        <button
+          id="btn_confirmation_approve"
+          rls-button="raised"
+          (click)="onApprove()"
+          [attr.rls-theme]="settings?.approve?.theme"
+        >
+          <span>{{ settings?.approve?.label }}</span>
+        </button>
+      }
+
+      @if (settings?.reject) {
+        <button
+          id="btn_confirmation_reject"
+          rls-button="outline"
+          (click)="onReject()"
+          [attr.rls-theme]="settings?.reject?.theme"
+        >
+          <span>{{ settings?.reject?.label }}</span>
+        </button>
+      }
+    </div>
+  </div>
+</div>
+
+<div class="rls-confirmation__backdrop"></div>
