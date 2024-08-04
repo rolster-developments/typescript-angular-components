@@ -12,7 +12,7 @@ import { RlsRadiobuttonComponent } from '../../atoms';
 })
 export class RlsLabelRadiobuttonComponent<T = any> {
   @Input()
-  public formControl?: FormControl<T>;
+  public formControl?: FormControl<Undefined<T>>;
 
   @Input()
   public value?: T;

@@ -28,9 +28,11 @@ interface PortalContainerProps<C, T> {
 export class RlsPortalService {
   constructor(private overlay: Overlay) {}
 
-  public container<C extends OnPortalContainer, T extends OnPortal>(
-    containerProps: PortalContainerProps<C, T>
-  ): RlsPortalPublic {
+  public container<
+    V = any,
+    C extends OnPortalContainer = OnPortalContainer,
+    T extends OnPortal<V> = OnPortal<V>
+  >(containerProps: PortalContainerProps<C, T>): RlsPortalPublic<V> {
     const { container, component, props } = containerProps;
 
     const overlayContainer = this.overlay.create();
@@ -54,7 +56,7 @@ export class RlsPortalService {
 
     overlayComponent.hostElement.remove();
 
-    const rlsPortalContainer = new RlsPortalContainer(
+    const rlsPortalContainer = new RlsPortalContainer<C, V>(
       portalContainer,
       portalComponent
     );

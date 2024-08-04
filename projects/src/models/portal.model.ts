@@ -7,7 +7,6 @@ import {
   RlsPortalCallback,
   RlsPortalComponentProps,
   RlsPortalContainerProps,
-  RlsPortalEvent,
   RlsPortalPrivate,
   RlsPortalPublic
 } from '../types';
@@ -69,58 +68,85 @@ export class PortalComponent<T = any> extends Portal<T> {
   }
 }
 
-export class RlsPortalContainer<T extends OnPortalContainer>
-  implements RlsPortalPublic, RlsPortalPrivate
+export class RlsPortalContainer<C extends OnPortalContainer, V = any>
+  implements RlsPortalPublic<V>, RlsPortalPrivate<V>
 {
-  private component: T;
+  private container: C;
 
-  private subscriptions: Subject<RlsPortalEvent<any>>;
+  private subscriptions: Subject<Undefined<V>>;
 
-  private listeners: Subject<RlsPortalEvent<any>>;
+  private listeners: Subject<Undefined<V>>;
+
+  private promise$: Promise<Undefined<V>>;
+
+  private resolver?: (value: Undefined<V>) => void;
 
   constructor(
-    public readonly portalContainer: PortalContainer<T>,
+    public readonly portalContainer: PortalContainer<C>,
     public readonly portalComponent: PortalComponent
   ) {
     this.subscriptions = new Subject();
     this.listeners = new Subject();
 
-    this.component = portalContainer.componentRef.instance;
+    this.container = portalContainer.componentRef.instance;
+
+    this.promise$ = Promise.resolve(undefined);
   }
 
   public get visible(): boolean {
-    return this.component.visible;
+    return this.container.visible;
   }
 
   public open(delayInMs = 0): void {
-    this.component.open(delayInMs);
+    this.container.open(delayInMs);
+
+    this.promise$ = new Promise<Undefined<V>>((resolver) => {
+      this.resolver = resolver;
+    });
   }
 
   public close(delayInMs = 0): void {
-    this.component.close(delayInMs);
+    this.container.close(delayInMs);
   }
 
-  public subscribe<T = any>(subscriber: RlsPortalCallback<T>): Unsubscription {
+  public waiting(): Promise<Undefined<V>> {
+    return this.promise$;
+  }
+
+  public resolve(value?: V): void {
+    if (this.resolver) {
+      this.resolver(value);
+    }
+  }
+
+  public subscribe(subscriber: RlsPortalCallback<V>): Unsubscription {
     const subscription = this.subscriptions.subscribe(subscriber);
 
-    return () => subscription.unsubscribe();
+    return () => {
+      subscription.unsubscribe();
+    };
   }
 
-  public emit<T = any>(event: RlsPortalEvent<T>): void {
+  public emit(event?: V): void {
     this.listeners.next(event);
   }
 
-  public receive<T = any>(subscriber: RlsPortalCallback<T>): Unsubscription {
-    const subscription = this.listeners.subscribe(subscriber);
+  public receive(listener: RlsPortalCallback<V>): Unsubscription {
+    const subscription = this.listeners.subscribe(listener);
 
-    return () => subscription.unsubscribe();
+    return () => {
+      subscription.unsubscribe();
+    };
   }
 
-  public send<T = any>(event: RlsPortalEvent<T>): void {
+  public send(event?: V): void {
     this.subscriptions.next(event);
   }
 
   public destroy(): void {
+    this.subscriptions.complete();
+    this.listeners.complete();
+
     this.portalContainer.destroy();
     this.portalComponent.destroy();
   }

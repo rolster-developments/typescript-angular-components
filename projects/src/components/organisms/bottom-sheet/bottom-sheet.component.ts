@@ -22,12 +22,13 @@ export class RlsBottomSheetComponent implements OnPortalContainer {
   @Input()
   public visible = false;
 
+  @Input()
+  public autoclose = true;
+
   @Output()
   public visibleChange: EventEmitter<boolean>;
 
   private declare component: HTMLDivElement | null;
-
-  public autoclose = true;
 
   constructor(private ref: ElementRef<HTMLElement>) {
     this.visibleChange = new EventEmitter();

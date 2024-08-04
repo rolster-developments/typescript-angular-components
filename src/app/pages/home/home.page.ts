@@ -11,13 +11,24 @@ import { OnPortal, RlsPortalPrivate } from '../../../../projects/src/types';
 @Component({
   selector: 'rls-portal',
   template: `<div>
-    <div class="rls-title-regular">Daniel Castillo Pedroza</div>
+    <div class="rls-title-regular" (click)="onEmit()">
+      Daniel Castillo Pedroza
+    </div>
     <div class="rls-title-regular">Adrian Castillo Pedroza</div>
     <div class="rls-title-regular">Fabian Castillo Pedroza</div>
   </div>`
 })
-class RlsComponentPortal implements OnPortal {
-  ngPortal(portal: RlsPortalPrivate): void {}
+class RlsComponentPortal implements OnPortal<string> {
+  private portal?: RlsPortalPrivate<string>;
+
+  onEmit() {
+    this.portal?.resolve('Daniel');
+    this.portal?.destroy();
+  }
+
+  public ngPortal(portal: RlsPortalPrivate<string>): void {
+    this.portal = portal;
+  }
 }
 
 @Component({
@@ -61,6 +72,16 @@ export class HomePage {
         label: 'Cancelar',
         theme: 'danger'
       }
+    });
+  }
+
+  public onBottomSheet(): void {
+    const sheet = this.modalService.create(RlsComponentPortal);
+
+    sheet.open();
+
+    sheet.waiting().then((data) => {
+      console.log(data);
     });
   }
 }

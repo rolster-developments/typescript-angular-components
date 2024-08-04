@@ -1,5 +1,5 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
-import { currencyFormat } from '@rolster/helpers-advanced';
+import { currencyFormat } from '@rolster/commons';
 import { RlsTabularTextComponent } from '../tabular-text/tabular-text.component';
 
 @Component({

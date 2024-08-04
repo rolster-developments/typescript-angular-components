@@ -8,11 +8,11 @@ import { RlsModalComponent } from './modal.component';
 export class RlsModalService {
   constructor(private portalService: RlsPortalService) {}
 
-  public create<T extends OnPortal>(
-    component: ComponentType<T>,
-    props?: RlsPortalProps<RlsModalComponent, T>
-  ): RlsPortalPublic {
-    return this.portalService.container({
+  public create<V = any>(
+    component: ComponentType<OnPortal<V>>,
+    props?: RlsPortalProps<RlsModalComponent, OnPortal<V>>
+  ): RlsPortalPublic<V> {
+    return this.portalService.container<V>({
       component,
       container: RlsModalComponent,
       props

@@ -1,0 +1,112 @@
+/**
+ * BOCC DatePicker Component
+ * v2.0.0
+ * Author: MB Frontend Developers
+ * Created: 26/Sep/2023
+ * Updated: 05/Jun/2024
+*/
+
+bocc-date-picker {
+  --pvt-title-font-size: 7.5rem;
+  --pvt-span-font-size: 7rem;
+  --pvt-span-padding: var(--sizing-x4);
+
+  display: block;
+  width: 100%;
+  padding: var(--sizing-x6);
+  box-sizing: border-box;
+
+  .bocc-date-picker {
+    &__content {
+      display: flex;
+      width: 100%;
+      flex-direction: column;
+      row-gap: var(--sizing-x4);
+      overflow: hidden;
+    }
+
+    &__header {
+      display: flex;
+      flex-direction: column;
+      row-gap: var(--sizing-x6);
+      padding: 0rem var(--sizing-x2);
+      box-sizing: border-box;
+    }
+
+    &__title {
+      color: var(--color-carbon-lighter-700);
+      cursor: default;
+      text-align: center;
+      font-size: var(--pvt-title-font-size);
+      font-weight: var(--font-weight-medium);
+      letter-spacing: var(--body2-letter-spacing);
+    }
+
+    &__subheader {
+      display: flex;
+      column-gap: var(--sizing-x6);
+
+      & > *[class^='bocc-date-picker__subheader__'] {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: var(--pvt-span-padding);
+        box-sizing: border-box;
+        border: 1px solid var(--color-carbon-lighter-400);
+        border-radius: var(--sizing-x2);
+
+        span {
+          color: var(--color-carbon-lighter-700);
+          font-size: var(--pvt-span-font-size);
+          font-weight: var(--font-weight-medium);
+          letter-spacing: var(--body2-letter-spacing);
+        }
+
+        bocc-icon {
+          color: var(--color-blue-700);
+        }
+      }
+
+      &__month {
+        width: 65%;
+      }
+
+      &__year {
+        width: 35%;
+      }
+    }
+
+    &__component {
+      display: flex;
+      justify-content: center;
+      padding: 0rem var(--sizing-x2);
+      box-sizing: border-box;
+    }
+
+    &__footer {
+      &--hidden {
+        display: none;
+      }
+    }
+
+    &__actions {
+      display: flex;
+      column-gap: var(--sizing-x4);
+      padding: 0rem var(--sizing-x4);
+      overflow: hidden;
+      box-sizing: border-box;
+
+      button {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 320px) {
+  bocc-date-picker {
+    --pvt-title-font-size: 7rem;
+    --pvt-span-font-size: 6.5rem;
+    --pvt-span-padding: var(--sizing-x3);
+  }
+}

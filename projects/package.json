@@ -22,8 +22,11 @@
     "clean": "rimraf ./dist"
   },
   "dependencies": {
-    "@rolster/helpers-advanced": "^1.3.0",
-    "@rolster/helpers-components": "^0.1.27"
+    "@rolster/angular-forms": "^17.4.1",
+    "@rolster/commons": "^2.0.2",
+    "@rolster/components": "^0.2.0",
+    "@rolster/dates": "^2.0.0",
+    "@rolster/strings": "^2.0.0"
   },
   "peerDependencies": {
     "@angular/cdk": "^17.3.0",
@@ -40,6 +43,9 @@
     "rolster",
     "typescript",
     "angular",
-    "forms"
-  ]
+    "components"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }

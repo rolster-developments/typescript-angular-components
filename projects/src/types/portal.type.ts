@@ -1,10 +1,5 @@
 import { ComponentType } from '@angular/cdk/overlay';
 
-export interface RlsPortalEvent<T = any> {
-  action?: string;
-  value?: T;
-}
-
 type KeysOmitFunction<T> = {
   [K in keyof T]: T[K] extends ComponentType<T> ? never : K;
 }[keyof T];
@@ -20,7 +15,7 @@ export type RlsPortalContainerProps<C = any> = Omit<
 
 export type RlsPortalComponentProps<T = any> = Omit<
   RlsPortalElementProps<T>,
-  'ngBoccPortal'
+  'ngPortal'
 >;
 
 export interface RlsPortalProps<C = any, T = any> {
@@ -28,7 +23,7 @@ export interface RlsPortalProps<C = any, T = any> {
   container?: RlsPortalContainerProps<C>;
 }
 
-export type RlsPortalCallback<T = any> = (event: RlsPortalEvent<T>) => void;
+export type RlsPortalCallback<V = any> = (event?: V) => void;
 
 interface BasePortal {
   close: (delayInMs?: number) => void;
@@ -37,22 +32,24 @@ interface BasePortal {
   visible: boolean;
 }
 
-export interface RlsPortalPublic extends BasePortal {
-  emit: <T = any>(event: RlsPortalEvent<T>) => void;
-  subscribe: <T = any>(subscriber: RlsPortalCallback<T>) => Unsubscription;
+export interface RlsPortalPublic<V = any> extends BasePortal {
+  emit: (event?: V) => void;
+  subscribe: (subscriber: RlsPortalCallback<V>) => Unsubscription;
+  waiting: () => Promise<Undefined<V>>;
 }
 
-export interface RlsPortalPrivate extends BasePortal {
-  receive: <T = any>(subscriber: RlsPortalCallback<T>) => Unsubscription;
-  send: <T = any>(event: RlsPortalEvent<T>) => void;
+export interface RlsPortalPrivate<V = any> extends BasePortal {
+  receive: (listener: RlsPortalCallback<V>) => Unsubscription;
+  resolve: (value?: V) => void;
+  send: (event?: V) => void;
 }
 
-export interface OnPortal {
-  ngPortal(portal: RlsPortalPrivate): void;
+export interface OnPortal<V = any> {
+  ngPortal(portal: RlsPortalPrivate<V>): void;
 }
 
 export interface OnPortalContainer {
-  append<T extends HTMLElement = HTMLElement>(component: T): void;
+  append<E extends HTMLElement = HTMLElement>(component: E): void;
   close(delayInMs?: number): void;
   open(delayInMs?: number): void;
   visible: boolean;

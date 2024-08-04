@@ -1,0 +1,68 @@
+<div class="bocc-date-picker__content">
+  <div class="bocc-date-picker__header">
+    <div class="bocc-date-picker__title">{{ title }}</div>
+
+    <div class="bocc-date-picker__subheader">
+      <div class="bocc-date-picker__subheader__month" (click)="onClickMonth()">
+        <span>{{ month }}</span>
+        <bocc-icon icon="list-open"></bocc-icon>
+      </div>
+
+      <div class="bocc-date-picker__subheader__year" (click)="onClickYear()">
+        <span>{{ year }}</span>
+        <bocc-icon icon="list-open"></bocc-icon>
+      </div>
+    </div>
+  </div>
+
+  <div class="bocc-date-picker__component">
+    <bocc-day-picker
+      [formControl]="dateControl.day"
+      [date]="value"
+      [minDate]="minDate"
+      [maxDate]="maxDate"
+      [hidden]="!visibility.day"
+    >
+    </bocc-day-picker>
+
+    <bocc-month-picker
+      [formControl]="dateControl.month"
+      [date]="value"
+      [minDate]="minDate"
+      [maxDate]="maxDate"
+      [hidden]="!visibility.month"
+    >
+    </bocc-month-picker>
+
+    <bocc-year-picker
+      [formControl]="dateControl.year"
+      [minDate]="minDate"
+      [maxDate]="maxDate"
+      [hidden]="!visibility.year"
+    >
+    </bocc-year-picker>
+  </div>
+
+  <div
+    class="bocc-date-picker__footer"
+    [class.bocc-date-picker__footer--hidden]="automatic"
+  >
+    <div class="bocc-date-picker__actions">
+      <button
+        bocc-button="outline"
+        class="bocc-date-picker__button bocc-date-picker__button--today"
+        (click)="onToday()"
+      >
+        <span>Hoy</span>
+      </button>
+
+      <button
+        bocc-button="raised"
+        class="bocc-date-picker__button bocc-date-picker__button--ok"
+        (click)="onSelect()"
+      >
+        <span>Establecer</span>
+      </button>
+    </div>
+  </div>
+</div>

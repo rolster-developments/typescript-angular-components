@@ -1,0 +1,37 @@
+<div class="rls-picker-year__header">
+  <div class="rls-picker-year__action rls-picker-year__action--prev">
+    <button
+      rls-button-action="arrow-ios-left"
+      (click)="onPrev()"
+      [disabled]="!template.canPrevious"
+    ></button>
+  </div>
+
+  <label className="rls-title-bold">
+    {{ template.minRange }} - {{ template.maxRange }}
+  </label>
+
+  <div class="rls-picker-year__action rls-picker-year__action--next">
+    <button
+      rls-button-action="arrow-ios-right"
+      (click)="onNext()"
+      [disabled]="!template.canNext"
+    ></button>
+  </div>
+</div>
+
+<div class="rls-picker-year__component">
+  @for (year of template.years; track year) {
+    <div
+      class="rls-picker-year__year"
+      [class.rls-picker-year__year--selected]="year.selected"
+      [class.rls-picker-year__year--focused]="year.focused"
+      [class.rls-picker-year__year--disabled]="year.disabled"
+      (click)="onSelect(year)"
+    >
+      <span class="rls-picker-year__year__span rls-body1-medium">
+        {{ year.value || '????' }}
+      </span>
+    </div>
+  }
+</div>

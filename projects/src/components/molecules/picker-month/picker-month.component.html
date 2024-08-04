@@ -1,0 +1,13 @@
+@for (month of months; track month) {
+  <div
+    class="rls-picker-month__component"
+    [class.rls-picker-month__component--selected]="month.selected"
+    [class.rls-picker-month__component--focused]="month.focused"
+    [class.rls-picker-month__component--disabled]="month.disabled"
+    (click)="onSelect(month)"
+  >
+    <span class="rls-picker-month__span">
+      {{ month.label }}
+    </span>
+  </div>
+}

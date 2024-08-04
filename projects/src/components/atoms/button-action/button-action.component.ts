@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   Component,
   ElementRef,
@@ -6,7 +7,6 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import { RlsIconComponent } from '../icon/icon.component';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'button[rls-button-action]',

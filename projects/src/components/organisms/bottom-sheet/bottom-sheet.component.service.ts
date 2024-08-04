@@ -8,11 +8,11 @@ import { RlsBottomSheetComponent } from './bottom-sheet.component';
 export class RlsBottomSheetService {
   constructor(private portalService: RlsPortalService) {}
 
-  public create<T extends OnPortal>(
-    component: ComponentType<T>,
-    props?: RlsPortalProps<RlsBottomSheetComponent, T>
-  ): RlsPortalPublic {
-    return this.portalService.container({
+  public create<V = any>(
+    component: ComponentType<OnPortal<V>>,
+    props?: RlsPortalProps<RlsBottomSheetComponent, OnPortal<V>>
+  ): RlsPortalPublic<V> {
+    return this.portalService.container<V>({
       component,
       container: RlsBottomSheetComponent,
       props
