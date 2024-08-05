@@ -12,14 +12,14 @@
       <div class="rls-picker-day__week">
         @for (day of week.days; track day) {
           <div
-            class="rls-picker-day__day"
-            [class.rls-picker-day__day--selected]="day.selected"
-            [class.rls-picker-day__day--focused]="day.focused"
-            [class.rls-picker-day__day--disabled]="day.disabled"
-            [class.rls-picker-day__day--forbidden]="day.forbidden"
+            class="rls-picker-day__element"
+            [class.rls-picker-day__element--selected]="day.selected"
+            [class.rls-picker-day__element--focused]="day.focused"
+            [class.rls-picker-day__element--disabled]="day.disabled"
+            [class.rls-picker-day__element--forbidden]="day.forbidden"
             (click)="onSelect(day)"
           >
-            <span class="rls-picker-day__day__span">
+            <span class="rls-picker-day__element__span">
               {{ day.value || '??' }}
             </span>
           </div>

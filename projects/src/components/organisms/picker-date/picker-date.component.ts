@@ -1,12 +1,18 @@
+import { CommonModule } from '@angular/common';
 import {
   Component,
-  EventEmitter,
   Input,
   OnDestroy,
   OnInit,
-  Output,
   ViewEncapsulation
 } from '@angular/core';
+import {
+  AngularControl,
+  FormControls,
+  FormGroup,
+  formControl,
+  formGroup
+} from '@rolster/angular-forms';
 import { itIsDefined } from '@rolster/commons';
 import { checkDateRange } from '@rolster/components';
 import {
@@ -17,18 +23,20 @@ import {
   dateFormatTemplate
 } from '@rolster/dates';
 import { FormControl } from '@rolster/forms';
-import { CommonModule } from '@angular/common';
+import { RlsButtonComponent, RlsIconComponent } from '../../atoms';
 import {
   RlsPickerDayComponent,
   RlsPickerMonthComponent,
+  RlsPickerMonthTitleComponent,
   RlsPickerYearComponent
 } from '../../molecules';
-import { RlsButtonComponent, RlsIconComponent } from '../../atoms';
 
-interface Visibility {
-  day: boolean;
-  month: boolean;
-  year: boolean;
+type Visibility = 'DAY' | 'MONTH' | 'YEAR';
+
+interface DatePickerGroup extends FormControls {
+  day: AngularControl<number>;
+  month: AngularControl<number>;
+  year: AngularControl<number>;
 }
 
 @Component({
@@ -43,10 +51,11 @@ interface Visibility {
     RlsIconComponent,
     RlsPickerDayComponent,
     RlsPickerMonthComponent,
+    RlsPickerMonthTitleComponent,
     RlsPickerYearComponent
   ]
 })
-export class BoccDatePickerComponent implements OnInit, OnDestroy {
+export class RlsPickerDateComponent implements OnInit, OnDestroy {
   @Input()
   public formControl?: FormControl<Date>;
 
@@ -60,62 +69,59 @@ export class BoccDatePickerComponent implements OnInit, OnDestroy {
   public maxDate?: Date;
 
   @Input()
-  public automatic = true;
-
-  @Output()
-  public listener: EventEmitter<DateListener>;
+  public automatic = false;
 
   protected value: Date;
 
-  protected dateControl: DatePickerControls;
+  protected dateGroup: FormGroup<DatePickerGroup>;
 
   protected unsubscriptions: Unsubscription[] = [];
 
-  protected visibility: Visibility;
+  protected visibility: Visibility = 'DAY';
 
   constructor() {
-    this.listener = new EventEmitter();
-
     this.value = new Date();
 
-    this.dateControl = new DatePickerControls(this.value);
-
-    this.visibility = {
-      day: true,
-      month: false,
-      year: false
-    };
+    this.dateGroup = formGroup({
+      controls: {
+        day: formControl(this.value.getDate()),
+        month: formControl(this.value.getMonth()),
+        year: formControl(this.value.getFullYear())
+      }
+    });
   }
 
   public ngOnInit(): void {
-    this.unsubscriptions.push(
-      this.formControl?.subscribe((date) => {
-        if (date) {
-          this.value = date;
-        }
-      })
-    );
+    if (this.formControl) {
+      this.unsubscriptions.push(
+        this.formControl.subscribe((date) => {
+          if (date) {
+            this.value = date;
+          }
+        })
+      );
+    }
 
     this.unsubscriptions.push(
-      this.dateControl.year.subscribe((year) => {
+      this.dateGroup.controls.year.subscribe((year) => {
         if (itIsDefined(year)) {
           this.value = assignYearInDate(this.value, year);
-          this.show('day');
+          this.visibility = 'DAY';
         }
       })
     );
 
     this.unsubscriptions.push(
-      this.dateControl.month.subscribe((month) => {
+      this.dateGroup.controls.month.subscribe((month) => {
         if (itIsDefined(month)) {
           this.value = assignMonthInDate(this.value, month);
-          this.show('day');
+          this.visibility = 'DAY';
         }
       })
     );
 
     this.unsubscriptions.push(
-      this.dateControl.day.subscribe((day) => {
+      this.dateGroup.controls.day.subscribe((day) => {
         if (itIsDefined(day)) {
           const newValue = assignDayInDate(this.value, day);
           this.value = newValue;
@@ -127,13 +133,13 @@ export class BoccDatePickerComponent implements OnInit, OnDestroy {
       })
     );
 
-    const dateValue = checkDateRange({
-      date: this.formControl?.state || this.value,
-      minDate: this.minDate,
-      maxDate: this.maxDate
-    });
-
-    this.dateControl.setDate(dateValue);
+    this.setDate(
+      checkDateRange({
+        date: this.formControl?.state || this.value,
+        minDate: this.minDate,
+        maxDate: this.maxDate
+      })
+    );
   }
 
   public ngOnDestroy(): void {
@@ -154,16 +160,16 @@ export class BoccDatePickerComponent implements OnInit, OnDestroy {
     return MONTH_NAMES(this.value.getMonth());
   }
 
-  public onClickDay(): void {
-    this.show('day');
+  public onVisibilityDay(): void {
+    this.visibility = 'DAY';
   }
 
-  public onClickMonth(): void {
-    this.show('month');
+  public onVisibilityMonth(): void {
+    this.visibility = 'MONTH';
   }
 
-  public onClickYear(): void {
-    this.show('year');
+  public onVisibilityYear(): void {
+    this.visibility = 'YEAR';
   }
 
   public onSelect(): void {
@@ -173,33 +179,28 @@ export class BoccDatePickerComponent implements OnInit, OnDestroy {
   public onToday(): void {
     const today = new Date(); // Refresh value with Today
 
-    this.dateControl.year.setState(today.getFullYear());
-    this.dateControl.month.setState(today.getMonth());
-    this.dateControl.day.setState(today.getDate());
-
+    this.setDate(today);
     this.formControl?.setState(today);
 
-    this.emitListener(DateListenerType.Today, today);
+    //this.emitListener(DateListenerType.Today, today);
   }
 
   public onCancel(): void {
-    this.emitListener(DateListenerType.Cancel);
+    //this.emitListener(DateListenerType.Cancel);
   }
 
-  private emitListener(type: DateListenerType, value?: Date): void {
-    this.listener.emit({ type, value });
+  private setDate(date: Date): void {
+    this.dateGroup.controls.year.setState(date.getFullYear());
+    this.dateGroup.controls.month.setState(date.getMonth());
+    this.dateGroup.controls.day.setState(date.getDate());
   }
+
+  // private emitListener(type: DateListenerType, value?: Date): void {
+  //   this.listener.emit({ type, value });
+  // }
 
   private emitDate(value: Date): void {
     this.formControl?.setState(value);
-    this.emitListener(DateListenerType.Select, value);
-  }
-
-  private show(key: keyof Visibility): void {
-    Object.keys(this.visibility).forEach((key) => {
-      this.visibility[key] = false;
-    });
-
-    this.visibility[key] = true; // Visible
+    //this.emitListener(DateListenerType.Select, value);
   }
 }

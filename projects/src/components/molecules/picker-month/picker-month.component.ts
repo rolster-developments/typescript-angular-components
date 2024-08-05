@@ -8,6 +8,7 @@ import {
   SimpleChanges,
   ViewEncapsulation
 } from '@angular/core';
+import { AngularControl } from '@rolster/angular-forms';
 import { itIsDefined } from '@rolster/commons';
 import {
   MonthPickerProps,
@@ -15,7 +16,6 @@ import {
   checkMonthPicker,
   createMonthPicker
 } from '@rolster/components';
-import { FormControl } from '@rolster/forms';
 
 @Component({
   selector: 'rls-picker-month',
@@ -27,13 +27,13 @@ import { FormControl } from '@rolster/forms';
 })
 export class RlsPickerMonthComponent implements OnInit, OnDestroy, OnChanges {
   @Input()
-  public formControl?: FormControl<number>;
+  public formControl?: AngularControl<number>;
 
   @Input()
   public date: Date;
 
   @Input()
-  public year: number;
+  public year?: number;
 
   @Input()
   public minDate?: Date;

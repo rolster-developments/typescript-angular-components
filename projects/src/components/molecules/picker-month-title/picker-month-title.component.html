@@ -1,0 +1,13 @@
+<button
+  rls-button-action="arrow-ios-left"
+  (click)="onPrevious()"
+  [disabled]="limitPrevious || disabled"
+></button>
+
+<span (click)="onTitle()">{{ name }}</span>
+
+<button
+  rls-button-action="arrow-ios-right"
+  (click)="onNext()"
+  [disabled]="limitNext || disabled"
+></button>

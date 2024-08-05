@@ -9,4 +9,5 @@ export * from './label-switch/label-switch.component';
 export * from './message-form-error/message-form-error.component';
 export * from './picker-day/picker-day.component';
 export * from './picker-month/picker-month.component';
+export * from './picker-month-title/picker-month-title.component';
 export * from './picker-year/picker-year.component';

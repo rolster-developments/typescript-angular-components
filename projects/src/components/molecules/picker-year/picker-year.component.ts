@@ -8,6 +8,7 @@ import {
   SimpleChanges,
   ViewEncapsulation
 } from '@angular/core';
+import { AngularControl } from '@rolster/angular-forms';
 import { itIsDefined } from '@rolster/commons';
 import {
   YearPickerProps,
@@ -16,7 +17,6 @@ import {
   checkYearPicker,
   createYearPicker
 } from '@rolster/components';
-import { FormControl } from '@rolster/forms';
 import { RlsButtonActionComponent } from '../../atoms';
 
 @Component({
@@ -29,7 +29,7 @@ import { RlsButtonActionComponent } from '../../atoms';
 })
 export class RlsPickerYearComponent implements OnInit, OnDestroy, OnChanges {
   @Input()
-  public formControl?: FormControl<number>;
+  public formControl?: AngularControl<number>;
 
   @Input()
   public date: Date;

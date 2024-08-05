@@ -8,6 +8,7 @@ import {
   SimpleChanges,
   ViewEncapsulation
 } from '@angular/core';
+import { AngularControl } from '@rolster/angular-forms';
 import { itIsDefined } from '@rolster/commons';
 import {
   DayPickerProps,
@@ -17,7 +18,6 @@ import {
   createDayPicker
 } from '@rolster/components';
 import { DAY_LABELS } from '@rolster/dates';
-import { FormControl } from '@rolster/forms';
 
 @Component({
   selector: 'rls-picker-day',
@@ -29,16 +29,16 @@ import { FormControl } from '@rolster/forms';
 })
 export class RlsPickerDayComponent implements OnInit, OnDestroy, OnChanges {
   @Input()
-  public formControl?: FormControl<number>;
+  public formControl?: AngularControl<number>;
 
   @Input()
   public date: Date;
 
   @Input()
-  public month: number;
+  public month?: number;
 
   @Input()
-  public year: number;
+  public year?: number;
 
   @Input()
   public minDate?: Date;

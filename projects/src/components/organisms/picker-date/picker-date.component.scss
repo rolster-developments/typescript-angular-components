@@ -1,112 +1,94 @@
-/**
- * BOCC DatePicker Component
- * v2.0.0
- * Author: MB Frontend Developers
- * Created: 26/Sep/2023
- * Updated: 05/Jun/2024
-*/
+// Rolster Technology DatePicker Component
+// v2.0.0
+// @license MIT
+// Author: Rolster Developers
+// Created: 20/Mar/2018
+// Updated: 27/Ene/2024
 
-bocc-date-picker {
-  --pvt-title-font-size: 7.5rem;
-  --pvt-span-font-size: 7rem;
-  --pvt-span-padding: var(--sizing-x4);
-
+rls-picker-date {
+  position: relative;
   display: block;
-  width: 100%;
-  padding: var(--sizing-x6);
-  box-sizing: border-box;
 
-  .bocc-date-picker {
-    &__content {
-      display: flex;
-      width: 100%;
-      flex-direction: column;
-      row-gap: var(--sizing-x4);
-      overflow: hidden;
-    }
+  .rls-picker-date {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    max-width: 150rem;
+    overflow: hidden;
+    row-gap: var(--rls-sizing-x4);
 
     &__header {
       display: flex;
       flex-direction: column;
-      row-gap: var(--sizing-x6);
-      padding: 0rem var(--sizing-x2);
+      row-gap: var(--rls-sizing-x4);
+      padding: var(--rls-sizing-x4);
       box-sizing: border-box;
+      background: var(--rls-theme-color-100);
+      border-radius: var(--rls-sizing-x4);
+
+      .rls-picker-month-title {
+        padding: 0rem var(--rls-sizing-x6);
+        box-sizing: border-box;
+      }
     }
 
     &__title {
-      color: var(--color-carbon-lighter-700);
-      cursor: default;
+      color: var(--rls-app-color-500);
       text-align: center;
-      font-size: var(--pvt-title-font-size);
-      font-weight: var(--font-weight-medium);
-      letter-spacing: var(--body2-letter-spacing);
-    }
+      cursor: default;
+      font-weight: var(--rls-font-weight-bold);
 
-    &__subheader {
-      display: flex;
-      column-gap: var(--sizing-x6);
-
-      & > *[class^='bocc-date-picker__subheader__'] {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: var(--pvt-span-padding);
-        box-sizing: border-box;
-        border: 1px solid var(--color-carbon-lighter-400);
-        border-radius: var(--sizing-x2);
-
-        span {
-          color: var(--color-carbon-lighter-700);
-          font-size: var(--pvt-span-font-size);
-          font-weight: var(--font-weight-medium);
-          letter-spacing: var(--body2-letter-spacing);
-        }
-
-        bocc-icon {
-          color: var(--color-blue-700);
-        }
+      &:hover {
+        color: var(--rls-theme-color-500);
       }
 
-      &__month {
-        width: 65%;
+      &--description {
+        height: var(--rls-sizing-x16);
+        line-height: var(--rls-sizing-x16);
+        font-size: 9.25rem;
       }
 
-      &__year {
-        width: 35%;
+      &--year {
+        height: var(--rls-sizing-x16);
+        line-height: var(--rls-sizing-x16);
+        font-size: var(--rls-sizing-x12);
+        color: var(--rls-app-color-300);
       }
     }
 
     &__component {
       display: flex;
       justify-content: center;
-      padding: 0rem var(--sizing-x2);
-      box-sizing: border-box;
-    }
 
-    &__footer {
-      &--hidden {
+      & > .hidden {
         display: none;
       }
     }
 
     &__actions {
       display: flex;
-      column-gap: var(--sizing-x4);
-      padding: 0rem var(--sizing-x4);
+      flex-wrap: wrap;
+      gap: var(--rls-sizing-x4);
+      padding: var(--rls-sizing-x4) var(--rls-sizing-x8) var(--rls-sizing-x6)
+        var(--rls-sizing-x8);
       overflow: hidden;
       box-sizing: border-box;
+
+      &--cancel {
+        width: calc(50% - var(--rls-sizing-x2));
+      }
+
+      &--today {
+        width: calc(50% - var(--rls-sizing-x2));
+      }
+
+      &--ok {
+        width: 100%;
+      }
 
       button {
         width: 100%;
       }
     }
-  }
-}
-
-@media screen and (max-width: 320px) {
-  bocc-date-picker {
-    --pvt-title-font-size: 7rem;
-    --pvt-span-font-size: 6.5rem;
-    --pvt-span-padding: var(--sizing-x3);
   }
 }

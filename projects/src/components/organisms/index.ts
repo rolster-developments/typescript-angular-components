@@ -4,3 +4,4 @@ export * from './confirmation/confirmation.component';
 export * from './confirmation/confirmation.component.service';
 export * from './modal/modal.component';
 export * from './modal/modal.component.service';
+export * from './picker-date/picker-date.component';

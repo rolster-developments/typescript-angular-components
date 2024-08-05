@@ -1,68 +1,82 @@
-<div class="bocc-date-picker__content">
-  <div class="bocc-date-picker__header">
-    <div class="bocc-date-picker__title">{{ title }}</div>
-
-    <div class="bocc-date-picker__subheader">
-      <div class="bocc-date-picker__subheader__month" (click)="onClickMonth()">
-        <span>{{ month }}</span>
-        <bocc-icon icon="list-open"></bocc-icon>
-      </div>
-
-      <div class="bocc-date-picker__subheader__year" (click)="onClickYear()">
-        <span>{{ year }}</span>
-        <bocc-icon icon="list-open"></bocc-icon>
-      </div>
+<div class="rls-picker-date">
+  <div class="rls-picker-date__header">
+    <div class="rls-picker-date__title rls-picker-date__title--description">
+      <span (click)="onVisibilityDay()">
+        {{ title }}
+      </span>
     </div>
-  </div>
 
-  <div class="bocc-date-picker__component">
-    <bocc-day-picker
-      [formControl]="dateControl.day"
+    <div class="rls-picker-date__title rls-picker-date__title--year">
+      <span (click)="onVisibilityYear()">
+        {{ dateGroup.controls.year.state }}
+      </span>
+    </div>
+
+    <rls-picker-month-title
+      [monthControl]="dateGroup.controls.month"
+      [yearControl]="dateGroup.controls.year"
+      (title)="onVisibilityMonth()"
       [date]="value"
       [minDate]="minDate"
       [maxDate]="maxDate"
-      [hidden]="!visibility.day"
+      [disabled]="visibility === 'YEAR'"
     >
-    </bocc-day-picker>
+    </rls-picker-month-title>
+  </div>
 
-    <bocc-month-picker
-      [formControl]="dateControl.month"
+  <div class="rls-picker-date__component">
+    <rls-picker-day
+      [class.hidden]="visibility !== 'DAY'"
+      [formControl]="dateGroup.controls.day"
+      [date]="value"
+      [year]="dateGroup.controls.year.state"
+      [month]="dateGroup.controls.month.state"
+      [minDate]="minDate"
+      [maxDate]="maxDate"
+    >
+    </rls-picker-day>
+
+    <rls-picker-month
+      [class.hidden]="visibility !== 'MONTH'"
+      [formControl]="dateGroup.controls.month"
+      [date]="value"
+      [year]="dateGroup.controls.year.state"
+      [minDate]="minDate"
+      [maxDate]="maxDate"
+    >
+    </rls-picker-month>
+
+    <rls-picker-year
+      [class.hidden]="visibility !== 'YEAR'"
+      [formControl]="dateGroup.controls.year"
       [date]="value"
       [minDate]="minDate"
       [maxDate]="maxDate"
-      [hidden]="!visibility.month"
     >
-    </bocc-month-picker>
-
-    <bocc-year-picker
-      [formControl]="dateControl.year"
-      [minDate]="minDate"
-      [maxDate]="maxDate"
-      [hidden]="!visibility.year"
-    >
-    </bocc-year-picker>
+    </rls-picker-year>
   </div>
 
-  <div
-    class="bocc-date-picker__footer"
-    [class.bocc-date-picker__footer--hidden]="automatic"
-  >
-    <div class="bocc-date-picker__actions">
-      <button
-        bocc-button="outline"
-        class="bocc-date-picker__button bocc-date-picker__button--today"
-        (click)="onToday()"
-      >
-        <span>Hoy</span>
-      </button>
+  @if (!automatic) {
+    <div class="rls-picker-date__footer">
+      <div class="rls-picker-date__actions">
+        <div class="rls-picker-date__actions--cancel">
+          <button rls-button="outline" (click)="onCancel()">
+            <span>Cancelar</span>
+          </button>
+        </div>
 
-      <button
-        bocc-button="raised"
-        class="bocc-date-picker__button bocc-date-picker__button--ok"
-        (click)="onSelect()"
-      >
-        <span>Establecer</span>
-      </button>
+        <div class="rls-picker-date__actions--today">
+          <button rls-button="outline" (click)="onToday()">
+            <span>Hoy</span>
+          </button>
+        </div>
+
+        <div class="rls-picker-date__actions--ok">
+          <button rls-button="raised" (click)="onSelect()">
+            <span>Establecer</span>
+          </button>
+        </div>
+      </div>
     </div>
-  </div>
+  }
 </div>
