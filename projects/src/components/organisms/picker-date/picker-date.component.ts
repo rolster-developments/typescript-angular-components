@@ -1,20 +1,15 @@
 import { CommonModule } from '@angular/common';
 import {
   Component,
+  EventEmitter,
   Input,
   OnDestroy,
   OnInit,
+  Output,
   ViewEncapsulation
 } from '@angular/core';
-import {
-  AngularControl,
-  FormControls,
-  FormGroup,
-  formControl,
-  formGroup
-} from '@rolster/angular-forms';
 import { itIsDefined } from '@rolster/commons';
-import { checkDateRange } from '@rolster/components';
+import { PickerListenerType, checkDateRange } from '@rolster/components';
 import {
   MONTH_NAMES,
   assignDayInDate,
@@ -30,13 +25,13 @@ import {
   RlsPickerMonthTitleComponent,
   RlsPickerYearComponent
 } from '../../molecules';
+import { PickerDateGroup } from './picker-date.controls';
 
 type Visibility = 'DAY' | 'MONTH' | 'YEAR';
 
-interface DatePickerGroup extends FormControls {
-  day: AngularControl<number>;
-  month: AngularControl<number>;
-  year: AngularControl<number>;
+export interface PickerDateListener {
+  type: PickerListenerType;
+  value?: Date;
 }
 
 @Component({
@@ -57,10 +52,7 @@ interface DatePickerGroup extends FormControls {
 })
 export class RlsPickerDateComponent implements OnInit, OnDestroy {
   @Input()
-  public formControl?: FormControl<Date>;
-
-  @Input()
-  public enabled = true;
+  public formControl?: FormControl<Undefined<Date>>;
 
   @Input()
   public minDate?: Date;
@@ -71,30 +63,28 @@ export class RlsPickerDateComponent implements OnInit, OnDestroy {
   @Input()
   public automatic = false;
 
+  @Output()
+  public listener: EventEmitter<PickerDateListener>;
+
   protected value: Date;
 
-  protected dateGroup: FormGroup<DatePickerGroup>;
+  protected dateGroup: PickerDateGroup;
 
   protected unsubscriptions: Unsubscription[] = [];
 
   protected visibility: Visibility = 'DAY';
 
   constructor() {
+    this.listener = new EventEmitter();
     this.value = new Date();
-
-    this.dateGroup = formGroup({
-      controls: {
-        day: formControl(this.value.getDate()),
-        month: formControl(this.value.getMonth()),
-        year: formControl(this.value.getFullYear())
-      }
-    });
+    this.dateGroup = new PickerDateGroup(this.value);
   }
 
   public ngOnInit(): void {
     if (this.formControl) {
       this.unsubscriptions.push(
         this.formControl.subscribe((date) => {
+          console.log(date)
           if (date) {
             this.value = date;
           }
@@ -103,7 +93,7 @@ export class RlsPickerDateComponent implements OnInit, OnDestroy {
     }
 
     this.unsubscriptions.push(
-      this.dateGroup.controls.year.subscribe((year) => {
+      this.dateGroup.year.subscribe((year) => {
         if (itIsDefined(year)) {
           this.value = assignYearInDate(this.value, year);
           this.visibility = 'DAY';
@@ -112,7 +102,7 @@ export class RlsPickerDateComponent implements OnInit, OnDestroy {
     );
 
     this.unsubscriptions.push(
-      this.dateGroup.controls.month.subscribe((month) => {
+      this.dateGroup.month.subscribe((month) => {
         if (itIsDefined(month)) {
           this.value = assignMonthInDate(this.value, month);
           this.visibility = 'DAY';
@@ -121,7 +111,7 @@ export class RlsPickerDateComponent implements OnInit, OnDestroy {
     );
 
     this.unsubscriptions.push(
-      this.dateGroup.controls.day.subscribe((day) => {
+      this.dateGroup.day.subscribe((day) => {
         if (itIsDefined(day)) {
           const newValue = assignDayInDate(this.value, day);
           this.value = newValue;
@@ -182,25 +172,23 @@ export class RlsPickerDateComponent implements OnInit, OnDestroy {
     this.setDate(today);
     this.formControl?.setState(today);
 
-    //this.emitListener(DateListenerType.Today, today);
+    this.emitListener(PickerListenerType.Now, today);
   }
 
   public onCancel(): void {
-    //this.emitListener(DateListenerType.Cancel);
+    this.emitListener(PickerListenerType.Cancel);
   }
 
   private setDate(date: Date): void {
-    this.dateGroup.controls.year.setState(date.getFullYear());
-    this.dateGroup.controls.month.setState(date.getMonth());
-    this.dateGroup.controls.day.setState(date.getDate());
+    this.dateGroup.setDate(date);
   }
 
-  // private emitListener(type: DateListenerType, value?: Date): void {
-  //   this.listener.emit({ type, value });
-  // }
+  private emitListener(type: PickerListenerType, value?: Date): void {
+    this.listener.emit({ type, value });
+  }
 
   private emitDate(value: Date): void {
     this.formControl?.setState(value);
-    //this.emitListener(DateListenerType.Select, value);
+    this.emitListener(PickerListenerType.Select, value);
   }
 }

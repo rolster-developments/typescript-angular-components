@@ -26,7 +26,8 @@ import {
   RlsLabelRadiobuttonComponent,
   RlsLabelSwitchComponent,
   RlsBottomSheetComponent,
-  RlsPickerDateComponent
+  RlsPickerDateComponent,
+  RlsFieldDateComponent
 } from '../../../../projects/src';
 
 @NgModule({
@@ -57,7 +58,8 @@ import {
     RlsLabelRadiobuttonComponent,
     RlsLabelSwitchComponent,
     RlsBottomSheetComponent,
-    RlsPickerDateComponent
+    RlsPickerDateComponent,
+    RlsFieldDateComponent
   ]
 })
 export class HomePageModule {}

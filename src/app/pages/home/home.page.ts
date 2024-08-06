@@ -46,6 +46,8 @@ export class HomePage {
 
   protected formRadiobutton = new FormControl<string>();
 
+  protected formDate = new FormControl(new Date(), [required]);
+
   protected name = signal('Daniel');
 
   protected active = false;

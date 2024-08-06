@@ -8,13 +8,13 @@
 
     <div class="rls-picker-date__title rls-picker-date__title--year">
       <span (click)="onVisibilityYear()">
-        {{ dateGroup.controls.year.state }}
+        {{ dateGroup.year.state }}
       </span>
     </div>
 
     <rls-picker-month-title
-      [monthControl]="dateGroup.controls.month"
-      [yearControl]="dateGroup.controls.year"
+      [monthControl]="dateGroup.month"
+      [yearControl]="dateGroup.year"
       (title)="onVisibilityMonth()"
       [date]="value"
       [minDate]="minDate"
@@ -27,10 +27,10 @@
   <div class="rls-picker-date__component">
     <rls-picker-day
       [class.hidden]="visibility !== 'DAY'"
-      [formControl]="dateGroup.controls.day"
+      [formControl]="dateGroup.day"
       [date]="value"
-      [year]="dateGroup.controls.year.state"
-      [month]="dateGroup.controls.month.state"
+      [year]="dateGroup.year.state"
+      [month]="dateGroup.month.state"
       [minDate]="minDate"
       [maxDate]="maxDate"
     >
@@ -38,9 +38,9 @@
 
     <rls-picker-month
       [class.hidden]="visibility !== 'MONTH'"
-      [formControl]="dateGroup.controls.month"
+      [formControl]="dateGroup.month"
       [date]="value"
-      [year]="dateGroup.controls.year.state"
+      [year]="dateGroup.year.state"
       [minDate]="minDate"
       [maxDate]="maxDate"
     >
@@ -48,7 +48,7 @@
 
     <rls-picker-year
       [class.hidden]="visibility !== 'YEAR'"
-      [formControl]="dateGroup.controls.year"
+      [formControl]="dateGroup.year"
       [date]="value"
       [minDate]="minDate"
       [maxDate]="maxDate"

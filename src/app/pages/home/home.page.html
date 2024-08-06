@@ -3,7 +3,7 @@
     <section class="rls-app__page__content">
       <div class="home-app">
         <div class="home-app__content">
-          <rls-picker-date></rls-picker-date>
+          <rls-field-date [formControl]="formDate">Fecha de nacimiento</rls-field-date>
 
           <rls-field-password [formControl]="formControl" rls-theme="amaizing">
             Nombre completo
@@ -23,7 +23,11 @@
             Registrar Producto
           </button>
 
-          <button rls-button="raised" rls-theme="warning" (click)="onBottomSheet()">
+          <button
+            rls-button="raised"
+            rls-theme="warning"
+            (click)="onBottomSheet()"
+          >
             Registrar Producto
           </button>
 
