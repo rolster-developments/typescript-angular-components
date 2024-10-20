@@ -83,9 +83,11 @@ export class RlsFieldDateComponent implements OnChanges, OnDestroy {
     if (formControl) {
       this.unsusbcription && this.unsusbcription();
 
-      this.unsusbcription = formControl.currentValue?.subscribe((value) => {
-        this.setFormatDate(value);
-      });
+      this.unsusbcription = formControl.currentValue?.subscribe(
+        (value: Date | undefined) => {
+          this.setFormatDate(value);
+        }
+      );
     }
   }
 

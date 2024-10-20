@@ -29,7 +29,7 @@ import {
   RlsPickerDateComponent,
   RlsFieldDateComponent,
   RlsPickerDayRangeComponent
-} from '../../../../projects/src';
+} from '../../../../projects';
 
 @NgModule({
   declarations: [HomePage],

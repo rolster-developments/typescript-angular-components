@@ -15,9 +15,7 @@
     }
   ],
   "files": [
-    "dist/",
-    "LICENSE",
-    "readme.md"
+    "dist/"
   ],
   "scripts": {
     "server": "ng serve",

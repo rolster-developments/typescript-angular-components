@@ -59,9 +59,11 @@ export class RlsInputComponent implements OnChanges, OnDestroy {
     if (formControl) {
       this.unsubscription && this.unsubscription();
 
-      this.unsubscription = formControl.currentValue?.subscribe((value) => {
-        this.input.set(String(value ?? ''));
-      });
+      this.unsubscription = formControl.currentValue?.subscribe(
+        (value: any) => {
+          this.input.set(String(value ?? ''));
+        }
+      );
     }
   }
 

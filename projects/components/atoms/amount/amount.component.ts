@@ -33,8 +33,8 @@ export class RlsAmountComponent implements OnChanges {
 
     if (value || decimals) {
       this.valueFormat = currencyFormat({
-        value: value.currentValue || this.value,
-        decimals: decimals.currentValue || this.decimals
+        value: value?.currentValue ?? this.value,
+        decimals: decimals?.currentValue ?? this.decimals
       });
     }
   }

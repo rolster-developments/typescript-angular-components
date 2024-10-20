@@ -83,9 +83,11 @@ export class RlsPickerMonthComponent implements OnInit, OnDestroy, OnChanges {
     if (formControl) {
       this.unsubscription && this.unsubscription();
 
-      this.unsubscription = formControl.currentValue?.subscribe((month) => {
-        this.setValue(month ?? this.date.getMonth());
-      });
+      this.unsubscription = formControl.currentValue?.subscribe(
+        (value: number) => {
+          this.setValue(value ?? this.date.getMonth());
+        }
+      );
     }
   }
 

@@ -3,6 +3,7 @@
 .github
 .vscode
 node_modules
+projects
 test
 
 # Files

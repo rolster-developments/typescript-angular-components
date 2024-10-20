@@ -141,11 +141,13 @@ export class RlsPickerDateComponent implements OnInit, OnChanges, OnDestroy {
     if (formControl) {
       this.unsubscription && this.unsubscription();
 
-      this.unsubscription = formControl.currentValue?.subscribe((date) => {
-        if (date) {
-          this.value = date;
+      this.unsubscription = formControl.currentValue?.subscribe(
+        (value: Date | undefined) => {
+          if (value) {
+            this.value = value;
+          }
         }
-      });
+      );
     }
   }
 

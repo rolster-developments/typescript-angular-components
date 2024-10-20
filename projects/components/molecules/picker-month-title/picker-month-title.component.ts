@@ -87,19 +87,21 @@ export class RlsPickerMonthTitleComponent implements OnDestroy, OnChanges {
     if (monthControl) {
       this.unsubscription && this.unsubscription();
 
-      this.unsubscription = monthControl.currentValue?.subscribe((state) => {
-        this.name = MONTH_NAMES()[state ?? 0];
+      this.unsubscription = monthControl.currentValue?.subscribe(
+        (value: number) => {
+          this.name = MONTH_NAMES()[value ?? 0];
 
-        const { limitNext, limitPrevious } = monthLimitTemplate({
-          date: this.date,
-          maxDate: this.maxDate,
-          minDate: this.minDate,
-          month: state
-        });
+          const { limitNext, limitPrevious } = monthLimitTemplate({
+            date: this.date,
+            maxDate: this.maxDate,
+            minDate: this.minDate,
+            month: value
+          });
 
-        this.limitNext = limitNext;
-        this.limitPrevious = limitPrevious;
-      });
+          this.limitNext = limitNext;
+          this.limitPrevious = limitPrevious;
+        }
+      );
     }
   }
 

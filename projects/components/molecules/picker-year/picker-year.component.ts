@@ -90,9 +90,11 @@ export class RlsPickerYearComponent implements OnInit, OnDestroy, OnChanges {
     if (formControl) {
       this.unsubscription && this.unsubscription();
 
-      this.unsubscription = formControl.currentValue?.subscribe((year) => {
-        this.setValue(year ?? this.date.getFullYear());
-      });
+      this.unsubscription = formControl.currentValue?.subscribe(
+        (year: number) => {
+          this.setValue(year ?? this.date.getFullYear());
+        }
+      );
     }
   }
 

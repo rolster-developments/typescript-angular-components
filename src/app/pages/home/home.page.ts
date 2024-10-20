@@ -21,7 +21,7 @@ import { OnPortal, RlsPortalPrivate } from '../../../../projects';
 class RlsComponentPortal implements OnPortal<string> {
   private portal?: RlsPortalPrivate<string>;
 
-  public name: string;
+  public name = "";
 
   protected onEmit() {
     this.portal?.resolve('Daniel');
