@@ -1,0 +1,16 @@
+{
+  "$schema": "./node_modules/ng-packagr/ng-package.schema.json",
+  "allowedNonPeerDependencies": [
+    "@rolster/angular-forms",
+    "@rolster/commons",
+    "@rolster/components",
+    "@rolster/dates",
+    "@rolster/strings",
+    "@rolster/validators"
+  ],
+  "dest": "./dist",
+  "lib": {
+    "entryFile": "projects/index.ts"
+  },
+  "inlineStyleLanguage": "scss"
+}

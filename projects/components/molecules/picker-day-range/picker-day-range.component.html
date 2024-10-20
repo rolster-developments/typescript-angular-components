@@ -1,0 +1,31 @@
+<div class="rls-picker-day-range__content">
+  <div class="rls-picker-day-range__header">
+    @for (title of titles; track title) {
+      <div class="rls-picker-day-range__label">
+        {{ title }}
+      </div>
+    }
+  </div>
+
+  <div class="rls-picker-day-range__component">
+    @for (week of weeks; track week) {
+      <div class="rls-picker-day-range__week">
+        @for (day of week.days; track day) {
+          <div
+            class="rls-picker-day-range__element"
+            [class.rls-picker-day-range__element--source]="day.source"
+            [class.rls-picker-day-range__element--ranged]="day.ranged"
+            [class.rls-picker-day-range__element--end]="day.end"
+            [class.rls-picker-day-range__element--disabled]="day.disabled"
+            [class.rls-picker-day-range__element--forbidden]="day.forbidden"
+            (click)="onSelect(day)"
+          >
+            <span class="rls-picker-day-range__element__span">
+              {{ day.value || '??' }}
+            </span>
+          </div>
+        }
+      </div>
+    }
+  </div>
+</div>

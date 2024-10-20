@@ -10,5 +10,6 @@
     "src/polyfills.ts",
     "node_modules/@rolster/types/index.d.ts"
   ],
+  "include": ["src/**/*.d.ts", "projects/**/*.d.ts"],
   "exclude": ["src/**/*.spec.ts"]
 }

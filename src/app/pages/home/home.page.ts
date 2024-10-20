@@ -5,8 +5,8 @@ import {
   RlsBottomSheetService,
   RlsConfirmationService,
   RlsModalService
-} from '../../../../projects/src';
-import { OnPortal, RlsPortalPrivate } from '../../../../projects/src/types';
+} from '../../../../projects';
+import { OnPortal, RlsPortalPrivate } from '../../../../projects';
 
 @Component({
   selector: 'rls-portal',
@@ -21,7 +21,9 @@ import { OnPortal, RlsPortalPrivate } from '../../../../projects/src/types';
 class RlsComponentPortal implements OnPortal<string> {
   private portal?: RlsPortalPrivate<string>;
 
-  onEmit() {
+  public name: string;
+
+  protected onEmit() {
     this.portal?.resolve('Daniel');
     this.portal?.destroy();
   }
@@ -60,7 +62,7 @@ export class HomePage {
 
   public onClick(): void {
     this.active = !this.active;
-    this.formControl.setState('Adrian Castillo');
+    this.formControl.setValue('Adrian Castillo');
     this.name.set('Adrian');
 
     this.confirmationService.execute({
@@ -78,7 +80,10 @@ export class HomePage {
   }
 
   public onBottomSheet(): void {
-    const sheet = this.modalService.create(RlsComponentPortal);
+    const sheet = this.modalService.create(RlsComponentPortal, {
+      container: { autoclose: true },
+      component: { name: 'Daniel Castillo' }
+    });
 
     sheet.open();
 
