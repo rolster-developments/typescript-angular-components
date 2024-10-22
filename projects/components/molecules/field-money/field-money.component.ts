@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -15,7 +16,7 @@ import { RlsMessageFormErrorComponent } from '../message-form-error/message-form
   templateUrl: 'field-money.component.html',
   styleUrls: ['field-money.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  imports: [RlsInputMoneyComponent, RlsMessageFormErrorComponent]
+  imports: [CommonModule, RlsInputMoneyComponent, RlsMessageFormErrorComponent]
 })
 export class RlsFieldMoneyComponent {
   @Input()

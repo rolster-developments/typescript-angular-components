@@ -28,7 +28,8 @@ import {
   RlsBottomSheetComponent,
   RlsPickerDateComponent,
   RlsFieldDateComponent,
-  RlsPickerDayRangeComponent
+  RlsPickerDayRangeComponent,
+  RlsPaginationComponent
 } from '../../../../projects';
 
 @NgModule({
@@ -61,7 +62,8 @@ import {
     RlsBottomSheetComponent,
     RlsPickerDateComponent,
     RlsFieldDateComponent,
-    RlsPickerDayRangeComponent
+    RlsPickerDayRangeComponent,
+    RlsPaginationComponent
   ]
 })
 export class HomePageModule {}

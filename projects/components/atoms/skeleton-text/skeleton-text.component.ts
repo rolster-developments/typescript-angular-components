@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { RlsSkeletonComponent } from '../skeleton/skeleton.component';
 
@@ -7,7 +8,7 @@ import { RlsSkeletonComponent } from '../skeleton/skeleton.component';
   templateUrl: 'skeleton-text.component.html',
   styleUrls: ['skeleton-text.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  imports: [RlsSkeletonComponent]
+  imports: [CommonModule, RlsSkeletonComponent]
 })
 export class RlsSkeletonTextComponent {
   @Input()

@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -17,7 +18,7 @@ type TextType = 'text' | 'email';
   templateUrl: 'field-text.component.html',
   styleUrls: ['field-text.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  imports: [RlsInputTextComponent, RlsMessageFormErrorComponent]
+  imports: [CommonModule, RlsInputTextComponent, RlsMessageFormErrorComponent]
 })
 export class RlsFieldTextComponent {
   @Input()

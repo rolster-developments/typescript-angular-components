@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { RlsIconComponent } from '../icon/icon.component';
 
@@ -7,7 +8,7 @@ import { RlsIconComponent } from '../icon/icon.component';
   templateUrl: 'message-icon.component.html',
   styleUrls: ['message-icon.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  imports: [RlsIconComponent]
+  imports: [CommonModule, RlsIconComponent]
 })
 export class RlsMessageIconComponent {
   @Input()

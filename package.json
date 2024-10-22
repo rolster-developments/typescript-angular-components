@@ -29,7 +29,7 @@
   "dependencies": {
     "@rolster/angular-forms": "^17.4.2",
     "@rolster/commons": "^2.0.4",
-    "@rolster/components": "^0.2.0",
+    "@rolster/components": "^0.3.7",
     "@rolster/dates": "^2.0.0",
     "@rolster/strings": "^2.0.0",
     "@rolster/validators": "^1.0.5"

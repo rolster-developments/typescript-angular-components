@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@rolster/angular-forms';
 import { RlsMessageIconComponent } from '../../atoms/message-icon/message-icon.component';
@@ -7,7 +8,7 @@ import { RlsMessageIconComponent } from '../../atoms/message-icon/message-icon.c
   standalone: true,
   templateUrl: 'message-form-error.component.html',
   encapsulation: ViewEncapsulation.None,
-  imports: [RlsMessageIconComponent]
+  imports: [CommonModule, RlsMessageIconComponent]
 })
 export class RlsMessageFormErrorComponent {
   @Input()

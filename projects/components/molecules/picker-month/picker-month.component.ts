@@ -9,7 +9,6 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import { AngularControl } from '@rolster/angular-forms';
-import { itIsDefined } from '@rolster/commons';
 import {
   MonthPickerProps,
   MonthState,

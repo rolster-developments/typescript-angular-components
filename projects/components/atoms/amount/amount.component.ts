@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   Component,
   Input,
@@ -14,7 +15,7 @@ import { RlsTabularTextComponent } from '../tabular-text/tabular-text.component'
   templateUrl: 'amount.component.html',
   styleUrls: ['amount.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  imports: [RlsTabularTextComponent]
+  imports: [CommonModule, RlsTabularTextComponent]
 })
 export class RlsAmountComponent implements OnChanges {
   @Input()

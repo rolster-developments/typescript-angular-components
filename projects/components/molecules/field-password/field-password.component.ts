@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -21,6 +22,7 @@ type PasswordType = 'password' | 'text';
   styleUrls: ['field-password.component.scss'],
   encapsulation: ViewEncapsulation.None,
   imports: [
+    CommonModule,
     RlsButtonActionComponent,
     RlsInputPasswordComponent,
     RlsMessageFormErrorComponent

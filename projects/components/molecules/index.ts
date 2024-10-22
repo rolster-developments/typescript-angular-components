@@ -7,6 +7,7 @@ export * from './label-checkbox/label-checkbox.component';
 export * from './label-radiobutton/label-radiobutton.component';
 export * from './label-switch/label-switch.component';
 export * from './message-form-error/message-form-error.component';
+export * from './pagination/pagination.component';
 export * from './picker-day/picker-day.component';
 export * from './picker-day-range/picker-day-range.component';
 export * from './picker-month/picker-month.component';

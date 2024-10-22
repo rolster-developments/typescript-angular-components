@@ -21,7 +21,7 @@ import { OnPortal, RlsPortalPrivate } from '../../../../projects';
 class RlsComponentPortal implements OnPortal<string> {
   private portal?: RlsPortalPrivate<string>;
 
-  public name = "";
+  public name = '';
 
   protected onEmit() {
     this.portal?.resolve('Daniel');
@@ -53,6 +53,20 @@ export class HomePage {
   protected name = signal('Daniel');
 
   protected active = false;
+
+  public names = [
+    'Daniel Castillo Pedroza',
+    'Nelson Ceballos',
+    'Katherin Bolaño Narvaez',
+    'Adrian Castillo Pedroza',
+    'Fabian Castillo Pedroza',
+    'Yessika Bolaño Narvaez',
+    'Andres Bolaño Narvaez',
+    'Milton Castillo Martinez',
+    'Yomaira Pedroza Payares',
+    'Cristiano Ronaldo Aveiro',
+    'Lionel Messi Cuccitini'
+  ];
 
   constructor(
     private bottomSheetService: RlsBottomSheetService,
@@ -90,5 +104,9 @@ export class HomePage {
     sheet.waiting().then((data) => {
       console.log(data);
     });
+  }
+
+  public onPagination(pagination: any): void {
+    console.log(pagination);
   }
 }

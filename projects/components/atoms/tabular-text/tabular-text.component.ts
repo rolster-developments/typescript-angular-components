@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, ViewEncapsulation } from '@angular/core';
 
 const CLASS_BASE = 'rls-tabular-text';
@@ -8,7 +9,8 @@ const POINTERS = ['.', ','];
   standalone: true,
   templateUrl: 'tabular-text.component.html',
   styleUrls: ['tabular-text.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  imports: [CommonModule]
 })
 export class RlsTabularTextComponent {
   @Input()

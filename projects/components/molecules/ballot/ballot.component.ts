@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { RlsAvatarComponent, RlsSkeletonTextComponent } from '../../atoms';
 
@@ -7,7 +8,7 @@ import { RlsAvatarComponent, RlsSkeletonTextComponent } from '../../atoms';
   templateUrl: 'ballot.component.html',
   styleUrls: ['ballot.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  imports: [RlsAvatarComponent, RlsSkeletonTextComponent]
+  imports: [CommonModule, RlsAvatarComponent, RlsSkeletonTextComponent]
 })
 export class RlsBallotComponent {
   @Input()

@@ -3,7 +3,9 @@
     <section class="rls-app__page__content">
       <div class="home-app">
         <div class="home-app__content">
-          <rls-field-date [formControl]="formDate">Fecha de nacimiento</rls-field-date>
+          <rls-field-date [formControl]="formDate"
+            >Fecha de nacimiento</rls-field-date
+          >
 
           <rls-picker-day-range></rls-picker-day-range>
 
@@ -20,6 +22,13 @@
           </rls-field-money>
 
           <rls-amount [value]="106564"></rls-amount>
+
+          <rls-pagination
+            [suggestions]="names"
+            [count]="3"
+            (pagination)="onPagination($event)"
+          >
+          </rls-pagination>
 
           <button rls-button="outline" (click)="onClick()">
             Registrar Producto

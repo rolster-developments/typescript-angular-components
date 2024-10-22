@@ -1,0 +1,51 @@
+<div class="rls-pagination">
+  <div class="rls-pagination__actions">
+    <button
+      class="rls-pagination__action"
+      (click)="goFirstPagination()"
+      [disabled]="template().firstPage"
+    >
+      <rls-icon value="arrowhead-left" />
+    </button>
+
+    <button
+      class="rls-pagination__action"
+      (click)="goPreviousPagination()"
+      [disabled]="template().firstPage"
+    >
+      <rls-icon value="arrow-ios-left" />
+    </button>
+  </div>
+
+  <div class="rls-pagination__pages">
+    @for (page of template().pages; track page) {
+      <div
+        class="rls-pagination__page"
+        [class.rls-pagination__page--active]="page.active"
+        (click)="goToPagination(page)"
+      >
+        {{ page.label }}
+      </div>
+    }
+  </div>
+
+  <div class="rls-pagination__description">{{ template().description }}</div>
+
+  <div class="rls-pagination__actions">
+    <button
+      class="rls-pagination__action"
+      (click)="goNextPagination()"
+      [disabled]="template().lastPage"
+    >
+      <rls-icon value="arrow-ios-right" />
+    </button>
+
+    <button
+      class="rls-pagination__action"
+      (click)="goLastPagination()"
+      [disabled]="template().lastPage"
+    >
+      <rls-icon value="arrowhead-right" />
+    </button>
+  </div>
+</div>
