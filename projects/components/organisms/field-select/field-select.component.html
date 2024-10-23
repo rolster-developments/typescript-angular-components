@@ -1,0 +1,85 @@
+<div
+  class="rls-field-box rls-field-list rls-field-select"
+  [class.rls-field-box--focused]="formControl?.focused"
+  [class.rls-field-box--error]="formControl?.wrong"
+  [class.rls-field-box--disabled]="disabledInput"
+>
+  @if (label) {
+    <label class="rls-field-box__label">
+      <ng-content />
+    </label>
+  }
+
+  <div class="rls-field-box__component">
+    <div class="rls-field-box__body">
+      <input
+        class="rls-field-list__control"
+        [value]="inputValue()"
+        readonly="true"
+        [placeholder]="placeholder"
+        (focus)="onInputFocus()"
+        (blur)="onInputBlur()"
+        (click)="onInputClick()"
+        (keydown)="onInputKeydown($event)"
+        [disabled]="disabledInput"
+      />
+      <button
+        class="rls-field-list__action"
+        tabindex="-1"
+        (click)="onActionClick()"
+        [disabled]="disabledInput"
+      >
+        <rls-icon value="arrow-ios-down" />
+      </button>
+    </div>
+  </div>
+
+  <div
+    class="rls-field-list__suggestions"
+    [class.rls-field-list__suggestions--visible]="visible"
+    [class.rls-field-list__suggestions--hide]="!visible"
+    [class.rls-field-list__suggestions--higher]="higher"
+  >
+    <div class="rls-field-list__suggestions__body">
+      <ul class="rls-field-list__ul">
+        @for (suggestion of suggestions; track suggestion) {
+          <li
+            class="rls-field-list__element"
+            tabindex="-1"
+            (click)="onSelect(suggestion)"
+            (keydown)="onKeydownElement(suggestion, $event)"
+          >
+            <rls-ballot
+              [subtitle]="suggestion.subtitle"
+              [img]="suggestion.img"
+              [initials]="suggestion.initials"
+            >
+              {{ suggestion.description }}
+            </rls-ballot>
+          </li>
+        }
+
+        @if (!suggestions.length) {
+          <li class="rls-field-list__empty">
+            <div class="rls-field-list__empty__description">
+              <label class="rls-label-bold truncate">
+                Selección no disponible
+              </label>
+              <p class="rls-caption-regular">
+                Lo sentimos, en el momento no hay elementos en el listado
+              </p>
+            </div>
+          </li>
+        }
+      </ul>
+    </div>
+
+    <div class="rls-field-list__backdrop" (click)="onBackdropClick()"></div>
+  </div>
+
+  <rls-message-form-error
+    class="rls-field-box__error"
+    [formControl]="formControl"
+  >
+  </rls-message-form-error>
+</div>

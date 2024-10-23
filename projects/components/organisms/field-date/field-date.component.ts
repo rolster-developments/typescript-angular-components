@@ -7,7 +7,9 @@ import {
   OnDestroy,
   Output,
   SimpleChanges,
-  ViewEncapsulation
+  ViewEncapsulation,
+  WritableSignal,
+  signal
 } from '@angular/core';
 import { FormControl } from '@rolster/angular-forms';
 import { PickerListenerType } from '@rolster/components';
@@ -63,7 +65,7 @@ export class RlsFieldDateComponent implements OnChanges, OnDestroy {
 
   protected currentValue?: Date;
 
-  protected formatDate = '';
+  protected inputValue: WritableSignal<string> = signal('');
 
   protected modalIsVisible = false;
 
@@ -119,7 +121,7 @@ export class RlsFieldDateComponent implements OnChanges, OnDestroy {
   }
 
   private setFormatDate(date?: Date): void {
-    this.formatDate = date ? dateFormatTemplate(date, this.format) : '';
+    this.inputValue.set(date ? dateFormatTemplate(date, this.format) : '');
   }
 
   private onChange(value?: Date): void {

@@ -7,6 +7,7 @@ import {
   RlsModalService
 } from '../../../../projects';
 import { OnPortal, RlsPortalPrivate } from '../../../../projects';
+import { RolsterAutocompleteElement, RolsterListElement } from '@rolster/components';
 
 @Component({
   selector: 'rls-portal',
@@ -40,9 +41,10 @@ class RlsComponentPortal implements OnPortal<string> {
   encapsulation: ViewEncapsulation.None
 })
 export class HomePage {
-  protected formControl = new FormControl<string>('Daniel Castillo', [
-    required
-  ]);
+  protected formControl = new FormControl<string | undefined>(
+    'Daniel Castillo Pedroza',
+    [required]
+  );
 
   protected formNumber = new FormControl<number>(30, [required]);
 
@@ -68,15 +70,19 @@ export class HomePage {
     'Lionel Messi Cuccitini'
   ];
 
+  public elements: RolsterAutocompleteElement<string>[];
+
   constructor(
     private bottomSheetService: RlsBottomSheetService,
     private confirmationService: RlsConfirmationService,
     private modalService: RlsModalService
-  ) {}
+  ) {
+    this.elements = this.names.map((name) => new RolsterAutocompleteElement(name));
+  }
 
   public onClick(): void {
     this.active = !this.active;
-    this.formControl.setValue('Adrian Castillo');
+    this.formControl.setValue(undefined);
     this.name.set('Adrian');
 
     this.confirmationService.execute({

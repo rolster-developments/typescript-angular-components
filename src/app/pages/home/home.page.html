@@ -3,13 +3,14 @@
     <section class="rls-app__page__content">
       <div class="home-app">
         <div class="home-app__content">
+
           <rls-field-date [formControl]="formDate"
             >Fecha de nacimiento</rls-field-date
           >
 
           <rls-picker-day-range></rls-picker-day-range>
 
-          <rls-field-password [formControl]="formControl" rls-theme="amaizing">
+          <rls-field-password rls-theme="amaizing">
             Nombre completo
           </rls-field-password>
 
@@ -29,6 +30,13 @@
             (pagination)="onPagination($event)"
           >
           </rls-pagination>
+          
+          <rls-field-autocomplete
+            [suggestions]="elements"
+            [formControl]="formControl"
+          >
+            Probando autocomplete
+          </rls-field-autocomplete>
 
           <button rls-button="outline" (click)="onClick()">
             Registrar Producto
