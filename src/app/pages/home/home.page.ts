@@ -7,7 +7,10 @@ import {
   RlsModalService
 } from '../../../../projects';
 import { OnPortal, RlsPortalPrivate } from '../../../../projects';
-import { RolsterAutocompleteElement, RolsterListElement } from '@rolster/components';
+import {
+  RolsterAutocompleteElement,
+  RolsterListElement
+} from '@rolster/components';
 
 @Component({
   selector: 'rls-portal',
@@ -77,7 +80,9 @@ export class HomePage {
     private confirmationService: RlsConfirmationService,
     private modalService: RlsModalService
   ) {
-    this.elements = this.names.map((name) => new RolsterAutocompleteElement(name));
+    this.elements = this.names.map(
+      (name) => new RolsterAutocompleteElement(name)
+    );
   }
 
   public onClick(): void {

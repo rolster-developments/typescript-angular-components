@@ -8,14 +8,11 @@ import { personsElement } from '../../../../resources/persons';
   encapsulation: ViewEncapsulation.None
 })
 export class MainComponent {
-
   public persons = personsElement;
 
   public checked = false;
 
-  constructor() {
-  }
+  constructor() {}
 
-  public onConfirmation(): void {
-  }
+  public onConfirmation(): void {}
 }

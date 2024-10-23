@@ -22,9 +22,9 @@
     "test": "ng test @rolster/angular-components",
     "clean": "rimraf ./dist",
     "build": "ng-packagr -p ng-package.json",
-    "publish:lib": "npm run build && npm publish",
-    "prettier": "npx prettier --write .",
-    "lint:ts": "eslint . --ext .ts"
+    "prettier:all": "npx prettier --write .",
+    "lint:ts": "eslint . --ext .ts",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "@rolster/angular-forms": "^17.4.2",

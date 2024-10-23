@@ -40,7 +40,10 @@ export class PaletteMaterial {
 
   private model: PaletteMaterialModel;
 
-  constructor(private color: string, public name?: string) {
+  constructor(
+    private color: string,
+    public name?: string
+  ) {
     this.model = this.createModel(this.color);
 
     this.catalog = [
