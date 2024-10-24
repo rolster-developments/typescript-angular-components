@@ -10,7 +10,7 @@ import {
   ViewEncapsulation,
   signal
 } from '@angular/core';
-import { AngularControl } from '@rolster/angular-forms';
+import { AngularControlEmpty } from '@rolster/angular-forms';
 import { PickerListener, PickerListenerType } from '@rolster/components';
 import { DateRange, dateFormatTemplate } from '@rolster/dates';
 import { RlsButtonActionComponent } from '../../atoms';
@@ -43,7 +43,7 @@ function rangeFormatTemplate({ maxDate, minDate }: DateRange): string {
 })
 export class RlsFieldDateRangeComponent implements OnChanges, OnDestroy {
   @Input()
-  public formControl?: AngularControl<DateRange | undefined>;
+  public formControl?: AngularControlEmpty<DateRange>;
 
   @Input()
   public minDate?: Date;

@@ -10,7 +10,7 @@ import {
   ViewEncapsulation,
   signal
 } from '@angular/core';
-import { AngularControl } from '@rolster/angular-forms';
+import { AngularControlEmpty } from '@rolster/angular-forms';
 import { PickerListener, PickerListenerType } from '@rolster/components';
 import { dateFormatTemplate } from '@rolster/dates';
 import { RlsButtonActionComponent } from '../../atoms';
@@ -34,7 +34,7 @@ import { RlsPickerDateComponent } from '../picker-date/picker-date.component';
 })
 export class RlsFieldDateComponent implements OnChanges, OnDestroy {
   @Input()
-  public formControl?: AngularControl<Date | undefined>;
+  public formControl?: AngularControlEmpty<Date>;
 
   @Input()
   public minDate?: Date;

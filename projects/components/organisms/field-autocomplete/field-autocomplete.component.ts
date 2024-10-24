@@ -13,7 +13,7 @@ import {
   ViewEncapsulation,
   signal
 } from '@angular/core';
-import { AngularControl } from '@rolster/angular-forms';
+import { AngularControlEmpty } from '@rolster/angular-forms';
 import {
   AutocompleteElement,
   AutocompleteStore,
@@ -53,7 +53,7 @@ export class RlsFieldAutocompleteComponent<
   public suggestions: E[] = [];
 
   @Input()
-  public formControl?: AngularControl<T | undefined>;
+  public formControl?: AngularControlEmpty<T>;
 
   @Input()
   public label = true;

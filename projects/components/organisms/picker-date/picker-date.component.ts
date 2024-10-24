@@ -10,7 +10,7 @@ import {
   SimpleChanges,
   ViewEncapsulation
 } from '@angular/core';
-import { AngularControl } from '@rolster/angular-forms';
+import { AngularControlEmpty } from '@rolster/angular-forms';
 import { itIsDefined } from '@rolster/commons';
 import {
   PickerListener,
@@ -55,7 +55,7 @@ type Visibility = 'DAY' | 'MONTH' | 'YEAR';
 })
 export class RlsPickerDateComponent implements OnInit, OnChanges, OnDestroy {
   @Input()
-  public formControl?: AngularControl<Date | undefined>;
+  public formControl?: AngularControlEmpty<Date>;
 
   @Input()
   public minDate?: Date;
