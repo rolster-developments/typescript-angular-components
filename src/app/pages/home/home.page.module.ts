@@ -31,7 +31,9 @@ import {
   RlsPickerDayRangeComponent,
   RlsPaginationComponent,
   RlsFieldSelectComponent,
-  RlsFieldAutocompleteComponent
+  RlsFieldAutocompleteComponent,
+  RlsPickerDateRangeComponent,
+  RlsFieldDateRangeComponent
 } from '../../../../projects';
 
 @NgModule({
@@ -67,7 +69,9 @@ import {
     RlsPickerDayRangeComponent,
     RlsPaginationComponent,
     RlsFieldSelectComponent,
-    RlsFieldAutocompleteComponent
+    RlsFieldAutocompleteComponent,
+    RlsPickerDateRangeComponent,
+    RlsFieldDateRangeComponent
   ]
 })
 export class HomePageModule {}

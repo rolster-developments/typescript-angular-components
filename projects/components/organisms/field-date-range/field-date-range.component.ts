@@ -12,29 +12,38 @@ import {
 } from '@angular/core';
 import { AngularControl } from '@rolster/angular-forms';
 import { PickerListener, PickerListenerType } from '@rolster/components';
-import { dateFormatTemplate } from '@rolster/dates';
+import { DateRange, dateFormatTemplate } from '@rolster/dates';
 import { RlsButtonActionComponent } from '../../atoms';
 import { RlsMessageFormErrorComponent } from '../../molecules';
 import { RlsModalComponent } from '../modal/modal.component';
-import { RlsPickerDateComponent } from '../picker-date/picker-date.component';
+import { RlsPickerDateRangeComponent } from '../picker-date-range/picker-date-range.component';
+
+const DATE_RANGE_FORMAT = '{dd}/{mx}/{aa}';
+
+function rangeFormatTemplate({ maxDate, minDate }: DateRange): string {
+  const minFormat = dateFormatTemplate(minDate, DATE_RANGE_FORMAT);
+  const maxFormat = dateFormatTemplate(maxDate, DATE_RANGE_FORMAT);
+
+  return `${minFormat} - ${maxFormat}`;
+}
 
 @Component({
-  selector: 'rls-field-date',
+  selector: 'rls-field-date-range',
   standalone: true,
-  templateUrl: 'field-date.component.html',
-  styleUrls: ['field-date.component.scss'],
+  templateUrl: 'field-date-range.component.html',
+  styleUrls: ['field-date-range.component.scss'],
   encapsulation: ViewEncapsulation.None,
   imports: [
     CommonModule,
     RlsButtonActionComponent,
     RlsMessageFormErrorComponent,
-    RlsPickerDateComponent,
+    RlsPickerDateRangeComponent,
     RlsModalComponent
   ]
 })
-export class RlsFieldDateComponent implements OnChanges, OnDestroy {
+export class RlsFieldDateRangeComponent implements OnChanges, OnDestroy {
   @Input()
-  public formControl?: AngularControl<Date | undefined>;
+  public formControl?: AngularControl<DateRange | undefined>;
 
   @Input()
   public minDate?: Date;
@@ -51,15 +60,12 @@ export class RlsFieldDateComponent implements OnChanges, OnDestroy {
   @Input()
   public disabled = false;
 
-  @Input()
-  public format = '{dd}/{mx}/{aa}';
-
   @Output()
-  public value: EventEmitter<Date | undefined>;
+  public value: EventEmitter<DateRange | undefined>;
 
   private unsusbcription?: () => void;
 
-  protected currentValue?: Date;
+  protected currentValue?: DateRange;
 
   protected inputValue = signal('');
 
@@ -67,8 +73,8 @@ export class RlsFieldDateComponent implements OnChanges, OnDestroy {
 
   constructor() {
     this.value = new EventEmitter();
-    this.currentValue = new Date();
-    this.setFormatDate(this.currentValue);
+    this.currentValue = DateRange.now();
+    this.setFormatRange(this.currentValue);
   }
 
   public ngOnDestroy(): void {
@@ -82,8 +88,8 @@ export class RlsFieldDateComponent implements OnChanges, OnDestroy {
       this.unsusbcription && this.unsusbcription();
 
       this.unsusbcription = formControl.currentValue?.subscribe(
-        (value: Date | undefined) => {
-          this.setFormatDate(value);
+        (value: DateRange | undefined) => {
+          this.setFormatRange(value);
         }
       );
     }
@@ -107,7 +113,7 @@ export class RlsFieldDateComponent implements OnChanges, OnDestroy {
     }
   }
 
-  public onListener({ type, value }: PickerListener<Date>): void {
+  public onListener({ type, value }: PickerListener<DateRange>): void {
     if (type !== PickerListenerType.Cancel) {
       this.onChange(value);
     }
@@ -116,13 +122,13 @@ export class RlsFieldDateComponent implements OnChanges, OnDestroy {
     this.modalIsVisible = false;
   }
 
-  private setFormatDate(date?: Date): void {
-    this.inputValue.set(date ? dateFormatTemplate(date, this.format) : '');
+  private setFormatRange(range?: DateRange): void {
+    this.inputValue.set(range ? rangeFormatTemplate(range) : '');
   }
 
-  private onChange(value?: Date): void {
+  private onChange(value?: DateRange): void {
     this.currentValue = value;
-    this.setFormatDate(value);
+    this.setFormatRange(value);
 
     this.value.emit(value);
   }

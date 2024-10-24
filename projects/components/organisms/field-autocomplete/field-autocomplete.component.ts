@@ -11,10 +11,9 @@ import {
   Output,
   SimpleChanges,
   ViewEncapsulation,
-  WritableSignal,
   signal
 } from '@angular/core';
-import { FormControl } from '@rolster/angular-forms';
+import { AngularControl } from '@rolster/angular-forms';
 import {
   AutocompleteElement,
   AutocompleteStore,
@@ -54,7 +53,7 @@ export class RlsFieldAutocompleteComponent<
   public suggestions: E[] = [];
 
   @Input()
-  public formControl?: FormControl<T | undefined>;
+  public formControl?: AngularControl<T | undefined>;
 
   @Input()
   public label = true;
@@ -82,9 +81,9 @@ export class RlsFieldAutocompleteComponent<
 
   protected coincidences: E[] = [];
 
-  protected inputValue: WritableSignal<string> = signal('');
+  protected inputValue = signal('');
 
-  protected filterValue: WritableSignal<string> = signal('');
+  protected filterValue = signal('');
 
   protected visible = false;
 

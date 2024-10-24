@@ -1,5 +1,5 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
-import { FormControl } from '@rolster/angular-forms';
+import { AngularControl } from '@rolster/angular-forms';
 import { RlsCheckboxComponent } from '../../atoms';
 
 @Component({
@@ -12,7 +12,7 @@ import { RlsCheckboxComponent } from '../../atoms';
 })
 export class RlsLabelCheckboxComponent {
   @Input()
-  public formControl?: FormControl<boolean>;
+  public formControl?: AngularControl<boolean>;
 
   @Input()
   public disabled = false;

@@ -72,11 +72,11 @@ export class RlsPickerDayRangeComponent {
 
     if (date || minDate || maxDate) {
       this.renderComponent({
-        date: date.currentValue || this.currentDate,
+        date: date?.currentValue || this.currentDate,
         range: this.currentRange,
         sourceDate: this.sourceDate,
-        maxDate: maxDate.currentValue || this.maxDate,
-        minDate: minDate.currentValue || this.minDate
+        maxDate: maxDate?.currentValue || this.maxDate,
+        minDate: minDate?.currentValue || this.minDate
       });
     }
   }
@@ -92,6 +92,18 @@ export class RlsPickerDayRangeComponent {
       const range = dateIsBefore(date, this.sourceDate)
         ? new DateRange(this.sourceDate, date)
         : new DateRange(date, this.sourceDate);
+
+      this.sourceDate = date;
+      this.currentRange = range;
+      this.formControl?.setValue(range);
+
+      this.renderComponent({
+        date,
+        range,
+        sourceDate: this.sourceDate,
+        maxDate: this.maxDate,
+        minDate: this.minDate
+      });
     }
   }
 

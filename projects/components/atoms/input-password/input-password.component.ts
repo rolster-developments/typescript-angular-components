@@ -9,7 +9,7 @@ import {
   ViewEncapsulation,
   signal
 } from '@angular/core';
-import { FormControl } from '@rolster/angular-forms';
+import { AngularControl } from '@rolster/angular-forms';
 
 type PasswordType = 'password' | 'text';
 
@@ -22,7 +22,7 @@ type PasswordType = 'password' | 'text';
 })
 export class RlsInputPasswordComponent implements OnChanges, OnDestroy {
   @Input()
-  public formControl?: FormControl<string>;
+  public formControl?: AngularControl<string>;
 
   @Input()
   public type: PasswordType = 'password';

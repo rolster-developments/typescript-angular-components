@@ -18,44 +18,46 @@ import {
   checkDateRange
 } from '@rolster/components';
 import {
+  DateRange,
   MONTH_NAMES,
-  assignDayInDate,
   assignMonthInDate,
   assignYearInDate,
   dateFormatTemplate
 } from '@rolster/dates';
 import { RlsButtonComponent, RlsIconComponent } from '../../atoms';
 import {
-  RlsPickerDayComponent,
+  RlsPickerDayRangeComponent,
   RlsPickerMonthComponent,
   RlsPickerMonthTitleComponent,
   RlsPickerYearComponent
 } from '../../molecules';
-import { PickerDateGroup } from './picker-date.controls';
+import { PickerDateRangeGroup } from './picker-date-range.controls';
 
 const FORMAT_TITLE = '{dw}, {mx} {dd} de {aa}';
 
 type Visibility = 'DAY' | 'MONTH' | 'YEAR';
 
 @Component({
-  selector: 'rls-picker-date',
+  selector: 'rls-picker-date-range',
   standalone: true,
-  templateUrl: 'picker-date.component.html',
-  styleUrls: ['picker-date.component.scss'],
+  templateUrl: 'picker-date-range.component.html',
+  styleUrls: ['picker-date-range.component.scss'],
   encapsulation: ViewEncapsulation.None,
   imports: [
     CommonModule,
     RlsButtonComponent,
     RlsIconComponent,
-    RlsPickerDayComponent,
+    RlsPickerDayRangeComponent,
     RlsPickerMonthComponent,
     RlsPickerMonthTitleComponent,
     RlsPickerYearComponent
   ]
 })
-export class RlsPickerDateComponent implements OnInit, OnChanges, OnDestroy {
+export class RlsPickerDateRangeComponent
+  implements OnInit, OnChanges, OnDestroy
+{
   @Input()
-  public formControl?: AngularControl<Date | undefined>;
+  public formControl?: AngularControl<DateRange | undefined>;
 
   @Input()
   public minDate?: Date;
@@ -67,29 +69,33 @@ export class RlsPickerDateComponent implements OnInit, OnChanges, OnDestroy {
   public automatic = false;
 
   @Output()
-  public listener: EventEmitter<PickerListener<Date>>;
+  public listener: EventEmitter<PickerListener<DateRange>>;
 
   private unsubscriptions: (() => void)[] = [];
 
   private unsubscription?: () => void;
 
-  protected value: Date;
+  private value: DateRange;
 
-  protected dateGroup: PickerDateGroup;
+  protected date: Date;
+
+  protected dateGroup: PickerDateRangeGroup;
 
   protected visibility: Visibility = 'DAY';
 
   constructor() {
     this.listener = new EventEmitter();
-    this.value = new Date();
-    this.dateGroup = new PickerDateGroup(this.value);
+    this.date = new Date();
+
+    this.value = DateRange.now();
+    this.dateGroup = new PickerDateRangeGroup(this.value, this.date);
   }
 
   public ngOnInit(): void {
     this.unsubscriptions.push(
       this.dateGroup.year.subscribe((year) => {
         if (itIsDefined(year)) {
-          this.value = assignYearInDate(this.value, year);
+          this.date = assignYearInDate(this.date, year);
           this.visibility = 'DAY';
         }
       })
@@ -98,28 +104,21 @@ export class RlsPickerDateComponent implements OnInit, OnChanges, OnDestroy {
     this.unsubscriptions.push(
       this.dateGroup.month.subscribe((month) => {
         if (itIsDefined(month)) {
-          this.value = assignMonthInDate(this.value, month);
+          this.date = assignMonthInDate(this.date, month);
           this.visibility = 'DAY';
         }
       })
     );
 
     this.unsubscriptions.push(
-      this.dateGroup.day.subscribe((day) => {
-        if (itIsDefined(day)) {
-          const newValue = assignDayInDate(this.value, day);
-          this.value = newValue;
-
-          if (this.automatic) {
-            this.emitDate(newValue);
-          }
-        }
+      this.dateGroup.day.subscribe((range) => {
+        this.value = range;
       })
     );
 
     this.dateGroup.setDate(
       checkDateRange({
-        date: this.formControl?.value ?? this.value,
+        date: this.date,
         minDate: this.minDate,
         maxDate: this.maxDate
       })
@@ -141,7 +140,7 @@ export class RlsPickerDateComponent implements OnInit, OnChanges, OnDestroy {
       this.unsubscription && this.unsubscription();
 
       this.unsubscription = formControl.currentValue?.subscribe(
-        (value: Date | undefined) => {
+        (value: DateRange | undefined) => {
           if (value) {
             this.value = value;
           }
@@ -151,15 +150,15 @@ export class RlsPickerDateComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   public get title(): string {
-    return dateFormatTemplate(this.value, FORMAT_TITLE);
+    return dateFormatTemplate(this.date, FORMAT_TITLE);
   }
 
   public get year(): string {
-    return this.value.getFullYear().toString();
+    return this.date.getFullYear().toString();
   }
 
   public get month(): string {
-    return MONTH_NAMES(this.value.getMonth());
+    return MONTH_NAMES(this.date.getMonth());
   }
 
   public onVisibilityDay(): void {
@@ -175,26 +174,18 @@ export class RlsPickerDateComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   public onSelect(): void {
-    this.emitDate(this.value);
-  }
-
-  public onToday(): void {
-    const today = new Date(); // Refresh value with Today
-
-    this.dateGroup.setDate(today);
-    this.formControl?.setValue(today);
-    this.emitListener(PickerListenerType.Now, today);
+    this.emitDateRange(this.value);
   }
 
   public onCancel(): void {
     this.emitListener(PickerListenerType.Cancel);
   }
 
-  private emitListener(type: PickerListenerType, value?: Date): void {
+  private emitListener(type: PickerListenerType, value?: DateRange): void {
     this.listener.emit({ type, value });
   }
 
-  private emitDate(value: Date): void {
+  private emitDateRange(value: DateRange): void {
     this.formControl?.setValue(value);
     this.emitListener(PickerListenerType.Select, value);
   }

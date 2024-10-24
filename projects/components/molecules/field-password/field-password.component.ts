@@ -6,7 +6,7 @@ import {
   Output,
   ViewEncapsulation
 } from '@angular/core';
-import { FormControl } from '@rolster/angular-forms';
+import { AngularControl } from '@rolster/angular-forms';
 import {
   RlsButtonActionComponent,
   RlsInputPasswordComponent
@@ -30,7 +30,7 @@ type PasswordType = 'password' | 'text';
 })
 export class RlsFieldPasswordComponent {
   @Input()
-  public formControl?: FormControl<string>;
+  public formControl?: AngularControl<string>;
 
   @Input()
   public type: PasswordType = 'password';

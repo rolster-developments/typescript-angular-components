@@ -1,15 +1,15 @@
-// Rolster Technology DatePicker Component
-// v2.0.0
+// Rolster Technology DateRangePicker Component
+// v1.1.2
 // @license MIT
 // Author: Rolster Developers
-// Created: 20/Mar/2018
-// Updated: 27/Ene/2024
+// Created: 25/May/2023
+// Updated: 06/Abr/2024
 
-rls-picker-date {
+rls-picker-date-range {
   position: relative;
   display: block;
 
-  .rls-picker-date {
+  .rls-picker-date-range {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -78,26 +78,20 @@ rls-picker-date {
       }
     }
 
+    &__footer {
+      &--hidden {
+        display: none;
+      }
+    }
+
     &__actions {
       display: flex;
       flex-wrap: wrap;
       gap: var(--rls-sizing-x4);
-      padding: var(--rls-sizing-x4) var(--rls-sizing-x8) var(--rls-sizing-x6)
+      padding: 0rem var(--rls-sizing-x8) var(--rls-sizing-x6)
         var(--rls-sizing-x8);
       overflow: hidden;
       box-sizing: border-box;
-
-      &--cancel {
-        width: calc(50% - var(--rls-sizing-x2));
-      }
-
-      &--today {
-        width: calc(50% - var(--rls-sizing-x2));
-      }
-
-      &--ok {
-        width: 100%;
-      }
 
       button {
         width: 100%;

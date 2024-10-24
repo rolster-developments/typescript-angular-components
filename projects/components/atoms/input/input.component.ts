@@ -9,7 +9,7 @@ import {
   ViewEncapsulation,
   signal
 } from '@angular/core';
-import { FormControl } from '@rolster/angular-forms';
+import { AngularControl } from '@rolster/angular-forms';
 
 type InputType = 'text' | 'number' | 'email';
 
@@ -22,7 +22,7 @@ type InputType = 'text' | 'number' | 'email';
 })
 export class RlsInputComponent implements OnChanges, OnDestroy {
   @Input()
-  public formControl?: FormControl<any>;
+  public formControl?: AngularControl<any>;
 
   @Input()
   public type: InputType = 'text';

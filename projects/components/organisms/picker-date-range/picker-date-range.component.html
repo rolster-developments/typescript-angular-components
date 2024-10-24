@@ -1,0 +1,78 @@
+<div class="rls-picker-date-range">
+  <div class="rls-picker-date-range__header">
+    <div
+      class="rls-picker-date-range__title rls-picker-date-range__title--description"
+    >
+      <span (click)="onVisibilityDay()">
+        {{ title }}
+      </span>
+    </div>
+
+    <div
+      class="rls-picker-date-range__title rls-picker-date-range__title--year"
+    >
+      <span (click)="onVisibilityYear()">
+        {{ dateGroup.year.value }}
+      </span>
+    </div>
+
+    <rls-picker-month-title
+      [monthControl]="dateGroup.month"
+      [yearControl]="dateGroup.year"
+      (title)="onVisibilityMonth()"
+      [date]="date"
+      [minDate]="minDate"
+      [maxDate]="maxDate"
+      [disabled]="visibility === 'YEAR'"
+    >
+    </rls-picker-month-title>
+  </div>
+
+  <div class="rls-picker-date-range__component">
+    <rls-picker-day-range
+      [class.hidden]="visibility !== 'DAY'"
+      [formControl]="dateGroup.day"
+      [date]="date"
+      [minDate]="minDate"
+      [maxDate]="maxDate"
+    >
+    </rls-picker-day-range>
+
+    <rls-picker-month
+      [class.hidden]="visibility !== 'MONTH'"
+      [formControl]="dateGroup.month"
+      [date]="date"
+      [year]="dateGroup.year.value"
+      [minDate]="minDate"
+      [maxDate]="maxDate"
+    >
+    </rls-picker-month>
+
+    <rls-picker-year
+      [class.hidden]="visibility !== 'YEAR'"
+      [formControl]="dateGroup.year"
+      [date]="date"
+      [minDate]="minDate"
+      [maxDate]="maxDate"
+    >
+    </rls-picker-year>
+  </div>
+
+  @if (!automatic) {
+    <div class="rls-picker-date-range__footer">
+      <div class="rls-picker-date-range__actions">
+        <div class="rls-picker-date-range__actions--cancel">
+          <button rls-button="outline" (click)="onCancel()">
+            <span>Cancelar</span>
+          </button>
+        </div>
+
+        <div class="rls-picker-date-range__actions--ok">
+          <button rls-button="raised" (click)="onSelect()">
+            <span>Establecer</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+</div>

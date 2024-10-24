@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, ViewEncapsulation } from '@angular/core';
-import { FormControl } from '@rolster/angular-forms';
+import { AngularControl } from '@rolster/angular-forms';
 import { RlsMessageIconComponent } from '../../atoms/message-icon/message-icon.component';
 
 @Component({
@@ -15,5 +15,5 @@ export class RlsMessageFormErrorComponent {
   public className = 'rls-message-form-error';
 
   @Input()
-  public formControl?: FormControl;
+  public formControl?: AngularControl;
 }

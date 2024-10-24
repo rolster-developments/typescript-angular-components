@@ -6,7 +6,7 @@ import {
   ViewEncapsulation,
   signal
 } from '@angular/core';
-import { FormControl } from '@rolster/angular-forms';
+import { AngularControl } from '@rolster/angular-forms';
 import { RlsInputComponent } from '../input/input.component';
 
 type TextType = 'text' | 'email';
@@ -21,7 +21,7 @@ type TextType = 'text' | 'email';
 })
 export class RlsInputTextComponent {
   @Input()
-  public formControl?: FormControl<string>;
+  public formControl?: AngularControl<string>;
 
   @Input()
   public type: TextType = 'text';

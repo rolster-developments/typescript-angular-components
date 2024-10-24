@@ -11,6 +11,7 @@ import {
   RolsterAutocompleteElement,
   RolsterListElement
 } from '@rolster/components';
+import { DateRange } from '@rolster/dates';
 
 @Component({
   selector: 'rls-portal',
@@ -51,9 +52,13 @@ export class HomePage {
 
   protected formNumber = new FormControl<number>(30, [required]);
 
-  protected formRadiobutton = new FormControl<string>();
+  protected formRadiobutton = new FormControl<string | undefined>();
 
-  protected formDate = new FormControl(new Date(), [required]);
+  protected formRange = new FormControl<DateRange | undefined>(DateRange.now());
+
+  protected formDate = new FormControl<Date | undefined>(new Date(), [
+    required
+  ]);
 
   protected name = signal('Daniel');
 
@@ -105,6 +110,9 @@ export class HomePage {
   }
 
   public onBottomSheet(): void {
+    console.log(this.formDate.value);
+    console.log(this.formRange.value);
+
     const sheet = this.modalService.create(RlsComponentPortal, {
       container: { autoclose: true },
       component: { name: 'Daniel Castillo' }

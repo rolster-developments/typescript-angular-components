@@ -6,7 +6,7 @@ import {
   Output,
   ViewEncapsulation
 } from '@angular/core';
-import { FormControl } from '@rolster/angular-forms';
+import { AngularControl } from '@rolster/angular-forms';
 import { RlsInputMoneyComponent } from '../../atoms';
 import { RlsMessageFormErrorComponent } from '../message-form-error/message-form-error.component';
 
@@ -20,7 +20,7 @@ import { RlsMessageFormErrorComponent } from '../message-form-error/message-form
 })
 export class RlsFieldMoneyComponent {
   @Input()
-  public formControl?: FormControl<number>;
+  public formControl?: AngularControl<number>;
 
   @Input()
   public label = true;

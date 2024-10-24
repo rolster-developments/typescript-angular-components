@@ -6,7 +6,7 @@ import {
   Output,
   ViewEncapsulation
 } from '@angular/core';
-import { FormControl } from '@rolster/angular-forms';
+import { AngularControl } from '@rolster/angular-forms';
 import { RlsInputTextComponent } from '../../atoms';
 import { RlsMessageFormErrorComponent } from '../message-form-error/message-form-error.component';
 
@@ -22,7 +22,7 @@ type TextType = 'text' | 'email';
 })
 export class RlsFieldTextComponent {
   @Input()
-  public formControl?: FormControl<string>;
+  public formControl?: AngularControl<string>;
 
   @Input()
   public type: TextType = 'text';

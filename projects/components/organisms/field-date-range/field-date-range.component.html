@@ -1,0 +1,48 @@
+<div
+  class="rls-field-box rls-field-date-range"
+  [class.rls-field-box--focused]="formControl?.focused"
+  [class.rls-field-box--error]="formControl?.wrong"
+  [class.rls-field-box--disabled]="disabledInput"
+>
+  @if (label) {
+    <label class="rls-field-box__label">
+      <ng-content />
+    </label>
+  }
+
+  <div class="rls-field-box__component">
+    <div class="rls-field-box__body">
+      <input
+        class="rls-field-date-range__control"
+        type="text"
+        [value]="inputValue()"
+        readonly="true"
+        [placeholder]="placeholder"
+        (click)="onInput()"
+        [disabled]="disabled"
+      />
+
+      <button
+        [rls-button-action]="currentValue ? 'trash-2' : 'calendar'"
+        class="rls-field-date-range__action"
+        (click)="onAction()"
+        [disabled]="disabled"
+      ></button>
+    </div>
+  </div>
+
+  <rls-message-form-error
+    class="rls-field-box__error"
+    [formControl]="formControl"
+  >
+  </rls-message-form-error>
+</div>
+
+<rls-modal [visible]="modalIsVisible" [autoclose]="false">
+  <rls-picker-date-range
+    [formControl]="formControl"
+    [minDate]="minDate"
+    [maxDate]="maxDate"
+    (listener)="onListener($event)"
+  ></rls-picker-date-range>
+</rls-modal>

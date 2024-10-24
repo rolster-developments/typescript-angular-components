@@ -11,10 +11,9 @@ import {
   Output,
   SimpleChanges,
   ViewEncapsulation,
-  WritableSignal,
   signal
 } from '@angular/core';
-import { FormControl } from '@rolster/angular-forms';
+import { AngularControl } from '@rolster/angular-forms';
 import {
   ListElement,
   locationListCanTop,
@@ -50,7 +49,7 @@ export class RlsFieldSelectComponent<
   public suggestions: E[] = [];
 
   @Input()
-  public formControl?: FormControl<T | undefined>;
+  public formControl?: AngularControl<T | undefined>;
 
   @Input()
   public label = true;
@@ -74,7 +73,7 @@ export class RlsFieldSelectComponent<
 
   private position = 0;
 
-  protected inputValue: WritableSignal<string> = signal('');
+  protected inputValue = signal('');
 
   protected visible = false;
 

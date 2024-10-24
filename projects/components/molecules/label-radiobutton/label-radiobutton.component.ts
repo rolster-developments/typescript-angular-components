@@ -1,5 +1,5 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
-import { FormControl } from '@rolster/angular-forms';
+import { AngularControl } from '@rolster/angular-forms';
 import { RlsRadiobuttonComponent } from '../../atoms';
 
 @Component({
@@ -12,7 +12,7 @@ import { RlsRadiobuttonComponent } from '../../atoms';
 })
 export class RlsLabelRadiobuttonComponent<T = any> {
   @Input()
-  public formControl?: FormControl<T | undefined>;
+  public formControl?: AngularControl<T | undefined>;
 
   @Input()
   public value?: T;

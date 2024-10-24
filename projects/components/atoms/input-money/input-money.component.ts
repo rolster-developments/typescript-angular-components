@@ -6,7 +6,7 @@ import {
   ViewEncapsulation,
   signal
 } from '@angular/core';
-import { FormControl } from '@rolster/angular-forms';
+import { AngularControl } from '@rolster/angular-forms';
 import { RlsInputComponent } from '../input/input.component';
 import { RlsAmountComponent } from '../amount/amount.component';
 
@@ -20,7 +20,7 @@ import { RlsAmountComponent } from '../amount/amount.component';
 })
 export class RlsInputMoneyComponent {
   @Input()
-  public formControl?: FormControl<number>;
+  public formControl?: AngularControl<number>;
 
   @Input()
   public placeholder = '';
