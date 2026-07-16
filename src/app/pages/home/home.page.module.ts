@@ -31,7 +31,8 @@ import {
   RlsSkeletonComponent,
   RlsSkeletonTextComponent,
   RlsSwitchComponent,
-  RlsTabularTextComponent} from '../../../../projects';
+  RlsTabularTextComponent
+} from '../../../../projects';
 import { HomePage } from './home.page';
 import { HomePageRouting } from './home.page.routing';
 

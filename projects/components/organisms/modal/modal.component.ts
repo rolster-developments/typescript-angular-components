@@ -3,9 +3,8 @@ import { CommonModule } from '@angular/common';
 import {
   Component,
   ElementRef,
-  EventEmitter,
-  Input,
-  Output,
+  input,
+  model,
   ViewEncapsulation
 } from '@angular/core';
 import { OnPortalContainer, RlsPortalContainerPrivate } from '../../../types';
@@ -19,36 +18,31 @@ import { OnPortalContainer, RlsPortalContainerPrivate } from '../../../types';
   imports: [CommonModule, OverlayModule]
 })
 export class RlsModalComponent implements OnPortalContainer {
-  @Input()
-  public visible = false;
+  public visible = model(false);
 
-  @Input()
-  public autoclose = true;
+  public autoclose = input(true);
 
-  @Output()
-  public visibleChange: EventEmitter<boolean>;
-
-  private declare component: HTMLDivElement | null;
+  declare private component: HTMLDivElement | null;
 
   private portal?: RlsPortalContainerPrivate;
 
-  constructor(private ref: ElementRef<HTMLElement>) {
-    this.visibleChange = new EventEmitter();
-  }
+  constructor(private ref: ElementRef<HTMLElement>) {}
 
   protected onBackdrop(): void {
-    this.autoclose && this.close();
+    if (this.autoclose()) {
+      this.close();
+    }
   }
 
   public open(delayInMs?: number): void {
     setTimeout(() => {
-      this.changeVisible(true);
+      this.visible.set(true);
     }, delayInMs || 0);
   }
 
   public close(delayInMs = 0): void {
     setTimeout(() => {
-      this.changeVisible(false);
+      this.visible.set(false);
       this.portal?.reject();
     }, delayInMs || 0);
   }
@@ -63,10 +57,5 @@ export class RlsModalComponent implements OnPortalContainer {
 
   public ngPortal(portal: RlsPortalContainerPrivate): void {
     this.portal = portal;
-  }
-
-  private changeVisible(visible: boolean): void {
-    this.visible = visible;
-    this.visibleChange.emit(visible);
   }
 }

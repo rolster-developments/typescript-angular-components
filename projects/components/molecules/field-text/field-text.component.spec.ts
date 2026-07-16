@@ -12,9 +12,7 @@ describe('RlsFieldTextComponent', () => {
     const fixture = TestBed.createComponent(RlsFieldTextComponent);
     fixture.detectChanges();
 
-    expect(
-      fixture.nativeElement.querySelector('.rls-field-text')
-    ).toBeTruthy();
+    expect(fixture.nativeElement.querySelector('.rls-field-text')).toBeTruthy();
   });
 
   it('should reflect the formControl value and state', () => {
@@ -23,8 +21,9 @@ describe('RlsFieldTextComponent', () => {
     fixture.componentRef.setInput('formControl', control);
     fixture.detectChanges();
 
-    const el: HTMLInputElement =
-      fixture.nativeElement.querySelector('.rls-input__component');
+    const el: HTMLInputElement = fixture.nativeElement.querySelector(
+      '.rls-input__component'
+    );
 
     expect(el.value).toBe('inicial');
 
@@ -44,8 +43,9 @@ describe('RlsFieldTextComponent', () => {
     fixture.componentRef.setInput('formControl', control);
     fixture.detectChanges();
 
-    const el: HTMLInputElement =
-      fixture.nativeElement.querySelector('.rls-input__component');
+    const el: HTMLInputElement = fixture.nativeElement.querySelector(
+      '.rls-input__component'
+    );
 
     el.value = 'abc';
     el.dispatchEvent(new Event('input'));

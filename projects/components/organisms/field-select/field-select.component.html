@@ -1,10 +1,10 @@
 <div
   class="rls-field-box rls-field-list rls-field-select"
-  [class.rls-field-box--focused]="formControl?.focused"
-  [class.rls-field-box--error]="formControl?.wrong"
-  [class.rls-field-box--disabled]="disabledInput"
+  [class.rls-field-box--focused]="formControl()?.focused()"
+  [class.rls-field-box--error]="formControl()?.wrong()"
+  [class.rls-field-box--disabled]="disabledInput()"
 >
-  @if (label) {
+  @if (label()) {
     <label class="rls-field-box__label">
       <ng-content />
     </label>
@@ -16,18 +16,18 @@
         class="rls-field-list__control"
         [value]="inputValue()"
         readonly="true"
-        [placeholder]="placeholder"
+        [placeholder]="placeholder()"
         (focus)="onInputFocus()"
         (blur)="onInputBlur()"
         (click)="onInputClick()"
         (keydown)="onInputKeydown($event)"
-        [disabled]="disabledInput"
+        [disabled]="disabledInput()"
       />
       <button
         class="rls-field-list__action"
         tabindex="-1"
         (click)="onActionClick()"
-        [disabled]="disabledInput"
+        [disabled]="disabledInput()"
       >
         <rls-icon value="arrow-ios-down" />
       </button>
@@ -36,13 +36,13 @@
 
   <div
     class="rls-field-list__suggestions"
-    [class.rls-field-list__suggestions--visible]="visible"
-    [class.rls-field-list__suggestions--hide]="!visible"
-    [class.rls-field-list__suggestions--higher]="higher"
+    [class.rls-field-list__suggestions--visible]="visible()"
+    [class.rls-field-list__suggestions--hide]="!visible()"
+    [class.rls-field-list__suggestions--higher]="higher()"
   >
     <div class="rls-field-list__suggestions__body">
       <ul class="rls-field-list__ul">
-        @for (suggestion of suggestions; track suggestion) {
+        @for (suggestion of suggestions(); track suggestion) {
           <li
             class="rls-field-list__element"
             tabindex="-1"
@@ -59,7 +59,7 @@
           </li>
         }
 
-        @if (!suggestions.length) {
+        @if (!suggestions().length) {
           <li class="rls-field-list__empty">
             <div class="rls-field-list__empty__description">
               <label class="rls-label-bold truncate">
@@ -79,7 +79,7 @@
 
   <rls-message-form-error
     class="rls-field-box__error"
-    [formControl]="formControl"
+    [formControl]="formControl()"
   >
   </rls-message-form-error>
 </div>

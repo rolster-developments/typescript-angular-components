@@ -2,6 +2,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { personsElement } from '../../../../resources/persons';
 
 @Component({
+  standalone: false,
   selector: 'app-main',
   templateUrl: 'main.page.html',
   styleUrls: ['main.page.scss'],

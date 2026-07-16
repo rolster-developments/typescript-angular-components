@@ -96,7 +96,7 @@ export class RlsPortalContainer<C extends OnPortalContainer, V = any>
   }
 
   public get visible(): boolean {
-    return this.container.visible;
+    return this.container.visible();
   }
 
   public open(delayInMs = 0): void {
@@ -117,12 +117,12 @@ export class RlsPortalContainer<C extends OnPortalContainer, V = any>
   }
 
   public resolve(value?: V): void {
-    this.resolver && this.resolver(value);
+    this.resolver?.(value);
     this.resolver = undefined;
   }
 
   public reject(reason?: any): void {
-    this.rejected && this.rejected(reason);
+    this.rejected?.(reason);
     this.rejected = undefined;
   }
 

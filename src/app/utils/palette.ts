@@ -160,7 +160,11 @@ export class PaletteMaterial {
         break;
     }
 
-    isDark ? this.configDark(color, rgb) : this.configLight(color, rgb);
+    if (isDark) {
+      this.configDark(color, rgb);
+    } else {
+      this.configLight(color, rgb);
+    }
   }
 
   private configDark(color: PaletteMaterialColor, rgb: ColorRgb): void {

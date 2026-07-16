@@ -1,4 +1,5 @@
 import { ComponentType } from '@angular/cdk/overlay';
+import { Signal } from '@angular/core';
 
 type KeysOmitFunction<T> = {
   [K in keyof T]: T[K] extends ComponentType<T> ? never : K;
@@ -56,5 +57,5 @@ export interface OnPortalContainer {
   close(delayInMs?: number): void;
   ngPortal(portal: RlsPortalContainerPrivate): void;
   open(delayInMs?: number): void;
-  visible: boolean;
+  visible: Signal<boolean>;
 }

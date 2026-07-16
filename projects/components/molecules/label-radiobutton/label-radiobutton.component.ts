@@ -28,8 +28,7 @@ export class RlsLabelRadiobuttonComponent<T = any> {
   private currentState = signal<T | undefined>(undefined);
 
   protected checked = computed(
-    () =>
-      (this.formControl()?.value() ?? this.currentState()) === this.value()
+    () => (this.formControl()?.value() ?? this.currentState()) === this.value()
   );
 
   public onSelect(): void {

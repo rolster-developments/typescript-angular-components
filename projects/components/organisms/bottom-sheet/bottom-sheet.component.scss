@@ -36,7 +36,9 @@ rls-bottom-sheet {
       border-radius: var(--rls-sizing-x4) var(--rls-sizing-x4) 0rem 0rem;
       overflow: hidden;
       max-height: calc(
-        var(--rls-html-max-height) - var(--rls-sizing-x32) - var(--rls-sizing-safe-top)
+        var(--rls-html-max-height) - var(--rls-sizing-x32) - var(
+            --rls-sizing-safe-top
+          )
       );
       z-index: var(--rls-z-index-4);
       background: var(--rls-app-background-500);

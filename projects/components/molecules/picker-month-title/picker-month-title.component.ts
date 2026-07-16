@@ -61,11 +61,19 @@ export class RlsPickerMonthTitleComponent {
   }
 
   public onPrevious(): void {
-    this.type() === 'month' ? this.onPreviousMonth() : this.onPreviousYear();
+    if (this.type() === 'month') {
+      this.onPreviousMonth();
+    } else {
+      this.onPreviousYear();
+    }
   }
 
   public onNext(): void {
-    this.type() === 'month' ? this.onNextMonth() : this.onNextYear();
+    if (this.type() === 'month') {
+      this.onNextMonth();
+    } else {
+      this.onNextYear();
+    }
   }
 
   private onPreviousMonth(): void {
@@ -74,7 +82,12 @@ export class RlsPickerMonthTitleComponent {
     const month = monthControl?.value();
     const year = yearControl?.value();
 
-    if (monthControl && yearControl && valueIsDefined(month) && valueIsDefined(year)) {
+    if (
+      monthControl &&
+      yearControl &&
+      valueIsDefined(month) &&
+      valueIsDefined(year)
+    ) {
       if (month > Month.January) {
         monthControl.setValue(month - 1);
       } else {
@@ -99,7 +112,12 @@ export class RlsPickerMonthTitleComponent {
     const month = monthControl?.value();
     const year = yearControl?.value();
 
-    if (monthControl && yearControl && valueIsDefined(month) && valueIsDefined(year)) {
+    if (
+      monthControl &&
+      yearControl &&
+      valueIsDefined(month) &&
+      valueIsDefined(year)
+    ) {
       if (month < Month.December) {
         monthControl.setValue(month + 1);
       } else {

@@ -1,4 +1,4 @@
-import { Component, signal,ViewEncapsulation } from '@angular/core';
+import { Component, signal, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@rolster/angular-forms';
 import {
   RolsterAutocompleteElement,
@@ -14,6 +14,7 @@ import {
 import { OnPortal, RlsPortalPrivate } from '../../../../projects';
 
 @Component({
+  standalone: false,
   selector: 'rls-portal',
   template: `<div>
     <div class="rls-title-regular" (click)="onEmit()">
@@ -39,6 +40,7 @@ class RlsComponentPortal implements OnPortal<string> {
 }
 
 @Component({
+  standalone: false,
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],

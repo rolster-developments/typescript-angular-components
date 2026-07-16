@@ -11,9 +11,7 @@ describe('RlsPaginationComponent', () => {
     const fixture = TestBed.createComponent(RlsPaginationComponent);
     fixture.detectChanges();
 
-    expect(
-      fixture.nativeElement.querySelector('.rls-pagination')
-    ).toBeTruthy();
+    expect(fixture.nativeElement.querySelector('.rls-pagination')).toBeTruthy();
   });
 
   it('should reflect the suggestions and count inputs as pages', () => {
@@ -50,8 +48,6 @@ describe('RlsPaginationComponent', () => {
     fixture.detectChanges();
 
     expect(lastEvent).toBeTruthy();
-    expect(lastEvent.suggestions).toEqual(
-      suggestions.slice(10, 20)
-    );
+    expect(lastEvent.suggestions).toEqual(suggestions.slice(10, 20));
   });
 });

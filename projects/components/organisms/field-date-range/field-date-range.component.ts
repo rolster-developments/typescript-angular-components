@@ -1,23 +1,22 @@
 import { CommonModule } from '@angular/common';
 import {
   Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnDestroy,
-  Output,
+  computed,
+  input,
+  output,
   signal,
-  SimpleChanges,
-  ViewEncapsulation} from '@angular/core';
-import { AngularControlEmpty } from '@rolster/angular-forms';
-import { PickerListener, PickerListenerType } from '@rolster/components';
-import { dateFormatTemplate,DateRange } from '@rolster/dates';
+  ViewEncapsulation
+} from '@angular/core';
+import { AngularVoid } from '@rolster/angular-forms';
+import { PickerListener, PickerListenerEvent } from '@rolster/components';
+import { dateFormatTemplate, DateRange } from '@rolster/dates';
+
 import { RlsButtonActionComponent } from '../../atoms';
 import { RlsMessageFormErrorComponent } from '../../molecules';
 import { RlsModalComponent } from '../modal/modal.component';
 import { RlsPickerDateRangeComponent } from '../picker-date-range/picker-date-range.component';
 
-const DATE_RANGE_FORMAT = '{dd}/{mx}/{aa}';
+const DATE_RANGE_FORMAT = '{dd}/{mx}/{yy}';
 
 function rangeFormatTemplate({ maxDate, minDate }: DateRange): string {
   const minFormat = dateFormatTemplate(minDate, DATE_RANGE_FORMAT);
@@ -40,94 +39,66 @@ function rangeFormatTemplate({ maxDate, minDate }: DateRange): string {
     RlsModalComponent
   ]
 })
-export class RlsFieldDateRangeComponent implements OnChanges, OnDestroy {
-  @Input()
-  public formControl?: AngularControlEmpty<DateRange>;
+export class RlsFieldDateRangeComponent {
+  public formControl = input<AngularVoid<DateRange>>();
 
-  @Input()
-  public minDate?: Date;
+  public minDate = input<Date | undefined>(undefined);
 
-  @Input()
-  public maxDate?: Date;
+  public maxDate = input<Date | undefined>(undefined);
 
-  @Input()
-  public label = true;
+  public label = input(true);
 
-  @Input()
-  public placeholder = '';
+  public placeholder = input('');
 
-  @Input()
-  public disabled = false;
+  public disabled = input(false);
 
-  @Output()
-  public value: EventEmitter<DateRange | undefined>;
+  public value = output<DateRange | undefined>();
 
-  private unsusbcription?: () => void;
+  private localValue = signal<DateRange | undefined>(DateRange.now());
 
-  protected currentValue?: DateRange;
+  protected currentValue = computed(() => {
+    const control = this.formControl();
 
-  protected inputValue = signal('');
+    return control ? control.value() : this.localValue();
+  });
 
-  protected modalIsVisible = false;
+  protected inputValue = computed(() => {
+    const value = this.currentValue();
 
-  constructor() {
-    this.value = new EventEmitter();
-    this.currentValue = DateRange.now();
-    this.setFormatRange(this.currentValue);
-  }
+    return value ? rangeFormatTemplate(value) : '';
+  });
 
-  public ngOnDestroy(): void {
-    this.unsusbcription && this.unsusbcription();
-  }
+  protected disabledInput = computed(
+    () => this.formControl()?.disabled() ?? this.disabled()
+  );
 
-  public ngOnChanges(changes: SimpleChanges): void {
-    const { formControl } = changes;
-
-    if (formControl) {
-      this.unsusbcription && this.unsusbcription();
-
-      this.unsusbcription = formControl.currentValue?.subscribe(
-        (value: DateRange | undefined) => {
-          this.setFormatRange(value);
-        }
-      );
-    }
-  }
-
-  public get disabledInput(): boolean {
-    return this.formControl?.disabled ?? this.disabled;
-  }
+  protected modalIsVisible = signal(false);
 
   public onInput(): void {
-    this.modalIsVisible = true;
+    this.modalIsVisible.set(true);
   }
 
   public onAction(): void {
-    if (this.currentValue) {
+    if (this.currentValue()) {
       this.onChange(undefined);
-      this.formControl?.setValue(undefined);
-      this.formControl?.touch();
+      this.formControl()?.setValue(undefined);
+      this.formControl()?.touch();
     } else {
-      this.modalIsVisible = true;
+      this.modalIsVisible.set(true);
     }
   }
 
-  public onListener({ type, value }: PickerListener<DateRange>): void {
-    if (type !== PickerListenerType.Cancel) {
+  public onListener({ event, value }: PickerListener<DateRange>): void {
+    if (event !== PickerListenerEvent.Cancel) {
       this.onChange(value);
     }
 
-    this.formControl?.touch();
-    this.modalIsVisible = false;
-  }
-
-  private setFormatRange(range?: DateRange): void {
-    this.inputValue.set(range ? rangeFormatTemplate(range) : '');
+    this.formControl()?.touch();
+    this.modalIsVisible.set(false);
   }
 
   private onChange(value?: DateRange): void {
-    this.currentValue = value;
-    this.setFormatRange(value);
+    this.localValue.set(value);
 
     this.value.emit(value);
   }

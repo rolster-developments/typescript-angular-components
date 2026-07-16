@@ -1,10 +1,11 @@
 import {
   AngularControl,
+  AngularFormControls,
   formControl,
-  FormControls,
-  FormGroup} from '@rolster/angular-forms';
+  FormGroup
+} from '@rolster/angular-forms';
 
-interface PickerDateControls extends FormControls {
+interface PickerDateControls extends AngularFormControls {
   day: AngularControl<number>;
   month: AngularControl<number>;
   year: AngularControl<number>;

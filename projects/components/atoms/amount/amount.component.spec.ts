@@ -21,8 +21,7 @@ describe('RlsAmountComponent', () => {
     fixture.componentRef.setInput('symbol', '$');
     fixture.detectChanges();
 
-    const span: HTMLSpanElement =
-      fixture.nativeElement.querySelector('span');
+    const span: HTMLSpanElement = fixture.nativeElement.querySelector('span');
 
     expect(span.textContent?.trim()).toBe('$');
   });

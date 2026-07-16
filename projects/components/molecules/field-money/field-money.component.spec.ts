@@ -23,8 +23,9 @@ describe('RlsFieldMoneyComponent', () => {
     fixture.componentRef.setInput('formControl', control);
     fixture.detectChanges();
 
-    const el: HTMLInputElement =
-      fixture.nativeElement.querySelector('.rls-input__component');
+    const el: HTMLInputElement = fixture.nativeElement.querySelector(
+      '.rls-input__component'
+    );
 
     expect(el.value).toContain('100');
 
@@ -44,8 +45,9 @@ describe('RlsFieldMoneyComponent', () => {
     fixture.componentRef.setInput('formControl', control);
     fixture.detectChanges();
 
-    const el: HTMLInputElement =
-      fixture.nativeElement.querySelector('.rls-input__component');
+    const el: HTMLInputElement = fixture.nativeElement.querySelector(
+      '.rls-input__component'
+    );
 
     el.value = '50';
     el.dispatchEvent(new Event('input'));

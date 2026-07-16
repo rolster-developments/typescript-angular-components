@@ -1,16 +1,14 @@
 import { CommonModule } from '@angular/common';
 import {
   Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnDestroy,
-  Output,
+  computed,
+  input,
+  output,
   signal,
-  SimpleChanges,
-  ViewEncapsulation} from '@angular/core';
-import { AngularControlEmpty } from '@rolster/angular-forms';
-import { PickerListener, PickerListenerType } from '@rolster/components';
+  ViewEncapsulation
+} from '@angular/core';
+import { AngularVoid } from '@rolster/angular-forms';
+import { PickerListener, PickerListenerEvent } from '@rolster/components';
 import { dateFormatTemplate } from '@rolster/dates';
 import { RlsButtonActionComponent } from '../../atoms';
 import { RlsMessageFormErrorComponent } from '../../molecules';
@@ -31,97 +29,68 @@ import { RlsPickerDateComponent } from '../picker-date/picker-date.component';
     RlsModalComponent
   ]
 })
-export class RlsFieldDateComponent implements OnChanges, OnDestroy {
-  @Input()
-  public formControl?: AngularControlEmpty<Date>;
+export class RlsFieldDateComponent {
+  public formControl = input<AngularVoid<Date>>();
 
-  @Input()
-  public minDate?: Date;
+  public minDate = input<Date | undefined>(undefined);
 
-  @Input()
-  public maxDate?: Date;
+  public maxDate = input<Date | undefined>(undefined);
 
-  @Input()
-  public label = true;
+  public label = input(true);
 
-  @Input()
-  public placeholder = '';
+  public placeholder = input('');
 
-  @Input()
-  public disabled = false;
+  public disabled = input(false);
 
-  @Input()
-  public format = '{dd}/{mx}/{aa}';
+  public format = input('{dd}/{mx}/{yy}');
 
-  @Output()
-  public value: EventEmitter<Date | undefined>;
+  public value = output<Date | undefined>();
 
-  private unsusbcription?: () => void;
+  private localValue = signal<Date | undefined>(new Date());
 
-  protected currentValue?: Date;
+  protected currentValue = computed(() => {
+    const control = this.formControl();
 
-  protected inputValue = signal('');
+    return control ? control.value() : this.localValue();
+  });
 
-  protected modalIsVisible = false;
+  protected inputValue = computed(() => {
+    const value = this.currentValue();
 
-  constructor() {
-    this.value = new EventEmitter();
-    this.currentValue = new Date();
-    this.setFormatDate(this.currentValue);
-  }
+    return value ? dateFormatTemplate(value, this.format()) : '';
+  });
 
-  public ngOnDestroy(): void {
-    this.unsusbcription && this.unsusbcription();
-  }
+  protected disabledInput = computed(
+    () => this.formControl()?.disabled() ?? this.disabled()
+  );
 
-  public ngOnChanges(changes: SimpleChanges): void {
-    const { formControl } = changes;
-
-    if (formControl) {
-      this.unsusbcription && this.unsusbcription();
-
-      this.unsusbcription = formControl.currentValue?.subscribe(
-        (value: Date | undefined) => {
-          this.setFormatDate(value);
-        }
-      );
-    }
-  }
-
-  public get disabledInput(): boolean {
-    return this.formControl?.disabled ?? this.disabled;
-  }
+  protected modalIsVisible = signal(false);
 
   public onInput(): void {
-    this.modalIsVisible = true;
+    this.modalIsVisible.set(true);
   }
 
   public onAction(): void {
-    if (this.currentValue) {
+    if (this.currentValue()) {
       this.onChange(undefined);
-      this.formControl?.setValue(undefined);
-      this.formControl?.touch();
+      this.formControl()?.setValue(undefined);
+      this.formControl()?.touch();
     } else {
-      this.modalIsVisible = true;
+      this.modalIsVisible.set(true);
     }
   }
 
-  public onListener({ type, value }: PickerListener<Date>): void {
-    if (type !== PickerListenerType.Cancel) {
+  public onListener({ event, value }: PickerListener<Date>): void {
+    if (event !== PickerListenerEvent.Cancel) {
       this.onChange(value);
     }
 
-    this.formControl?.touch();
-    this.modalIsVisible = false;
-  }
-
-  private setFormatDate(date?: Date): void {
-    this.inputValue.set(date ? dateFormatTemplate(date, this.format) : '');
+    this.formControl()?.touch();
+    this.modalIsVisible.set(false);
   }
 
   private onChange(value?: Date): void {
-    this.currentValue = value;
-    this.setFormatDate(value);
+    this.localValue.set(value);
 
     this.value.emit(value);
   }

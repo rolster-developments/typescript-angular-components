@@ -1,18 +1,18 @@
 import { CommonModule } from '@angular/common';
 import {
   Component,
+  computed,
+  effect,
   ElementRef,
-  EventEmitter,
   HostListener,
-  Input,
-  OnChanges,
-  OnDestroy,
+  input,
   OnInit,
-  Output,
+  output,
   signal,
-  SimpleChanges,
-  ViewEncapsulation} from '@angular/core';
-import { AngularControlEmpty } from '@rolster/angular-forms';
+  untracked,
+  ViewEncapsulation
+} from '@angular/core';
+import { AngularVoid } from '@rolster/angular-forms';
 import {
   AutocompleteElement,
   AutocompleteStore,
@@ -43,28 +43,20 @@ const MAX_ELEMENTS = 6;
   ]
 })
 export class RlsFieldAutocompleteComponent<
-    T = any,
-    E extends AutocompleteElement<T> = AutocompleteElement<T>
-  >
-  implements OnInit, OnDestroy, OnChanges
-{
-  @Input()
-  public suggestions: E[] = [];
+  T = any,
+  E extends AutocompleteElement<T> = AutocompleteElement<T>
+> implements OnInit {
+  public suggestions = input<E[]>([]);
 
-  @Input()
-  public formControl?: AngularControlEmpty<T>;
+  public formControl = input<AngularVoid<T>>();
 
-  @Input()
-  public label = true;
+  public label = input(true);
 
-  @Input()
-  public placeholder = '';
+  public placeholder = input('');
 
-  @Input()
-  public disabled = false;
+  public disabled = input(false);
 
-  @Output()
-  public value: EventEmitter<T | undefined>;
+  public value = output<T | undefined>();
 
   private content: HTMLDivElement | null = null;
 
@@ -72,21 +64,23 @@ export class RlsFieldAutocompleteComponent<
 
   private input: HTMLInputElement | null = null;
 
-  private unsusbcription?: () => void;
-
   private position = 0;
 
   private store: AutocompleteStore<T, E>;
 
-  protected coincidences: E[] = [];
+  protected coincidences = signal<E[]>([]);
 
   protected inputValue = signal('');
 
   protected filterValue = signal('');
 
-  protected visible = false;
+  protected visible = signal(false);
 
-  protected higher = false;
+  protected higher = signal(false);
+
+  protected disabledInput = computed(
+    () => this.formControl()?.disabled() ?? this.disabled()
+  );
 
   constructor(private ref: ElementRef<HTMLElement>) {
     this.store = {
@@ -95,7 +89,23 @@ export class RlsFieldAutocompleteComponent<
       previous: null
     };
 
-    this.value = new EventEmitter();
+    effect(() => {
+      const suggestions = this.suggestions();
+
+      if (suggestions.length && untracked(this.formControl)) {
+        this.refreshCoincidences(untracked(this.filterValue), true);
+        this.checkSuggestion(
+          suggestions,
+          untracked(() => this.formControl()?.value())
+        );
+      }
+    });
+
+    effect(() => {
+      const value = this.formControl()?.value();
+
+      this.checkSuggestion(untracked(this.suggestions), value);
+    });
   }
 
   public ngOnInit(): void {
@@ -111,36 +121,11 @@ export class RlsFieldAutocompleteComponent<
     );
   }
 
-  public ngOnDestroy(): void {
-    this.unsusbcription && this.unsusbcription();
-  }
-
-  public ngOnChanges(changes: SimpleChanges): void {
-    const { formControl, suggestions } = changes;
-
-    if (suggestions?.currentValue && this.formControl) {
-      this.refreshCoincidences(this.filterValue(), true);
-      this.checkSuggestion(suggestions.currentValue, this.formControl.value);
-    }
-
-    if (formControl) {
-      this.unsusbcription && this.unsusbcription();
-
-      this.unsusbcription = formControl.currentValue?.subscribe(
-        (value: T | undefined) => {
-          this.checkSuggestion(this.suggestions, value);
-        }
-      );
-    }
-  }
-
   @HostListener('document:click', ['$event.target'])
   public onDocumentClick(element: HTMLElement) {
-    !this.ref.nativeElement.contains(element) && this.closeSuggestions();
-  }
-
-  public get disabledInput(): boolean {
-    return this.formControl?.disabled ?? this.disabled;
+    if (!this.ref.nativeElement.contains(element)) {
+      this.closeSuggestions();
+    }
   }
 
   public onInputClick(): void {
@@ -149,11 +134,11 @@ export class RlsFieldAutocompleteComponent<
   }
 
   public onInputFocus(): void {
-    this.formControl?.focus();
+    this.formControl()?.focus();
   }
 
   public onInputBlur(): void {
-    this.formControl?.blur();
+    this.formControl()?.blur();
   }
 
   public onInputValue(event: Event): void {
@@ -176,7 +161,7 @@ export class RlsFieldAutocompleteComponent<
         break;
 
       default:
-        if (this.visible) {
+        if (this.visible()) {
           const { content, list } = this;
 
           this.position =
@@ -191,7 +176,7 @@ export class RlsFieldAutocompleteComponent<
   }
 
   public onBackdropClick(): void {
-    this.visible = false;
+    this.visible.set(false);
   }
 
   public onKeydownElement(suggestion: E, event: KeyboardEvent): void {
@@ -211,37 +196,37 @@ export class RlsFieldAutocompleteComponent<
   }
 
   public onSelect({ value }: E): void {
-    this.visible = false;
+    this.visible.set(false);
     this.emitValue(value);
-    this.formControl?.touch();
+    this.formControl()?.touch();
   }
 
   private openSuggestions(): void {
     const { content, list } = this;
 
-    this.higher = locationListCanTop(content, list);
-    this.visible = true;
+    this.higher.set(locationListCanTop(content, list));
+    this.visible.set(true);
   }
 
   private closeSuggestions(): void {
-    this.visible = false;
+    this.visible.set(false);
   }
 
   private emitValue(value?: T): void {
-    this.formControl?.setValue(value);
+    this.formControl()?.setValue(value);
     this.value.emit(value);
   }
 
   private refreshCoincidences(pattern: string | null, reboot = false): void {
     const { collection, store } = createAutocompleteStore<T, E>({
       pattern,
-      suggestions: this.suggestions,
+      suggestions: this.suggestions(),
       reboot,
       store: this.store
     });
 
     this.store = store;
-    this.coincidences = collection.slice(0, MAX_ELEMENTS);
+    this.coincidences.set(collection.slice(0, MAX_ELEMENTS));
   }
 
   private checkSuggestion(suggestions: E[], value?: T): void {

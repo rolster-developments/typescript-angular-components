@@ -15,9 +15,10 @@
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
     "importHelpers": true,
-    "lib": ["DOM", "ES2020"],
-    "module": "ES2020",
+    "lib": ["DOM", "ES2022"],
+    "module": "ES2022",
     "moduleResolution": "node",
+    "skipLibCheck": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitOverride": true,
     "noImplicitReturns": true,
@@ -25,7 +26,7 @@
     "outDir": "dist",
     "sourceMap": true,
     "strict": true,
-    "target": "ES2020",
+    "target": "ES2022",
     "typeRoots": ["node_modules/@types"]
   },
   "files": ["node_modules/@rolster/types/index.d.ts"]

@@ -21,8 +21,9 @@ describe('RlsInputTextComponent', () => {
     fixture.componentRef.setInput('formControl', control);
     fixture.detectChanges();
 
-    const el: HTMLInputElement =
-      fixture.nativeElement.querySelector('.rls-input__component');
+    const el: HTMLInputElement = fixture.nativeElement.querySelector(
+      '.rls-input__component'
+    );
 
     expect(el.value).toBe('inicial');
 
@@ -43,8 +44,9 @@ describe('RlsInputTextComponent', () => {
     fixture.componentRef.setInput('formControl', control);
     fixture.detectChanges();
 
-    const el: HTMLInputElement =
-      fixture.nativeElement.querySelector('.rls-input__component');
+    const el: HTMLInputElement = fixture.nativeElement.querySelector(
+      '.rls-input__component'
+    );
 
     el.value = 'abc';
     el.dispatchEvent(new Event('input'));

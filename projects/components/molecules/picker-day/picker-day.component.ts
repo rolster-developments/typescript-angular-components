@@ -50,7 +50,9 @@ export class RlsPickerDayComponent {
   private options = computed<DayPickerOptions>(() => ({
     date: this.date(),
     day: this.day(),
-    month: valueIsDefined(this.month()) ? this.month()! : this.date().getMonth(),
+    month: valueIsDefined(this.month())
+      ? this.month()!
+      : this.date().getMonth(),
     year: this.year() ?? this.date().getFullYear(),
     maxDate: this.maxDate(),
     minDate: this.minDate()

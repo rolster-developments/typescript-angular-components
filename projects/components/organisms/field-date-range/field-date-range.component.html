@@ -1,10 +1,10 @@
 <div
   class="rls-field-box rls-field-date-range"
-  [class.rls-field-box--focused]="formControl?.focused"
-  [class.rls-field-box--error]="formControl?.wrong"
-  [class.rls-field-box--disabled]="disabledInput"
+  [class.rls-field-box--focused]="formControl()?.focused()"
+  [class.rls-field-box--error]="formControl()?.wrong()"
+  [class.rls-field-box--disabled]="disabledInput()"
 >
-  @if (label) {
+  @if (label()) {
     <label class="rls-field-box__label">
       <ng-content />
     </label>
@@ -17,32 +17,32 @@
         type="text"
         [value]="inputValue()"
         readonly="true"
-        [placeholder]="placeholder"
+        [placeholder]="placeholder()"
         (click)="onInput()"
-        [disabled]="disabled"
+        [disabled]="disabled()"
       />
 
       <button
-        [rls-button-action]="currentValue ? 'trash-2' : 'calendar'"
+        [rls-button-action]="currentValue() ? 'trash-2' : 'calendar'"
         class="rls-field-date-range__action"
         (click)="onAction()"
-        [disabled]="disabled"
+        [disabled]="disabled()"
       ></button>
     </div>
   </div>
 
   <rls-message-form-error
     class="rls-field-box__error"
-    [formControl]="formControl"
+    [formControl]="formControl()"
   >
   </rls-message-form-error>
 </div>
 
-<rls-modal [visible]="modalIsVisible" [autoclose]="false">
+<rls-modal [visible]="modalIsVisible()" [autoclose]="false">
   <rls-picker-date-range
-    [formControl]="formControl"
-    [minDate]="minDate"
-    [maxDate]="maxDate"
+    [formControl]="formControl()"
+    [minDate]="minDate()"
+    [maxDate]="maxDate()"
     (listener)="onListener($event)"
   ></rls-picker-date-range>
 </rls-modal>

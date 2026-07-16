@@ -42,8 +42,7 @@ describe('RlsBallotComponent', () => {
     fixture.componentRef.setInput('skeleton', true);
     fixture.detectChanges();
 
-    const el: HTMLElement =
-      fixture.nativeElement.querySelector('.rls-ballot');
+    const el: HTMLElement = fixture.nativeElement.querySelector('.rls-ballot');
 
     expect(el.classList.contains('rls-ballot--bordered')).toBeTrue();
     expect(el.classList.contains('rls-ballot--skeleton')).toBeTrue();

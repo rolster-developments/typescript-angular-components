@@ -1,18 +1,17 @@
 import { CommonModule } from '@angular/common';
 import {
   Component,
+  computed,
+  effect,
   ElementRef,
-  EventEmitter,
   HostListener,
-  Input,
-  OnChanges,
-  OnDestroy,
+  input,
   OnInit,
-  Output,
+  output,
   signal,
-  SimpleChanges,
-  ViewEncapsulation} from '@angular/core';
-import { AngularControlEmpty } from '@rolster/angular-forms';
+  ViewEncapsulation
+} from '@angular/core';
+import { AngularVoid } from '@rolster/angular-forms';
 import {
   ListElement,
   locationListCanTop,
@@ -39,28 +38,20 @@ import {
   ]
 })
 export class RlsFieldSelectComponent<
-    T = any,
-    E extends ListElement<T> = ListElement<T>
-  >
-  implements OnInit, OnDestroy, OnChanges
-{
-  @Input()
-  public suggestions: E[] = [];
+  T = any,
+  E extends ListElement<T> = ListElement<T>
+> implements OnInit {
+  public suggestions = input<E[]>([]);
 
-  @Input()
-  public formControl?: AngularControlEmpty<T>;
+  public formControl = input<AngularVoid<T>>();
 
-  @Input()
-  public label = true;
+  public label = input(true);
 
-  @Input()
-  public placeholder = '';
+  public placeholder = input('');
 
-  @Input()
-  public disabled = false;
+  public disabled = input(false);
 
-  @Output()
-  public value: EventEmitter<T | undefined>;
+  public value = output<T | undefined>();
 
   private content: HTMLDivElement | null = null;
 
@@ -68,18 +59,22 @@ export class RlsFieldSelectComponent<
 
   private input: HTMLInputElement | null = null;
 
-  private unsusbcription?: () => void;
-
   private position = 0;
 
   protected inputValue = signal('');
 
-  protected visible = false;
+  protected visible = signal(false);
 
-  protected higher = false;
+  protected higher = signal(false);
+
+  protected disabledInput = computed(
+    () => this.formControl()?.disabled() ?? this.disabled()
+  );
 
   constructor(private ref: ElementRef<HTMLElement>) {
-    this.value = new EventEmitter();
+    effect(() => {
+      this.checkSuggestion(this.suggestions(), this.formControl()?.value());
+    });
   }
 
   public ngOnInit(): void {
@@ -95,43 +90,19 @@ export class RlsFieldSelectComponent<
     );
   }
 
-  public ngOnDestroy(): void {
-    this.unsusbcription && this.unsusbcription();
-  }
-
-  public ngOnChanges(changes: SimpleChanges): void {
-    const { formControl, suggestions } = changes;
-
-    if (suggestions?.currentValue && this.formControl) {
-      this.checkSuggestion(suggestions.currentValue, this.formControl.value);
-    }
-
-    if (formControl) {
-      this.unsusbcription && this.unsusbcription();
-
-      this.unsusbcription = formControl.currentValue?.subscribe(
-        (value: T | undefined) => {
-          this.checkSuggestion(this.suggestions, value);
-        }
-      );
-    }
-  }
-
   @HostListener('document:click', ['$event.target'])
   public onDocumentClick(element: HTMLElement) {
-    !this.ref.nativeElement.contains(element) && this.closeSuggestions();
-  }
-
-  public get disabledInput(): boolean {
-    return this.formControl?.disabled ?? this.disabled;
+    if (!this.ref.nativeElement.contains(element)) {
+      this.closeSuggestions();
+    }
   }
 
   public onInputFocus(): void {
-    this.formControl?.focus();
+    this.formControl()?.focus();
   }
 
   public onInputBlur(): void {
-    this.formControl?.blur();
+    this.formControl()?.blur();
   }
 
   public onInputClick(): void {
@@ -151,7 +122,7 @@ export class RlsFieldSelectComponent<
         break;
 
       default:
-        if (this.visible) {
+        if (this.visible()) {
           const { content, list } = this;
 
           this.position =
@@ -166,7 +137,7 @@ export class RlsFieldSelectComponent<
   }
 
   public onBackdropClick(): void {
-    this.visible = false;
+    this.visible.set(false);
   }
 
   public onKeydownElement(suggestion: E, event: KeyboardEvent): void {
@@ -186,33 +157,33 @@ export class RlsFieldSelectComponent<
   }
 
   public onSelect({ value }: E): void {
-    this.visible = false;
+    this.visible.set(false);
     this.emitValue(value);
-    this.formControl?.touch();
+    this.formControl()?.touch();
   }
 
   private openSuggestions(): void {
     const { content, list } = this;
 
-    this.higher = locationListCanTop(content, list);
-    this.visible = true;
+    this.higher.set(locationListCanTop(content, list));
+    this.visible.set(true);
   }
 
   private closeSuggestions(): void {
-    this.visible = false;
+    this.visible.set(false);
   }
 
   private toggleSuggestions(): void {
-    if (this.visible) {
+    if (this.visible()) {
       this.closeSuggestions();
     } else {
       this.openSuggestions();
-      this.formControl?.focus();
+      this.formControl()?.focus();
     }
   }
 
   private emitValue(value?: T): void {
-    this.formControl?.setValue(value);
+    this.formControl()?.setValue(value);
     this.value.emit(value);
   }
 

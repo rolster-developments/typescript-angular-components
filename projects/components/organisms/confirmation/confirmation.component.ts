@@ -1,5 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  signal,
+  ViewEncapsulation
+} from '@angular/core';
+
 import { ModalConfirmationOptions } from '../../../models';
 import { RlsButtonComponent } from '../../atoms';
 
@@ -12,37 +18,41 @@ import { RlsButtonComponent } from '../../atoms';
   imports: [CommonModule, RlsButtonComponent]
 })
 export class RlsConfirmationComponent {
-  protected settings?: ModalConfirmationOptions;
+  protected settings = signal<ModalConfirmationOptions | undefined>(undefined);
 
   constructor(private ref: ElementRef<HTMLElement>) {}
 
   public execute(settings: ModalConfirmationOptions): void {
-    settings.opening && settings.opening();
+    settings.opening?.();
 
-    this.settings = settings;
+    this.settings.set(settings);
 
     this.ref.nativeElement.classList.add('visible');
   }
 
   protected onApprove(): void {
-    if (this.settings) {
-      const { approve, closing } = this.settings;
+    const settings = this.settings();
+
+    if (settings) {
+      const { approve, closing } = settings;
 
       this.hide();
 
-      approve?.click && approve.click();
-      closing && closing();
+      approve?.click?.();
+      closing?.();
     }
   }
 
   protected onReject(): void {
-    if (this.settings) {
-      const { reject, closing } = this.settings;
+    const settings = this.settings();
+
+    if (settings) {
+      const { reject, closing } = settings;
 
       this.hide();
 
-      reject?.click && reject.click();
-      closing && closing();
+      reject?.click?.();
+      closing?.();
     }
   }
 

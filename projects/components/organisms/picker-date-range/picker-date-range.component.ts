@@ -1,28 +1,31 @@
 import { CommonModule } from '@angular/common';
 import {
   Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnDestroy,
+  computed,
+  effect,
+  input,
   OnInit,
-  Output,
-  SimpleChanges,
+  output,
+  signal,
+  untracked,
   ViewEncapsulation
 } from '@angular/core';
-import { AngularControlEmpty } from '@rolster/angular-forms';
-import { itIsDefined } from '@rolster/commons';
+import { AngularVoid } from '@rolster/angular-forms';
+import { valueIsDefined } from '@rolster/commons';
 import {
-  checkDateRange,
   PickerListener,
-  PickerListenerType} from '@rolster/components';
+  PickerListenerEvent,
+  verifyDateRange
+} from '@rolster/components';
 import {
   assignMonthInDate,
   assignYearInDate,
   dateFormatTemplate,
   DateRange,
-  MONTH_NAMES} from '@rolster/dates';
-import { RlsButtonComponent, RlsIconComponent } from '../../atoms';
+  MONTH_NAMES
+} from '@rolster/dates';
+
+import { RlsButtonComponent } from '../../atoms';
 import {
   RlsPickerDayRangeComponent,
   RlsPickerMonthComponent,
@@ -31,7 +34,7 @@ import {
 } from '../../molecules';
 import { PickerDateRangeGroup } from './picker-date-range.controls';
 
-const FORMAT_TITLE = '{dw}, {mx} {dd} de {aa}';
+const FORMAT_TITLE = '{dw}, {mx} {dd} de {yy}';
 
 type Visibility = 'DAY' | 'MONTH' | 'YEAR';
 
@@ -44,131 +47,102 @@ type Visibility = 'DAY' | 'MONTH' | 'YEAR';
   imports: [
     CommonModule,
     RlsButtonComponent,
-    RlsIconComponent,
     RlsPickerDayRangeComponent,
     RlsPickerMonthComponent,
     RlsPickerMonthTitleComponent,
     RlsPickerYearComponent
   ]
 })
-export class RlsPickerDateRangeComponent
-  implements OnInit, OnChanges, OnDestroy
-{
-  @Input()
-  public formControl?: AngularControlEmpty<DateRange>;
+export class RlsPickerDateRangeComponent implements OnInit {
+  public formControl = input<AngularVoid<DateRange>>();
 
-  @Input()
-  public minDate?: Date;
+  public minDate = input<Date | undefined>(undefined);
 
-  @Input()
-  public maxDate?: Date;
+  public maxDate = input<Date | undefined>(undefined);
 
-  @Input()
-  public automatic = false;
+  public automatic = input(false);
 
-  @Output()
-  public listener: EventEmitter<PickerListener<DateRange>>;
-
-  private unsubscriptions: (() => void)[] = [];
-
-  private unsubscription?: () => void;
+  public listener = output<PickerListener<DateRange>>();
 
   private value: DateRange;
 
-  protected date: Date;
+  protected date = signal(new Date());
 
   protected dateGroup: PickerDateRangeGroup;
 
-  protected visibility: Visibility = 'DAY';
+  protected visibility = signal<Visibility>('DAY');
+
+  protected title = computed(() =>
+    dateFormatTemplate(this.date(), FORMAT_TITLE)
+  );
+
+  protected year = computed(() => this.date().getFullYear().toString());
+
+  protected month = computed(() => MONTH_NAMES(this.date().getMonth()));
 
   constructor() {
-    this.listener = new EventEmitter();
-    this.date = new Date();
-
     this.value = DateRange.now();
-    this.dateGroup = new PickerDateRangeGroup(this.value, this.date);
+    this.dateGroup = new PickerDateRangeGroup(this.value, this.date());
+
+    effect(() => {
+      const year = this.dateGroup.year.value();
+
+      if (valueIsDefined(year)) {
+        const currentDate = untracked(this.date);
+
+        if (currentDate.getFullYear() !== year) {
+          this.date.set(assignYearInDate(currentDate, year));
+          this.visibility.set('DAY');
+        }
+      }
+    });
+
+    effect(() => {
+      const month = this.dateGroup.month.value();
+
+      if (valueIsDefined(month)) {
+        const currentDate = untracked(this.date);
+
+        if (currentDate.getMonth() !== month) {
+          this.date.set(assignMonthInDate(currentDate, month));
+          this.visibility.set('DAY');
+        }
+      }
+    });
+
+    effect(() => {
+      this.value = this.dateGroup.day.value();
+    });
+
+    effect(() => {
+      const value = this.formControl()?.value();
+
+      if (value) {
+        this.value = value;
+      }
+    });
   }
 
   public ngOnInit(): void {
-    this.unsubscriptions.push(
-      this.dateGroup.year.subscribe((year) => {
-        if (itIsDefined(year)) {
-          this.date = assignYearInDate(this.date, year);
-          this.visibility = 'DAY';
-        }
-      })
-    );
-
-    this.unsubscriptions.push(
-      this.dateGroup.month.subscribe((month) => {
-        if (itIsDefined(month)) {
-          this.date = assignMonthInDate(this.date, month);
-          this.visibility = 'DAY';
-        }
-      })
-    );
-
-    this.unsubscriptions.push(
-      this.dateGroup.day.subscribe((range) => {
-        this.value = range;
-      })
-    );
-
     this.dateGroup.setDate(
-      checkDateRange({
-        date: this.date,
-        minDate: this.minDate,
-        maxDate: this.maxDate
+      verifyDateRange({
+        date: this.date(),
+        minDate: this.minDate(),
+        maxDate: this.maxDate()
       })
     );
-  }
-
-  public ngOnDestroy(): void {
-    this.unsubscriptions.forEach((unsubscription) => {
-      unsubscription();
-    });
-
-    this.unsubscription && this.unsubscription();
-  }
-
-  public ngOnChanges(changes: SimpleChanges): void {
-    const { formControl } = changes;
-
-    if (formControl) {
-      this.unsubscription && this.unsubscription();
-
-      this.unsubscription = formControl.currentValue?.subscribe(
-        (value: DateRange | undefined) => {
-          if (value) {
-            this.value = value;
-          }
-        }
-      );
-    }
-  }
-
-  public get title(): string {
-    return dateFormatTemplate(this.date, FORMAT_TITLE);
-  }
-
-  public get year(): string {
-    return this.date.getFullYear().toString();
-  }
-
-  public get month(): string {
-    return MONTH_NAMES(this.date.getMonth());
   }
 
   public onVisibilityDay(): void {
-    this.visibility = 'DAY';
+    this.visibility.set('DAY');
   }
 
   public onVisibilityMonth(): void {
-    this.visibility = 'MONTH';
+    this.visibility.set('MONTH');
   }
 
   public onVisibilityYear(): void {
-    this.visibility = 'YEAR';
+    this.visibility.set('YEAR');
   }
 
   public onSelect(): void {
@@ -176,15 +150,15 @@ export class RlsPickerDateRangeComponent
   }
 
   public onCancel(): void {
-    this.emitListener(PickerListenerType.Cancel);
+    this.emitListener(PickerListenerEvent.Cancel);
   }
 
-  private emitListener(type: PickerListenerType, value?: DateRange): void {
-    this.listener.emit({ type, value });
+  private emitListener(event: PickerListenerEvent, value?: DateRange): void {
+    this.listener.emit({ event, value });
   }
 
   private emitDateRange(value: DateRange): void {
-    this.formControl?.setValue(value);
-    this.emitListener(PickerListenerType.Select, value);
+    this.formControl()?.setValue(value);
+    this.emitListener(PickerListenerEvent.Select, value);
   }
 }

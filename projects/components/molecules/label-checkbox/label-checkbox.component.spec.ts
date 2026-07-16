@@ -27,14 +27,18 @@ describe('RlsLabelCheckboxComponent', () => {
       fixture.nativeElement.querySelector('rls-checkbox');
 
     expect(
-      checkbox.querySelector('.rls-checkbox')?.classList.contains('rls-checkbox--checked')
+      checkbox
+        .querySelector('.rls-checkbox')
+        ?.classList.contains('rls-checkbox--checked')
     ).toBeFalse();
 
     control.setValue(true);
     fixture.detectChanges();
 
     expect(
-      checkbox.querySelector('.rls-checkbox')?.classList.contains('rls-checkbox--checked')
+      checkbox
+        .querySelector('.rls-checkbox')
+        ?.classList.contains('rls-checkbox--checked')
     ).toBeTrue();
   });
 

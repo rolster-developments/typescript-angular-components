@@ -12,8 +12,9 @@ describe('RlsTabularTextComponent', () => {
     fixture.detectChanges();
 
     expect(
-      fixture.nativeElement.querySelectorAll('.rls-tabular-text__char, .rls-tabular-text__pointer')
-        .length
+      fixture.nativeElement.querySelectorAll(
+        '.rls-tabular-text__char, .rls-tabular-text__pointer'
+      ).length
     ).toBe(0);
   });
 
