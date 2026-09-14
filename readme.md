@@ -1,5 +1,11 @@
 # Rolster Angular Components
 
-Repository for Kit Components in Angular 17.
+Repository for Kit Components in Angular 19.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.0.
+## Installation
+
+```
+npm i @rolster/angular-components
+```
+
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 19.2.0.
